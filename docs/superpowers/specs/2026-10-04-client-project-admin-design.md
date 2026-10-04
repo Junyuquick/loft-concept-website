@@ -69,7 +69,7 @@ Each unit has one job: the admin edits files, GitHub stores them, the Action bui
 Each field gets a plain-English hint (for example, "Lower numbers appear first in the portfolio").
 
 ### 3.2 Photos
-- Uploads go to `src/assets/projects/uploads/`, referenced from Markdown as `../../assets/projects/uploads/<file>` so Astro's `image()` resolves and optimises them like existing photos. If Sveltia supports a per-entry `{{slug}}` placeholder in a collection `media_folder`, use `src/assets/projects/{{slug}}/` instead to match the existing layout; the implementation plan verifies this first.
+- Uploads go to one shared folder, `src/assets/projects/uploads/`, referenced from Markdown as `../../assets/projects/uploads/<file>` so Astro's `image()` resolves and optimises them like existing photos. Decided: Sveltia only gives per-entry media folders when each entry is its own folder (`path: '{{slug}}/index'`), which would mean moving all 19 projects and changing their Astro ids. A shared folder needs no migration and makes no visible difference on the site.
 - Sveltia's built-in transformation shrinks uploads before commit: `media_libraries.default.config.transformations.raster_image` with `format: webp`, `quality: 85`, `width: 2400`, `height: 2400`.
 - Existing photos in `src/assets/projects/<slug>/` are untouched and stay editable.
 
