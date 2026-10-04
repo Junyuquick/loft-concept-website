@@ -24,6 +24,10 @@ describe('renderCloudflare', () => {
     expect(out).toContain('/projects/project-jalan-lana/ /portfolio/jalan-lana 301');
     expect(out).toContain('/thankyou /thank-you 301');
   });
+  it('sends /admin to /admin/ without looping on /admin/', () => {
+    expect(out).toContain('/admin /admin/ 301');
+    expect(out).not.toContain('/admin/ /admin/');
+  });
 });
 
 describe('renderApache', () => {
@@ -50,5 +54,9 @@ describe('renderApache', () => {
   });
   it('keeps the 404 page', () => {
     expect(out).toContain('ErrorDocument 404 /404.html');
+  });
+  it('sends /admin to /admin/ so the CMS folder index loads despite DirectorySlash Off', () => {
+    expect(out).toContain('RewriteRule ^admin$ /admin/ [R=301,L]');
+    expect(out.indexOf('RewriteRule ^admin$')).toBeLessThan(out.indexOf('RewriteRule ^(.+)$ $1.html [L]'));
   });
 });

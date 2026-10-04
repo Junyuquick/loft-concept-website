@@ -5,6 +5,7 @@ import https from 'node:https';
 
 const BASE = new URL(process.env.BASE_URL ?? 'http://127.0.0.1:8088');
 const LIVE = BASE.hostname === 'loftconcept.com.sg';
+const STAGING = BASE.hostname.startsWith('staging.');
 
 function get(path, host = BASE.host) {
   const lib = BASE.protocol === 'https:' ? https : http;
@@ -20,7 +21,7 @@ function get(path, host = BASE.host) {
 }
 
 const pages = ['/', '/about', '/portfolio', '/portfolio/jalan-lana', '/portfolio/mimosa', '/testimonials', '/contact', '/thank-you', '/privacy',
-  '/sitemap-index.xml', '/robots.txt', '/videos/hero.mp4', '/textures/paper.jpg'];
+  '/sitemap-index.xml', '/robots.txt', '/videos/hero.mp4', '/textures/paper.jpg', '/admin/'];
 const redirects = [
   ['/index.html', '/'], ['/index', '/'],
   ['/about.html', '/about'], ['/about/', '/about'],
@@ -28,6 +29,7 @@ const redirects = [
   ['/projects/project-jalan-lana', '/portfolio/jalan-lana'], ['/projects/project-jalan-lana.html', '/portfolio/jalan-lana'], ['/projects/project-jalan-lana/', '/portfolio/jalan-lana'],
   ['/thankyou', '/thank-you'], ['/thankyou.html', '/thank-you'],
   ['/sitemap', '/sitemap-index.xml'], ['/sitemap.xml', '/sitemap-index.xml'],
+  ['/admin', '/admin/'],
 ];
 
 const failures = [];
@@ -46,10 +48,13 @@ const missing = await get('/no-such-page');
 expect(missing.status === 404 && missing.body.includes('That page isn’t here'), `/no-such-page → ${missing.status} with the branded 404 page`);
 
 // Canonical host: on a local server, fake the live Host header; on the live site, ask for http and www directly.
-for (const host of ['loftconcept.com.sg', 'www.loftconcept.com.sg']) {
-  if (LIVE && host === 'loftconcept.com.sg') continue;
-  const r = LIVE ? await new Promise((res) => http.get({ hostname: host, path: '/about' }, (x) => res({ status: x.statusCode, location: x.headers.location ?? '' }))) : await get('/about', host);
-  expect(r.status === 301 && r.location === 'https://loftconcept.com.sg/about', `http://${host}/about → ${r.status} ${r.location} (want 301 https://loftconcept.com.sg/about)`);
+// Staging shares Vodien's IP; a faked live Host header would hit the live site, not staging.
+if (!STAGING) {
+  for (const host of ['loftconcept.com.sg', 'www.loftconcept.com.sg']) {
+    if (LIVE && host === 'loftconcept.com.sg') continue;
+    const r = LIVE ? await new Promise((res) => http.get({ hostname: host, path: '/about' }, (x) => res({ status: x.statusCode, location: x.headers.location ?? '' }))) : await get('/about', host);
+    expect(r.status === 301 && r.location === 'https://loftconcept.com.sg/about', `http://${host}/about → ${r.status} ${r.location} (want 301 https://loftconcept.com.sg/about)`);
+  }
 }
 
 console.log(failures.length ? `verify-server: ${failures.length} failed` : 'verify-server: OK');

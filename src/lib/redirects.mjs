@@ -21,6 +21,7 @@ export function renderCloudflare(list) {
     lines.push(`${r.from} ${r.to} ${r.status}`);
     lines.push(`${r.from}/ ${r.to} ${r.status}`);
   }
+  lines.push('/admin /admin/ 301');
   return lines.join('\n') + '\n';
 }
 
@@ -50,6 +51,9 @@ export function renderApache(list) {
   ];
   for (const r of list) lines.push(`RewriteRule ^${escapeRegex(r.from.slice(1))}/?$ ${r.to} [R=${r.status},L]`);
   lines.push(
+    '',
+    '# /admin is a folder; with DirectorySlash Off Apache will not add the slash itself',
+    'RewriteRule ^admin$ /admin/ [R=301,L]',
     '',
     '# Any other /page.html or /page/ goes to /page',
     'RewriteRule ^(.+)\\.html/?$ /$1 [R=301,L]',
