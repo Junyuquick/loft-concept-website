@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildRedirects, renderApache, renderCloudflare } from './redirects.mjs';
+import { buildRedirects, legacyProjectSlugs, renderApache, renderCloudflare } from './redirects.mjs';
 
 const list = buildRedirects(['jalan-lana', 'mimosa']);
 
@@ -14,6 +14,21 @@ describe('buildRedirects', () => {
   });
   it('has exactly 14 rules for 2 projects', () => {
     expect(list).toHaveLength(14);
+  });
+});
+
+describe('deleted launch projects', () => {
+  const after = buildRedirects(['mimosa'], ['jalan-lana', 'mimosa']);
+  it('sends the old address of a deleted project to the portfolio', () => {
+    expect(after).toContainEqual({ from: '/projects/project-jalan-lana', to: '/portfolio', status: 301 });
+    expect(after).toContainEqual({ from: '/projects/project-jalan-lana.html', to: '/portfolio', status: 301 });
+  });
+  it('keeps old addresses of remaining projects pointing at their pages', () => {
+    expect(after).toContainEqual({ from: '/projects/project-mimosa', to: '/portfolio/mimosa', status: 301 });
+  });
+  it('reads launch project slugs from the legacy sitemap', () => {
+    const xml = '<loc>https://loftconcept.com.sg/about</loc><loc>https://loftconcept.com.sg/projects/project-jalan-lana</loc><loc>https://loftconcept.com.sg/projects/project-ernani-street-ii</loc>';
+    expect(legacyProjectSlugs(xml)).toEqual(['jalan-lana', 'ernani-street-ii']);
   });
 });
 

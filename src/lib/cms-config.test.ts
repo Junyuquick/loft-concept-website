@@ -19,9 +19,9 @@ describe('admin config matches the projects schema', () => {
   it('edits src/content/projects as Markdown front matter', () => {
     expect(projects).toMatchObject({ folder: 'src/content/projects', extension: 'md', format: 'frontmatter', create: true });
   });
-  // The 19 launch projects back legacy redirects, home-page picks and testimonial links; deleting one fails every deploy.
-  it('does not let the client delete projects', () => {
-    expect(projects.delete).toBe(false);
+  // Deleting is safe: legacy addresses fall back to /portfolio, and the home and testimonials pages skip missing projects.
+  it('lets the client delete projects', () => {
+    expect(projects.delete).toBe(true);
   });
   it('has exactly the schema fields', () => {
     expect([...fields.keys()].sort()).toEqual(Object.keys(props).sort());

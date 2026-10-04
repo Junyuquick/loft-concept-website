@@ -5,6 +5,8 @@ import LiteYouTube from '../components/LiteYouTube.astro';
 import BookingCTA from '../components/BookingCTA.astro';
 
 const items = (await getCollection('testimonials')).sort((a, b) => a.data.order - b.data.order);
+// Projects can be deleted in /admin; only link to ones that still exist.
+const projectIds = new Set((await getCollection('projects')).map((p) => p.id));
 ---
 <Base
   title="Homeowner stories"
@@ -24,7 +26,7 @@ const items = (await getCollection('testimonials')).sort((a, b) => a.data.order 
       <h2>A tour inside Jalan Lana</h2>
       <div class="video__text">
         <p>Step inside this Jalan Lana residence and see how Loft Concept transformed the space, from the entry foyer through to every thoughtfully designed room.</p>
-        <a class="link" href="/portfolio/jalan-lana">View the project</a>
+        {projectIds.has('jalan-lana') && <a class="link" href="/portfolio/jalan-lana">View the project</a>}
       </div>
     </div>
   </section>
@@ -34,7 +36,7 @@ const items = (await getCollection('testimonials')).sort((a, b) => a.data.order 
       <figure class="story" data-reveal>
         <figcaption class="story__who">
           <strong>{item.data.author}</strong>
-          {item.data.projectSlug
+          {item.data.projectSlug && projectIds.has(item.data.projectSlug)
             ? <a class="link" href={`/portfolio/${item.data.projectSlug}`}>{item.data.projectLabel}</a>
             : <span>{item.data.projectLabel}</span>}
         </figcaption>

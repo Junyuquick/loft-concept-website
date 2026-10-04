@@ -1,9 +1,11 @@
-export function buildRedirects(slugs) {
+// Launch projects the client has since deleted keep their old address, pointing at the portfolio.
+export function buildRedirects(slugs, legacySlugs = slugs) {
   const list = [];
   const add = (from, to) => list.push({ from, to, status: 301 });
-  for (const slug of slugs) {
-    add(`/projects/project-${slug}`, `/portfolio/${slug}`);
-    add(`/projects/project-${slug}.html`, `/portfolio/${slug}`);
+  for (const slug of new Set([...slugs, ...legacySlugs])) {
+    const to = slugs.includes(slug) ? `/portfolio/${slug}` : '/portfolio';
+    add(`/projects/project-${slug}`, to);
+    add(`/projects/project-${slug}.html`, to);
   }
   for (const page of ['about', 'portfolio', 'testimonials', 'contact']) add(`/${page}.html`, `/${page}`);
   add('/index', '/');
@@ -13,6 +15,10 @@ export function buildRedirects(slugs) {
   add('/sitemap', '/sitemap-index.xml');
   add('/sitemap.xml', '/sitemap-index.xml');
   return list;
+}
+
+export function legacyProjectSlugs(sitemapXml) {
+  return [...sitemapXml.matchAll(/<loc>[^<]*\/projects\/project-([^<\/]+)<\/loc>/g)].map((m) => m[1]);
 }
 
 export function renderCloudflare(list) {

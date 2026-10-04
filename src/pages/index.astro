@@ -9,10 +9,13 @@ import BookingCTA from '../components/BookingCTA.astro';
 import { localBusinessSchema } from '../lib/schema';
 
 const featured = (await getCollection('projects', (p) => p.data.featured)).sort((a, b) => a.data.order - b.data.order).slice(0, 4);
-const residential = await getEntry('projects', 'lornie-road');
-const commercial = await getEntry('projects', 'horse-city');
+// The client can delete projects in /admin: fall back to the sector's first project, or drop the panel.
+const sectorPanel = async (sector: 'residential' | 'commercial', preferred: string) =>
+  (await getEntry('projects', preferred)) ?? (await getCollection('projects', (p) => p.data.sector === sector)).sort((a, b) => a.data.order - b.data.order)[0];
+const residential = await sectorPanel('residential', 'lornie-road');
+const commercial = await sectorPanel('commercial', 'horse-city');
 const quote = await getEntry('testimonials', 'wei-liang-priya');
-if (!residential || !commercial || !quote) throw new Error('Home page is missing a required content entry');
+if (!quote) throw new Error('Home page is missing a required content entry');
 
 const excerpt = 'They really listened to how we live day to day and translated that into a space that just feels right.';
 ---
@@ -63,6 +66,7 @@ const excerpt = 'They really listened to how we live day to day and translated t
     <div class="container">
       <h2 class="sectors__title">What we design</h2>
       <div class="sectors__grid">
+        {residential && (
         <a class="sector" href="/portfolio?sector=residential" data-reveal>
           <div class="sector__media"><Photo image={residential.data.hero} alt={residential.data.heroAlt ?? 'A residential interior by Loft Concept'} sizes="(min-width: 900px) 50vw, 100vw" position={residential.data.coverPosition} /></div>
           <div class="sector__body">
@@ -71,6 +75,8 @@ const excerpt = 'They really listened to how we live day to day and translated t
             <span class="sector__cta">View projects</span>
           </div>
         </a>
+        )}
+        {commercial && (
         <a class="sector" href="/portfolio?sector=commercial" data-reveal style="--i:1">
           <div class="sector__media"><Photo image={commercial.data.hero} alt={commercial.data.heroAlt ?? 'A commercial interior by Loft Concept'} sizes="(min-width: 900px) 50vw, 100vw" position={commercial.data.coverPosition} /></div>
           <div class="sector__body">
@@ -79,6 +85,7 @@ const excerpt = 'They really listened to how we live day to day and translated t
             <span class="sector__cta">View projects</span>
           </div>
         </a>
+        )}
       </div>
     </div>
   </section>
