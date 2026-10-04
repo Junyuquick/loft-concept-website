@@ -64,5 +64,6 @@ describe('admin media settings', () => {
   });
   it('commits to the repo on the expected branch', () => {
     expect(config.backend).toMatchObject({ name: 'github', repo: 'Junyuquick/loft-concept-website', branch: 'redesign' });
+    expect(config.backend.base_url).toMatch(/^https:\/\/sveltia-cms-auth\.[a-z0-9-]+\.workers\.dev$/);
   });
 });
