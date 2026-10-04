@@ -67,6 +67,10 @@ describe('renderApache', () => {
     expect(out).toContain('Options -MultiViews -Indexes');
     expect(out).toContain('RewriteRule ^(.+)$ $1.html [L]');
   });
+  it('refuses web requests for the FTP deploy state file, which lists every file on the site', () => {
+    expect(out).toContain('RewriteRule (^|/)\\.ftp-deploy-sync-state\\.json$ - [F,L]');
+    expect(out.indexOf('ftp-deploy-sync-state')).toBeLessThan(firstRedirect);
+  });
   it('keeps the 404 page', () => {
     expect(out).toContain('ErrorDocument 404 /404.html');
   });

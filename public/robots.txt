@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /staging/
 
 Sitemap: https://loftconcept.com.sg/sitemap-index.xml

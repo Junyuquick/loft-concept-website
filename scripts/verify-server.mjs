@@ -44,6 +44,8 @@ for (const [from, to] of redirects) {
   const target = r.location ? new URL(r.location, BASE).pathname : '';
   expect(r.status === 301 && target === to, `${from} → ${r.status} ${target} (want 301 ${to})`);
 }
+const state = await get('/.ftp-deploy-sync-state.json');
+expect(state.status === 403, `/.ftp-deploy-sync-state.json → ${state.status} (want 403)`);
 const missing = await get('/no-such-page');
 expect(missing.status === 404 && missing.body.includes('That page isn’t here'), `/no-such-page → ${missing.status} with the branded 404 page`);
 
