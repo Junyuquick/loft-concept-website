@@ -36,7 +36,7 @@ collections:
     media_folder: ../../assets/projects/uploads
     public_folder: ../../assets/projects/uploads
     create: true
-    delete: true
+    delete: false
     identifier_field: title
     slug: '{{slug}}'
     summary: '{{title}} · {{sector}}'

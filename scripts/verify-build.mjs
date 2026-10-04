@@ -1,5 +1,6 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import { parse } from 'yaml';
 import { resolveInternal } from './lib/resolve-internal.mjs';
 
 const DIST = 'dist';
@@ -21,7 +22,8 @@ for (const file of pages) {
   if (!/<html lang="en"/.test(html)) fail(`${name}: missing <html lang="en">`);
   const title = html.match(/<title>([^<]+)<\/title>/)?.[1];
   if (!title) fail(`${name}: missing <title>`);
-  else if (titles.has(title)) fail(`${name}: duplicate title "${title}" (also ${titles.get(title)})`);
+  // The client may reuse a project title (e.g. a second "Private Residence"); that must not block a publish.
+  else if (titles.has(title)) (name.startsWith('portfolio/') ? console.warn : fail)(`${name}: duplicate title "${title}" (also ${titles.get(title)})`);
   else titles.set(title, name);
   if (!/<meta name="description" content="[^"]{20,}"/.test(html)) fail(`${name}: missing or short meta description`);
   if (!is404 && !/<link rel="canonical" href="https:\/\/loftconcept\.com\.sg/.test(html)) fail(`${name}: missing canonical`);
@@ -36,11 +38,13 @@ for (const file of pages) {
   }
 
   if (name.startsWith('portfolio/')) {
+    // A gallery renders exactly when the project has gallery photos; the admin allows none.
+    const slug = name.slice('portfolio/'.length, -'.html'.length);
+    const data = parse(readFileSync(join('src/content/projects', `${slug}.md`), 'utf8').split('---')[1]);
     const hasGallery = /class="[^"]*\bgallery\b/.test(html);
-    if (name === 'portfolio/mimosa.html') {
-      if (!/<video\b/.test(html)) fail('portfolio/mimosa.html: expected a <video> hero');
-      if (hasGallery) fail('portfolio/mimosa.html: video-only project must not render an empty gallery');
-    } else if (!hasGallery) fail(`${name}: expected a gallery`);
+    if (data.gallery?.length && !hasGallery) fail(`${name}: expected a gallery`);
+    if (!data.gallery?.length && hasGallery) fail(`${name}: project without gallery photos must not render an empty gallery`);
+    if (name === 'portfolio/mimosa.html' && !/<video\b/.test(html)) fail('portfolio/mimosa.html: expected a <video> hero');
   }
 }
 
