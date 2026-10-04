@@ -107,6 +107,9 @@ Each field gets a plain-English hint (for example, "Lower numbers appear first i
 - A free Cloudflare account for the auth Worker. Owner has one (confirmed 2026-10-04).
 - The client's GitHub username: `loftconcept` (confirmed to exist 2026-10-04; added as collaborator at handover).
 
+- Went live 2026-10-05 (PR #1 merged 02:33 SGT; first live deploy built 15 min, uploaded 31 min). Auth Worker: `https://sveltia-cms-auth.junyuquick246.workers.dev`. Client account `loftconcept` has write access.
+- Changed after review (2026-10-05): the client can delete projects. A deleted launch project's old `/projects/project-<slug>` address redirects to `/portfolio`; the home page's sector panels fall back to that sector's first project (or drop the panel); testimonial links appear only for projects that exist. Projects without gallery photos and repeated titles publish normally. `/staging/` is disallowed in the live `robots.txt`, and `.ftp-deploy-sync-state.json` returns 403.
+
 ## 7. Risks
 | Risk | Mitigation |
 |---|---|
