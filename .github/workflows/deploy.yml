@@ -1,0 +1,48 @@
+# redesign → staging.loftconcept.com.sg (public_html/staging), main → loftconcept.com.sg (public_html).
+# Admin publishes are commits, so they deploy the same way. Any failed step uploads nothing.
+name: Deploy
+
+on:
+  push:
+    branches: [main, redesign]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Reuse optimised images from earlier builds
+        uses: actions/cache@v6
+        with:
+          path: node_modules/.astro
+          key: astro-assets-${{ hashFiles('src/assets/**') }}
+          restore-keys: astro-assets-
+      - run: npx astro sync
+      - run: npm test
+      - run: npm run build
+      - run: npm run verify:build
+      - name: Keep staging out of search engines
+        if: github.ref_name != 'main'
+        run: |
+          printf 'User-agent: *\nDisallow: /\n' > dist/robots.txt
+      - name: Upload to Vodien
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.VODIEN_FTP_HOST }}
+          username: ${{ secrets.VODIEN_FTP_USER }}
+          password: ${{ secrets.VODIEN_FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./dist/
+          server-dir: ${{ github.ref_name == 'main' && './' || './staging/' }}
