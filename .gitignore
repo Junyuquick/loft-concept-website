@@ -3,3 +3,4 @@ dist
 .astro
 .tmp
 .DS_Store
+legacy

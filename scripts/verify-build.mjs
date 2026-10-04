@@ -46,7 +46,7 @@ for (const file of pages) {
 
 // Every URL in the old sitemap must resolve, directly or by redirect.
 const redirectFroms = new Set(readFileSync(join(DIST, '_redirects'), 'utf8').split('\n').filter((l) => l && !l.startsWith('#')).map((l) => l.split(' ')[0]));
-const legacy = [...readFileSync('legacy/sitemap.xml', 'utf8').matchAll(/<loc>https:\/\/loftconcept\.com\.sg([^<]*)<\/loc>/g)].map((m) => m[1] || '/');
+const legacy = [...readFileSync('scripts/legacy-sitemap.xml', 'utf8').matchAll(/<loc>https:\/\/loftconcept\.com\.sg([^<]*)<\/loc>/g)].map((m) => m[1] || '/');
 for (const path of legacy) {
   if (resolveInternal(DIST, path) !== true && !redirectFroms.has(path)) fail(`legacy URL not covered: ${path}`);
 }
