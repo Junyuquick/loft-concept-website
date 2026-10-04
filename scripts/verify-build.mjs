@@ -10,7 +10,7 @@ const walk = (dir) => readdirSync(dir).flatMap((f) => {
   const p = join(dir, f);
   return statSync(p).isDirectory() ? walk(p) : [p];
 });
-const pages = walk(DIST).filter((f) => f.endsWith('.html'));
+const pages = walk(DIST).filter((f) => f.endsWith('.html') && !f.startsWith(join(DIST, 'admin')));
 const titles = new Map();
 
 for (const file of pages) {
@@ -53,6 +53,19 @@ for (const path of legacy) {
 for (const path of ['/thankyou', '/thankyou.html', '/index.html', '/sitemap.xml']) {
   if (!redirectFroms.has(path)) fail(`redirect missing: ${path}`);
 }
+
+// The CMS shell: present, hidden from search, and kept out of the sitemap.
+const adminHtml = join(DIST, 'admin', 'index.html');
+try {
+  const html = readFileSync(adminHtml, 'utf8');
+  if (!/<meta name="robots" content="noindex"/.test(html)) fail('admin/index.html: should be noindex');
+  if (!/rel="cms-config-url"/.test(html)) fail('admin/index.html: missing config link');
+} catch { fail('admin/index.html: missing'); }
+try { readFileSync(join(DIST, 'admin', 'config.yml')); } catch { fail('admin/config.yml: missing'); }
+for (const f of readdirSync(DIST).filter((f) => /^sitemap.*\.xml$/.test(f))) {
+  if (/<loc>[^<]*\/admin\/?<\/loc>/.test(readFileSync(join(DIST, f), 'utf8'))) fail(`${f}: lists /admin`);
+}
+if (!redirectFroms.has('/admin')) fail('redirect missing: /admin');
 
 console.log(`${pages.length} pages, ${legacy.length} legacy URLs checked`);
 if (failures.length) { console.error(failures.join('\n')); process.exit(1); }
