@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import LiteYouTube from '../components/LiteYouTube.astro';
+import BookingCTA from '../components/BookingCTA.astro';
+
+const items = (await getCollection('testimonials')).sort((a, b) => a.data.order - b.data.order);
+---
+<Base
+  title="Homeowner stories"
+  description="Hear from homeowners who worked with Loft Concept, and step inside a Jalan Lana residence we designed and built."
+>
+  <section class="container lead">
+    <p class="eyebrow">Homeowner stories</p>
+    <h1>The best way to understand our work <span class="accent">is to see it.</span></h1>
+  </section>
+
+  <section class="container video" data-reveal>
+    <LiteYouTube id="rjq1_hLP6n4" title="A tour inside Jalan Lana" />
+    <div class="video__text">
+      <h2>A tour inside Jalan Lana</h2>
+      <p>Step inside this Jalan Lana residence and see how Loft Concept transformed the space, from the entry foyer through to every thoughtfully designed room.</p>
+      <a class="link" href="/portfolio/jalan-lana">View the project</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container wall">
+      {items.map((item, i) => (
+        <figure class="quote" data-reveal style={`--i:${i % 2}`}>
+          <blockquote class="accent">“{item.data.quote}”</blockquote>
+          <figcaption>
+            <strong>{item.data.author}</strong>
+            <span>{item.data.projectSlug
+              ? <a class="link" href={`/portfolio/${item.data.projectSlug}`}>{item.data.projectLabel}</a>
+              : item.data.projectLabel}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <BookingCTA heading="Ready to get started?" />
+</Base>
+
+<style>
+  .lead { padding-block: var(--s-6) var(--s-5); }
+  .lead h1 { max-width: 18ch; }
+  .video { display: grid; gap: var(--s-4); }
+  @media (min-width: 900px) { .video { grid-template-columns: 7fr 5fr; align-items: end; gap: var(--s-5); } }
+  .video__text { display: grid; gap: var(--s-2); justify-items: start; }
+  .video h2 { font-size: var(--step-2); }
+  .wall { columns: 1; column-gap: var(--s-6); }
+  @media (min-width: 900px) { .wall { columns: 2; } }
+  .quote { margin: 0 0 var(--s-5); break-inside: avoid; padding-top: var(--s-3); border-top: 1px solid color-mix(in srgb, var(--stone) 60%, transparent); }
+  .quote blockquote { margin: 0; font-size: var(--step-1); line-height: 1.45; color: var(--ink); }
+  .quote figcaption { display: grid; gap: 0.15rem; margin-top: var(--s-2); font-size: var(--step--1); letter-spacing: 0.03em; }
+</style>

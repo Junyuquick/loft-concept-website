@@ -1,0 +1,29 @@
+---
+interface Props { id: string; title: string }
+const { id, title } = Astro.props;
+---
+<a class="yt" href={`https://www.youtube.com/watch?v=${id}`} data-yt={id} aria-label={`Play video: ${title}`}>
+  <img src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" width="480" height="360" loading="lazy" />
+  <span class="yt__play" aria-hidden="true">Play</span>
+</a>
+
+<style>
+  .yt { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--r-img); background: var(--ink); }
+  .yt img { width: 100%; height: 100%; object-fit: cover; opacity: 0.88; }
+  .yt__play { position: absolute; inset: 0; display: grid; place-items: center; color: var(--white); font-size: var(--step-1); letter-spacing: 0.08em; }
+  .yt :global(iframe) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+</style>
+
+<script>
+  document.addEventListener('click', (event) => {
+    const link = (event.target as HTMLElement).closest<HTMLAnchorElement>('[data-yt]');
+    if (!link) return;
+    event.preventDefault();
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube-nocookie.com/embed/${link.dataset.yt}?autoplay=1&rel=0`;
+    iframe.title = link.getAttribute('aria-label') ?? 'Video';
+    iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
+    iframe.allowFullscreen = true;
+    link.replaceChildren(iframe);
+  });
+</script>
