@@ -86,7 +86,7 @@ Each field gets a plain-English hint (for example, "Lower numbers appear first i
   1. checkout, Node LTS, `npm ci`
   2. `npm test`, `npm run build`, `npm run verify:build`
   3. upload `dist/` to Vodien with an FTP deploy action over FTPS, syncing only changed files.
-- Secrets: `VODIEN_FTP_HOST`, `VODIEN_FTP_USER`, `VODIEN_FTP_PASSWORD`, `VODIEN_FTP_DIR`.
+- Secrets (set): `VODIEN_FTP_HOST` (`ftp.loftconcept.com.sg`), `VODIEN_FTP_USER` (`deploy@loftconcept.com.sg`), `VODIEN_FTP_PASSWORD`. Explicit FTPS on port 21. The `deploy` FTP account is rooted at `/home2/loftconceptcom/public_html` (the domain's document root), so the remote directory is `./`.
 - `concurrency` group so two quick publishes don't upload at the same time; the later one wins.
 - First run targets a staging folder on Vodien, then switches to `public_html`.
 
@@ -103,7 +103,7 @@ Each field gets a plain-English hint (for example, "Lower numbers appear first i
 - Manual, local: Sveltia "Work with Local Repository" in Chrome; add a test project with photos, edit an existing one, build, check both pages, then discard the test changes.
 
 ## 6. Setup the owner provides
-- Vodien FTP/FTPS host, username, password and target directory.
+- ~~Vodien FTP/FTPS host, username, password and target directory.~~ Done 2026-10-04: dedicated `deploy` FTP account, secrets set.
 - A free Cloudflare account for the auth Worker.
 - The client's GitHub username.
 
