@@ -1,0 +1,41 @@
+:root {
+  --white: #ffffff;
+  --bone: #f5f0e6;
+  --stone: #b6a591;
+  --umber: #564739;
+  --ink: #2b241d;
+
+  /* Swap point: put 'Noah' first here once a web license is in hand. */
+  --font-sans: 'Figtree Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-accent: 'TeX Gyre Pagella', 'Palatino Linotype', Palatino, 'Book Antiqua', serif;
+
+  --step--1: clamp(0.8rem, 0.78rem + 0.1vw, 0.875rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --step-1: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --step-2: clamp(1.6rem, 1.4rem + 1vw, 2.25rem);
+  --step-3: clamp(2.1rem, 1.7rem + 2vw, 3.5rem);
+  --step-4: clamp(2.8rem, 2rem + 4vw, 5.5rem);
+  --step-5: clamp(3.4rem, 2.2rem + 6vw, 8rem);
+
+  --s-1: 0.5rem;
+  --s-2: 1rem;
+  --s-3: 1.5rem;
+  --s-4: 2.5rem;
+  --s-5: 4rem;
+  --s-6: 6rem;
+  --s-7: clamp(5rem, 4rem + 6vw, 10rem);
+
+  --gutter: clamp(20px, 5vw, 80px);
+  --max: 1440px;
+  --header-h: 72px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --r-img: 2px;
+  --r-ctl: 6px;
+
+  --z-grain: 40;
+  --z-header: 50;
+  --z-menu: 60;
+  --z-skip: 100;
+}
