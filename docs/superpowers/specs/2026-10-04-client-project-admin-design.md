@@ -104,8 +104,8 @@ Each field gets a plain-English hint (for example, "Lower numbers appear first i
 
 ## 6. Setup the owner provides
 - ~~Vodien FTP/FTPS host, username, password and target directory.~~ Done 2026-10-04: dedicated `deploy` FTP account, secrets set.
-- A free Cloudflare account for the auth Worker.
-- The client's GitHub username.
+- A free Cloudflare account for the auth Worker. Owner has one (confirmed 2026-10-04).
+- The client's GitHub username: `loftconcept` (confirmed to exist 2026-10-04; added as collaborator at handover).
 
 ## 7. Risks
 | Risk | Mitigation |
