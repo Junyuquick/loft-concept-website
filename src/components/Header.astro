@@ -1,7 +1,8 @@
 ---
 import { site } from '../lib/site';
+import { cleanPath } from '../lib/paths';
 
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const path = cleanPath(Astro.url.pathname);
 const current = (href: string) => (path === href || path.startsWith(`${href}/`) ? 'page' : undefined);
 const menuLinks = [{ href: '/', label: 'Home' }, ...site.nav, site.cta];
 ---

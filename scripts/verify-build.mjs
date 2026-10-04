@@ -25,6 +25,7 @@ for (const file of pages) {
   else titles.set(title, name);
   if (!/<meta name="description" content="[^"]{20,}"/.test(html)) fail(`${name}: missing or short meta description`);
   if (!is404 && !/<link rel="canonical" href="https:\/\/loftconcept\.com\.sg/.test(html)) fail(`${name}: missing canonical`);
+  if (/<link rel="canonical" href="[^"]*\.html"/.test(html)) fail(`${name}: canonical points at a .html URL that redirects`);
   if ((html.match(/<h1[\s>]/g) ?? []).length !== 1) fail(`${name}: expected exactly one <h1>`);
   for (const tag of html.match(/<img\b[^>]*>/g) ?? []) if (!/\salt=/.test(tag)) fail(`${name}: <img> without alt: ${tag.slice(0, 80)}`);
   if (/<dl[^>]*>\s*<\/dl>/.test(html)) fail(`${name}: empty <dl>`);

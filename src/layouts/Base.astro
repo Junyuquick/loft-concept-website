@@ -6,6 +6,7 @@ import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../lib/site';
+import { cleanPath } from '../lib/paths';
 
 interface Props {
   title: string;
@@ -16,7 +17,7 @@ interface Props {
 }
 const { title, description, image = '/og-default.jpg', noindex = false, schema } = Astro.props;
 const fullTitle = `${title} | ${site.name}`;
-const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const canonical = new URL(cleanPath(Astro.url.pathname), Astro.site).href;
 const ogImage = new URL(image, Astro.site).href;
 ---
 <!doctype html>
