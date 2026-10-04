@@ -34,7 +34,9 @@
   --r-img: 2px;
   --r-ctl: 6px;
 
-  --z-grain: 40;
+  /* Bone paper after the Brand Guide's page stock; regenerate with scripts/make-texture.mjs. */
+  --paper: url('/textures/paper.jpg');
+
   --z-header: 50;
   --z-menu: 60;
   --z-skip: 100;
