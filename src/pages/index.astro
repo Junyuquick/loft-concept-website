@@ -9,7 +9,7 @@ import BookingCTA from '../components/BookingCTA.astro';
 import { localBusinessSchema } from '../lib/schema';
 
 const featured = (await getCollection('projects', (p) => p.data.featured)).sort((a, b) => a.data.order - b.data.order).slice(0, 4);
-const residential = await getEntry('projects', 'mount-sinai-road');
+const residential = await getEntry('projects', 'lornie-road');
 const commercial = await getEntry('projects', 'horse-city');
 const quote = await getEntry('testimonials', 'wei-liang-priya');
 if (!residential || !commercial || !quote) throw new Error('Home page is missing a required content entry');
@@ -54,23 +54,32 @@ const excerpt = 'They really listened to how we live day to day and translated t
         <a class="link" href="/portfolio">All projects</a>
       </div>
       <div class="work__grid">
-        {featured.map((project, i) => <ProjectCard project={project} tile={i} eager={i === 0} />)}
+        {featured.map((project, i) => <ProjectCard project={project} eager={i === 0} />)}
       </div>
     </div>
   </section>
 
   <section class="section sectors">
-    <div class="container sectors__grid">
-      <a class="sector sector--lg" href="/portfolio?sector=residential" data-reveal>
-        <div class="sector__media"><Photo image={residential.data.hero} alt={residential.data.heroAlt ?? 'A residential interior by Loft Concept'} sizes="(min-width: 900px) 58vw, 100vw" position={residential.data.coverPosition} /></div>
-        <h3>Residential</h3>
-        <p>HDB, condominium and landed homes.</p>
-      </a>
-      <a class="sector sector--sm" href="/portfolio?sector=commercial" data-reveal style="--i:1">
-        <div class="sector__media"><Photo image={commercial.data.hero} alt={commercial.data.heroAlt ?? 'A commercial interior by Loft Concept'} sizes="(min-width: 900px) 40vw, 100vw" position={commercial.data.coverPosition} /></div>
-        <h3>Commercial</h3>
-        <p>Spaces built around a business.</p>
-      </a>
+    <div class="container">
+      <h2 class="sectors__title">What we design</h2>
+      <div class="sectors__grid">
+        <a class="sector" href="/portfolio?sector=residential" data-reveal>
+          <div class="sector__media"><Photo image={residential.data.hero} alt={residential.data.heroAlt ?? 'A residential interior by Loft Concept'} sizes="(min-width: 900px) 50vw, 100vw" position={residential.data.coverPosition} /></div>
+          <div class="sector__body">
+            <h3>Residential</h3>
+            <p>HDB, condominium and landed homes.</p>
+            <span class="sector__cta">View projects</span>
+          </div>
+        </a>
+        <a class="sector" href="/portfolio?sector=commercial" data-reveal style="--i:1">
+          <div class="sector__media"><Photo image={commercial.data.hero} alt={commercial.data.heroAlt ?? 'A commercial interior by Loft Concept'} sizes="(min-width: 900px) 50vw, 100vw" position={commercial.data.coverPosition} /></div>
+          <div class="sector__body">
+            <h3>Commercial</h3>
+            <p>Spaces built around a business.</p>
+            <span class="sector__cta">View projects</span>
+          </div>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -108,23 +117,22 @@ const excerpt = 'They really listened to how we live day to day and translated t
 
   .work__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--s-5); }
   .work__grid { display: grid; gap: var(--s-5) var(--s-3); }
-  @media (min-width: 900px) {
-    .work__grid { grid-template-columns: repeat(12, 1fr); gap: var(--s-6) var(--s-3); align-items: start; }
-    .work__grid :global(.card[data-tile='0']) { grid-column: 1 / span 7; }
-    .work__grid :global(.card[data-tile='1']) { grid-column: 8 / span 5; }
-    .work__grid :global(.card[data-tile='2']) { grid-column: 1 / span 5; }
-    .work__grid :global(.card[data-tile='3']) { grid-column: 6 / span 7; margin-top: var(--s-5); }
-  }
+  @media (min-width: 900px) { .work__grid { grid-template-columns: 1fr 1fr; gap: var(--s-5) var(--s-3); } }
 
-  .sectors__grid { display: grid; gap: var(--s-5) var(--s-3); }
-  @media (min-width: 900px) {
-    .sectors__grid { grid-template-columns: 7fr 5fr; align-items: end; }
-    .sector--sm { margin-bottom: var(--s-5); }
-  }
-  .sector { display: block; text-decoration: none; }
-  .sector__media { overflow: hidden; border-radius: var(--r-img); aspect-ratio: 4 / 5; margin-bottom: var(--s-2); }
-  .sector--lg .sector__media { aspect-ratio: 3 / 2; }
+  .sectors__title { margin-bottom: var(--s-5); }
+  .sectors__grid { display: grid; gap: var(--s-3); }
+  @media (min-width: 900px) { .sectors__grid { grid-template-columns: 1fr 1fr; } }
+  .sector { position: relative; display: block; overflow: hidden; border-radius: var(--r-img); color: var(--white); text-decoration: none; }
+  .sector__media { position: relative; aspect-ratio: 4 / 5; }
+  /* Legibility veil, same technique as the hero: dark where the text sits, light at the top. */
+  .sector__media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgb(43 36 29 / 0.85), rgb(43 36 29 / 0.55) 40%, rgb(43 36 29 / 0.1) 75%); transition: opacity 0.6s var(--ease-out); }
+  .sector:hover .sector__media::after { opacity: 0.85; }
   .sector__media :global(.photo) { transition: transform 1.1s var(--ease-out); }
   .sector:hover .sector__media :global(.photo) { transform: scale(1.02); }
+  .sector__body { position: absolute; inset: auto 0 0; z-index: 1; display: grid; gap: 0.4rem; justify-items: start; padding: var(--s-3); }
+  @media (min-width: 900px) { .sector__body { padding: var(--s-4); } }
+  .sector h3 { color: var(--white); font-size: var(--step-3); }
+  .sector p { color: rgb(255 255 255 / 0.9); }
+  .sector__cta { margin-top: var(--s-2); padding-bottom: 2px; border-bottom: 1px solid currentColor; font-size: var(--step--1); letter-spacing: 0.04em; }
   .more { margin-top: var(--s-4); }
 </style>

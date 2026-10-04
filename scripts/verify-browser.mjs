@@ -79,6 +79,22 @@ await check('Photos fill their fixed-ratio frames', async () => {
   await ctx.close();
 });
 
+await check('Project cards are one size on desktop, on Home and Portfolio', async () => {
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+  const page = await ctx.newPage();
+  for (const path of ['/', '/portfolio']) {
+    await page.goto(`${BASE}${path}`, { waitUntil: 'networkidle' });
+    const sizes = await page.evaluate(() =>
+      [...new Set([...document.querySelectorAll('.card__media')].map((m) => {
+        const r = m.getBoundingClientRect();
+        return `${Math.round(r.width)}x${Math.round(r.height)}`;
+      }))],
+    );
+    assert.equal(sizes.length, 1, `${path}: card sizes differ (${sizes.join(', ')})`);
+  }
+  await ctx.close();
+});
+
 await check('No horizontal overflow and screenshots at 360, 768, 1280, 1920', async () => {
   mkdirSync('.tmp/shots', { recursive: true });
   const ctx = await browser.newContext({ reducedMotion: 'reduce' });

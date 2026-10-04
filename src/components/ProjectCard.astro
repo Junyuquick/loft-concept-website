@@ -4,16 +4,15 @@ import Photo from './Photo.astro';
 
 interface Props {
   project: CollectionEntry<'projects'>;
-  tile?: number;
   sizes?: string;
   eager?: boolean;
 }
-const { project, tile = 0, sizes = '(min-width: 900px) 58vw, 100vw', eager = false } = Astro.props;
+const { project, sizes = '(min-width: 900px) 50vw, 100vw', eager = false } = Astro.props;
 const { data, id } = project;
 const sector = data.sector === 'commercial' ? 'Commercial' : 'Residential';
 const alt = data.coverAlt ?? `${data.title}, ${data.sector} interior by Loft Concept`;
 ---
-<article class="card" data-tile={tile} data-sector={data.sector} data-reveal>
+<article class="card" data-sector={data.sector} data-reveal>
   <a class="card__link" href={`/portfolio/${id}`}>
     <div class="card__media"><Photo image={data.cover} alt={alt} sizes={sizes} position={data.coverPosition} eager={eager} /></div>
     <div class="card__meta">
@@ -25,12 +24,9 @@ const alt = data.coverAlt ?? `${data.title}, ${data.sector} interior by Loft Con
 
 <style>
   .card__link { display: block; text-decoration: none; }
-  .card__media { overflow: hidden; border-radius: var(--r-img); aspect-ratio: 5 / 4; background: color-mix(in srgb, var(--stone) 35%, var(--bone)); }
-  .card[data-tile='0'] .card__media, .card[data-tile='3'] .card__media { aspect-ratio: 3 / 2; }
-  .card[data-tile='1'] .card__media, .card[data-tile='2'] .card__media { aspect-ratio: 4 / 5; }
+  .card__media { overflow: hidden; border-radius: var(--r-img); aspect-ratio: 3 / 2; background: color-mix(in srgb, var(--stone) 35%, var(--bone)); }
   .card__media :global(.photo) { transition: transform 1.1s var(--ease-out); }
   .card__link:hover .card__media :global(.photo) { transform: scale(1.02); }
   .card__meta { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-2); padding-top: var(--s-2); }
   .card__meta h3 { font-weight: 500; }
-  @media (max-width: 899px) { .card[data-tile] .card__media { aspect-ratio: 5 / 4; } }
 </style>
