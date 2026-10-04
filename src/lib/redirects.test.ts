@@ -28,12 +28,27 @@ describe('renderCloudflare', () => {
 
 describe('renderApache', () => {
   const out = renderApache(list);
-  it('uses anchored RedirectMatch so /sitemap does not swallow /sitemap-index.xml', () => {
-    expect(out).toContain('RedirectMatch 301 ^/sitemap/?$ /sitemap-index.xml');
-    expect(out).toContain('RedirectMatch 301 ^/projects/project-jalan-lana\\.html/?$ /portfolio/jalan-lana');
+  const firstRedirect = out.indexOf('[R=301');
+  it('redirects only the visitor request, never Apache internal rewrites (prevents loops)', () => {
+    expect(out).toContain('RewriteCond %{ENV:REDIRECT_STATUS} !^$');
+    expect(out.indexOf('RewriteCond %{ENV:REDIRECT_STATUS} !^$')).toBeLessThan(firstRedirect);
+    expect(out).not.toContain('RedirectMatch');
   });
-  it('keeps clean-URL serving and the 404 page', () => {
-    expect(out).toContain('RewriteRule ^(.+?)/?$ $1.html [L]');
+  it('maps legacy URLs with anchored rewrite rules', () => {
+    expect(out).toContain('RewriteRule ^sitemap/?$ /sitemap-index.xml [R=301,L]');
+    expect(out).toContain('RewriteRule ^projects/project-jalan-lana\\.html/?$ /portfolio/jalan-lana [R=301,L]');
+    expect(out).toContain('RewriteRule ^index\\.html/?$ / [R=301,L]');
+  });
+  it('sends http and www to the canonical https host, on the live domain only', () => {
+    expect(out).toContain('RewriteCond %{HTTP_HOST} ^(www\\.)?loftconcept\\.com\\.sg$ [NC]');
+    expect(out).toContain('RewriteRule ^ https://loftconcept.com.sg%{REQUEST_URI} [R=301,L]');
+  });
+  it('serves /portfolio from portfolio.html even though a portfolio/ folder exists', () => {
+    expect(out).toContain('DirectorySlash Off');
+    expect(out).toContain('Options -MultiViews -Indexes');
+    expect(out).toContain('RewriteRule ^(.+)$ $1.html [L]');
+  });
+  it('keeps the 404 page', () => {
     expect(out).toContain('ErrorDocument 404 /404.html');
   });
 });
