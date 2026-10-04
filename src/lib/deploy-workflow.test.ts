@@ -33,6 +33,9 @@ describe('deploy workflow', () => {
       server: '${{ secrets.VODIEN_FTP_HOST }}', username: '${{ secrets.VODIEN_FTP_USER }}', password: '${{ secrets.VODIEN_FTP_PASSWORD }}',
     });
   });
+  it('allows time for a first full upload (~1,800 files, ~40 min over FTPS) plus an uncached build', () => {
+    expect(wf.jobs.deploy['timeout-minutes']).toBeGreaterThanOrEqual(90);
+  });
   it('restores the image cache after npm ci, which would otherwise wipe it', () => {
     expect(at((s) => String(s.uses).startsWith('actions/cache@'))).toBeGreaterThan(run('npm ci'));
   });
