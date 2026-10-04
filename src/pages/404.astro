@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Page not found" description="That page could not be found." noindex>
+  <section class="container wrap">
+    <p class="eyebrow">404</p>
+    <h1>That page isn’t here. <span class="accent">The work is.</span></h1>
+    <p>The link may be out of date. Start from the portfolio, or go back to the home page.</p>
+    <div class="actions"><a class="btn" href="/portfolio">View the portfolio</a><a class="link" href="/">Back to home</a></div>
+  </section>
+</Base>
+
+<style>
+  .wrap { padding-block: var(--s-7); display: grid; gap: var(--s-3); justify-items: start; }
+  .wrap h1 { max-width: 16ch; }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3); margin-top: var(--s-2); }
+</style>

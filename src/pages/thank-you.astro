@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Thank you" description="Thank you for your enquiry. We will be in touch shortly." noindex>
+  <section class="container wrap">
+    <p class="eyebrow">Enquiry received</p>
+    <h1>Thank you. <span class="accent">We’ll be in touch shortly.</span></h1>
+    <p>In the meantime, you are welcome to look through some of our recent work.</p>
+    <div class="actions"><a class="btn" href="/portfolio">Explore the portfolio</a><a class="link" href="/">Back to home</a></div>
+  </section>
+</Base>
+
+<style>
+  .wrap { padding-block: var(--s-7); display: grid; gap: var(--s-3); justify-items: start; }
+  .wrap h1 { max-width: 14ch; }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3); margin-top: var(--s-2); }
+</style>

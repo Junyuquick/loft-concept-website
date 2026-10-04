@@ -1,0 +1,146 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../lib/site';
+import { budgets, keyCollections, propertyStatuses, propertyTypes } from '../lib/enquiry';
+---
+<Base
+  title="Book a consultation"
+  description="Book a consultation with Loft Concept. Tell us about your home or commercial space and one of our designers will be in touch."
+>
+  <section class="container contact">
+    <div class="contact__intro">
+      <p class="eyebrow">Book a consultation</p>
+      <h1>You deserve a home <span class="accent">that feels like you.</span></h1>
+      <p>Tell us a little about your space. We’ll be in touch shortly to arrange a first consultation.</p>
+      <p class="contact__alt">Prefer to talk now? <a class="link" href={site.whatsapp} target="_blank" rel="noopener">WhatsApp us</a>, call <a class="link" href={site.phoneHref}>{site.phone}</a>, or email <a class="link" href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    </div>
+
+    <form class="form" data-enquiry action={site.formAction} method="POST">
+      <input type="hidden" name="_subject" value="New booking enquiry — Loft Concept" />
+      <input type="hidden" name="_next" value={`${site.url}/thank-you`} />
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" class="form__trap" />
+
+      <fieldset>
+        <legend>About you</legend>
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" autocomplete="name" required aria-describedby="name-error" />
+          <p class="field__error" id="name-error" data-error="name" role="alert"></p>
+        </div>
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required aria-describedby="phone-error" />
+          <p class="field__error" id="phone-error" data-error="phone" role="alert"></p>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required aria-describedby="email-error" />
+          <p class="field__error" id="email-error" data-error="email" role="alert"></p>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>About your project <span class="accent">(optional, helps us prepare)</span></legend>
+        <div class="field">
+          <label for="property_type">Property type</label>
+          <select id="property_type" name="property_type"><option value="">Select</option>{propertyTypes.map((o) => <option>{o}</option>)}</select>
+        </div>
+        <div class="field">
+          <label for="property_status">Property status</label>
+          <select id="property_status" name="property_status"><option value="">Select</option>{propertyStatuses.map((o) => <option>{o}</option>)}</select>
+        </div>
+        <div class="field">
+          <label for="key_collection">Estimated key collection</label>
+          <select id="key_collection" name="key_collection"><option value="">Select</option>{keyCollections.map((o) => <option>{o}</option>)}</select>
+        </div>
+        <div class="field">
+          <label for="budget">Estimated budget</label>
+          <select id="budget" name="budget"><option value="">Select</option>{budgets.map((o) => <option>{o}</option>)}</select>
+        </div>
+        <div class="field">
+          <label for="preferences">Design preferences</label>
+          <textarea id="preferences" name="preferences" rows="4" placeholder="Anything else you would like us to take note of?"></textarea>
+        </div>
+        <div class="field">
+          <label for="discount_code">Discount code</label>
+          <input id="discount_code" name="discount_code" type="text" autocomplete="off" />
+        </div>
+      </fieldset>
+
+      <button class="btn" type="submit">Send enquiry</button>
+      <p class="form__status" data-status role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</Base>
+
+<style>
+  .contact { display: grid; gap: var(--s-5); padding-block: var(--s-6); }
+  @media (min-width: 900px) { .contact { grid-template-columns: 5fr 7fr; gap: var(--s-6); } .contact__intro { position: sticky; top: calc(var(--header-h) + var(--s-4)); align-self: start; } }
+  .contact__intro { display: grid; gap: var(--s-3); justify-items: start; }
+  .contact__alt { font-size: var(--step--1); }
+  .form { display: grid; gap: var(--s-4); }
+  fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: var(--s-3); }
+  legend { padding: 0; margin-bottom: var(--s-2); font-size: var(--step-1); color: var(--ink); font-weight: 500; }
+  .field { display: grid; gap: 0.35rem; }
+  label { font-size: var(--step--1); letter-spacing: 0.04em; font-weight: 500; }
+  input, select, textarea {
+    width: 100%; padding: 0.85em 1em; background: var(--white); color: var(--ink);
+    border: 1px solid color-mix(in srgb, var(--umber) 45%, transparent); border-radius: var(--r-ctl);
+    font: inherit; transition: border-color 0.2s var(--ease-out);
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--umber); }
+  input[aria-invalid='true'] { border-color: #9b2c2c; }
+  .field__error { min-height: 1.2em; font-size: var(--step--1); color: #9b2c2c; }
+  .form__trap { position: absolute; left: -9999px; }
+  .form__status { min-height: 1.5em; font-size: var(--step--1); }
+  .form button { justify-self: start; }
+</style>
+
+<script>
+  import { validateEnquiry } from '../lib/enquiry';
+
+  const FIELDS = ['name', 'phone', 'email'] as const;
+
+  function wire() {
+    const form = document.querySelector<HTMLFormElement>('form[data-enquiry]');
+    if (!form || form.dataset.wired) return;
+    form.dataset.wired = '1';
+    form.noValidate = true;
+    const status = form.querySelector<HTMLElement>('[data-status]')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+
+    const show = (errors: Partial<Record<(typeof FIELDS)[number], string>>) => {
+      for (const field of FIELDS) {
+        const input = form.elements.namedItem(field) as HTMLInputElement;
+        form.querySelector<HTMLElement>(`[data-error="${field}"]`)!.textContent = errors[field] ?? '';
+        input.setAttribute('aria-invalid', errors[field] ? 'true' : 'false');
+      }
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const errors = validateEnquiry({
+        name: String(data.get('name') ?? ''),
+        phone: String(data.get('phone') ?? ''),
+        email: String(data.get('email') ?? ''),
+      });
+      show(errors);
+      const first = FIELDS.find((f) => errors[f]);
+      if (first) { (form.elements.namedItem(first) as HTMLElement).focus(); return; }
+
+      button.disabled = true;
+      status.textContent = 'Sending…';
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+        if (!res.ok) throw new Error(String(res.status));
+        location.assign('/thank-you');
+      } catch {
+        status.textContent = 'We couldn’t send your enquiry. Please try again, or message us on WhatsApp.';
+        button.disabled = false;
+      }
+    });
+  }
+
+  document.addEventListener('astro:page-load', wire);
+</script>

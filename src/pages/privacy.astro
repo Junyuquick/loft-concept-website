@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../lib/site';
+---
+<Base title="Privacy" description="How Loft Concept handles the information you send us through this website.">
+  <section class="container doc">
+    <p class="eyebrow">Privacy</p>
+    <h1>How we handle your information</h1>
+    <h2>What we collect</h2>
+    <p>When you send an enquiry we receive the details you type into the form: your name, phone number and email address, and, if you choose to give them, your property type, status, estimated key collection date, budget, design preferences and any discount code.</p>
+    <h2>Why we collect it</h2>
+    <p>We use these details only to contact you, to arrange a consultation and to prepare a proposal for your project.</p>
+    <h2>Who processes it</h2>
+    <p>Enquiries are delivered to us by Formspree, a form-handling service. Formspree processes the form data on our behalf in order to deliver it to us. This site does not currently use advertising or analytics cookies.</p>
+    <h2>Your choices</h2>
+    <p>You can ask to see, correct or delete the information you have given us, or withdraw your consent to us contacting you, by emailing <a class="link" href={`mailto:${site.email}`}>{site.email}</a>.</p>
+  </section>
+</Base>
+
+<style>
+  .doc { padding-block: var(--s-6); display: grid; gap: var(--s-2); max-width: 52rem; margin-inline: 0; }
+  .doc h1 { margin-bottom: var(--s-3); }
+  .doc h2 { font-size: var(--step-1); margin-top: var(--s-3); }
+</style>
