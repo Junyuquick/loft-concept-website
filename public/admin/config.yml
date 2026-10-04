@@ -3,7 +3,7 @@
 backend:
   name: github
   repo: Junyuquick/loft-concept-website
-  branch: redesign
+  branch: main
   base_url: https://sveltia-cms-auth.junyuquick246.workers.dev
 
 media_folder: /src/assets/projects/uploads
