@@ -14,6 +14,6 @@ gallery:
   - "../../assets/projects/jalan-lana/07-dream-semi-d-paramount-kembangan-area-east-coast-marine-parade-singapore6.jpg"
   - "../../assets/projects/jalan-lana/08-img-3284.jpg"
   - "../../assets/projects/jalan-lana/09-img-8481.jpg"
-featured: true
+featured: false
 order: 1
 ---

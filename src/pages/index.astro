@@ -9,7 +9,7 @@ import BookingCTA from '../components/BookingCTA.astro';
 import { localBusinessSchema } from '../lib/schema';
 
 const featured = (await getCollection('projects', (p) => p.data.featured)).sort((a, b) => a.data.order - b.data.order).slice(0, 4);
-const residential = await getEntry('projects', 'jalan-lana');
+const residential = await getEntry('projects', 'mount-sinai-road');
 const commercial = await getEntry('projects', 'horse-city');
 const quote = await getEntry('testimonials', 'wei-liang-priya');
 if (!residential || !commercial || !quote) throw new Error('Home page is missing a required content entry');

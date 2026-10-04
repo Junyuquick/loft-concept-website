@@ -10,6 +10,6 @@ gallery:
   - "../../assets/projects/mount-sinai-road/03-img-9903.jpg"
   - "../../assets/projects/mount-sinai-road/04-img-9908.jpg"
   - "../../assets/projects/mount-sinai-road/05-img-9911.jpg"
-featured: false
+featured: true
 order: 16
 ---

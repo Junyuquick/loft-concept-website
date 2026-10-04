@@ -15,7 +15,7 @@ const cardImage = new Map(
 
 const COMMERCIAL = new Set(['horse-city']);
 const PROPERTY_TYPE = { 'jalan-lana': 'landed', 'leedon-green': 'condo', 'mount-sinai-road': 'landed', 'ceylon-road': 'condo', 'horse-city': 'commercial' };
-const FEATURED = new Set(['jalan-lana', 'sennett-road', 'leedon-green', 'ceylon-road']);
+const FEATURED = new Set(['mount-sinai-road', 'sennett-road', 'leedon-green', 'ceylon-road']);
 const rel = (slug, name) => `../../assets/projects/${slug}/${name}`;
 const q = JSON.stringify;
 

@@ -179,9 +179,25 @@ Each phase ends with its own verification command or screenshot set. Nothing is 
 
 ## 8. Open questions for the owner
 
-- **Q1.** Keep or remove the right-click and image-drag blocking? Recommendation: remove it. It frustrates visitors and does not stop image copying.
+- **Q1.** Keep or remove the right-click and image-drag blocking? Recommendation: remove it. It frustrates visitors and does not stop image copying. 
+ans: remove it
 - **Q2.** Is there a web license for Noah? If not, is Figtree acceptable as the interim?
+ans: figtree
 - **Q3.** Is the logo available as a vector (AI, SVG or PDF)? If not, I will trace the JPEG.
+ans: nope
 - **Q4.** Are the testimonials and client videos real and cleared for use? Do you have more?
+ans: real
 - **Q5.** Do you want analytics, a WhatsApp number on the site, or a privacy policy text? What is the contact number to publish? (The guide has placeholders.)
+- yes analytics will be good, contact nuumber is +65 8533 7311
 - **Q6.** Should I generate 2-3 visual direction mockups before the build starts?
+
+**Decisions recorded 2026-10-04**
+- Right-click and drag blocking: removed (Q1).
+- Type: Figtree stays as the interim sans; no Noah web license yet (Q2).
+- Logo: no vector exists; the traced `public/logo.svg` is the mark (Q3).
+- Testimonials and the Jalan Lana video: real and cleared for use (Q4).
+- Reply promise: "within one working day" on the contact and thank-you pages.
+- Mission and vision: the Brand Guide's wording.
+- Jalan Lana photos carry a third-party watermark (David Wang / PropertyGuru): the project page stays, but it is off Home. Mount Sinai Road replaces it in Selected work and as the Residential tile.
+- Analytics: wanted (Q5). Provider not yet chosen; once it is, update the privacy page, which currently says no analytics cookies are used.
+- Hosting and preview deploy: not yet.
