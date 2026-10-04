@@ -22,7 +22,8 @@ import { budgets, keyCollections, propertyStatuses, propertyTypes } from '../lib
 
       <fieldset>
         <legend>About you</legend>
-        <div class="field">
+        <div class="fields">
+        <div class="field field--full">
           <label for="name">Name</label>
           <input id="name" name="name" type="text" autocomplete="name" required aria-describedby="name-error" />
           <p class="field__error" id="name-error" data-error="name" role="alert"></p>
@@ -37,33 +38,36 @@ import { budgets, keyCollections, propertyStatuses, propertyTypes } from '../lib
           <input id="email" name="email" type="email" autocomplete="email" required aria-describedby="email-error" />
           <p class="field__error" id="email-error" data-error="email" role="alert"></p>
         </div>
+        </div>
       </fieldset>
 
       <fieldset>
         <legend>About your project <span class="accent">(optional, helps us prepare)</span></legend>
+        <div class="fields">
         <div class="field">
           <label for="property_type">Property type</label>
-          <select id="property_type" name="property_type"><option value="">Select</option>{propertyTypes.map((o) => <option>{o}</option>)}</select>
+          <select id="property_type" name="property_type"><option value="">Choose one</option>{propertyTypes.map((o) => <option>{o}</option>)}</select>
         </div>
         <div class="field">
           <label for="property_status">Property status</label>
-          <select id="property_status" name="property_status"><option value="">Select</option>{propertyStatuses.map((o) => <option>{o}</option>)}</select>
+          <select id="property_status" name="property_status"><option value="">Choose one</option>{propertyStatuses.map((o) => <option>{o}</option>)}</select>
         </div>
         <div class="field">
           <label for="key_collection">Estimated key collection</label>
-          <select id="key_collection" name="key_collection"><option value="">Select</option>{keyCollections.map((o) => <option>{o}</option>)}</select>
+          <select id="key_collection" name="key_collection"><option value="">Choose one</option>{keyCollections.map((o) => <option>{o}</option>)}</select>
         </div>
         <div class="field">
           <label for="budget">Estimated budget</label>
-          <select id="budget" name="budget"><option value="">Select</option>{budgets.map((o) => <option>{o}</option>)}</select>
+          <select id="budget" name="budget"><option value="">Choose one</option>{budgets.map((o) => <option>{o}</option>)}</select>
         </div>
-        <div class="field">
+        <div class="field field--full">
           <label for="preferences">Design preferences</label>
-          <textarea id="preferences" name="preferences" rows="4" placeholder="Anything else you would like us to take note of?"></textarea>
+          <textarea id="preferences" name="preferences" rows="3" placeholder="Anything else you would like us to take note of?"></textarea>
         </div>
         <div class="field">
           <label for="discount_code">Discount code</label>
           <input id="discount_code" name="discount_code" type="text" autocomplete="off" />
+        </div>
         </div>
       </fieldset>
 
@@ -78,22 +82,38 @@ import { budgets, keyCollections, propertyStatuses, propertyTypes } from '../lib
   @media (min-width: 900px) { .contact { grid-template-columns: 5fr 7fr; gap: var(--s-6); } .contact__intro { position: sticky; top: calc(var(--header-h) + var(--s-4)); align-self: start; } }
   .contact__intro { display: grid; gap: var(--s-3); justify-items: start; }
   .contact__alt { font-size: var(--step--1); }
-  .form { display: grid; gap: var(--s-4); }
-  fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: var(--s-3); }
-  legend { padding: 0; margin-bottom: var(--s-2); font-size: var(--step-1); color: var(--ink); font-weight: 500; }
-  .field { display: grid; gap: 0.35rem; }
+  .form { display: grid; gap: var(--s-5); }
+  fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+  legend { padding: 0; margin-bottom: var(--s-3); font-size: var(--step-1); color: var(--ink); font-weight: 500; }
+  .fields { display: grid; gap: var(--s-4) var(--s-4); }
+  @media (min-width: 640px) { .fields { grid-template-columns: 1fr 1fr; } .field--full { grid-column: 1 / -1; } }
+  .field { display: grid; gap: 0.25rem; align-content: start; }
   label { font-size: var(--step--1); letter-spacing: 0.04em; font-weight: 500; }
+
+  /* Editorial fields: a single hairline, no box. */
   input, select, textarea {
-    width: 100%; padding: 0.85em 1em; background: var(--white); color: var(--ink);
-    border: 1px solid color-mix(in srgb, var(--umber) 45%, transparent); border-radius: var(--r-ctl);
-    font: inherit; transition: border-color 0.2s var(--ease-out);
+    width: 100%; padding: 0.55em 0; margin: 0;
+    background: transparent; color: var(--ink);
+    border: 0; border-bottom: 1px solid color-mix(in srgb, var(--umber) 45%, transparent); border-radius: 0;
+    font: 400 1rem / 1.5 var(--font-sans);
+    transition: border-color 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
   }
-  input:focus, select:focus, textarea:focus { border-color: var(--umber); }
-  input[aria-invalid='true'] { border-color: #9b2c2c; }
-  .field__error { min-height: 1.2em; font-size: var(--step--1); color: #9b2c2c; }
+  textarea { resize: vertical; min-height: 5.5em; }
+  ::placeholder { color: color-mix(in srgb, var(--umber) 80%, var(--bone)); opacity: 1; }
+  select {
+    appearance: none; padding-right: 1.75em; cursor: pointer;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23564739' stroke-width='1.4'/%3E%3C/svg%3E") no-repeat right 0.25em center;
+  }
+  select:has(option[value='']:checked) { color: color-mix(in srgb, var(--umber) 80%, var(--bone)); }
+  input:hover, select:hover, textarea:hover { border-bottom-color: var(--umber); }
+  /* Focus thickens the line to 2px without shifting layout; this replaces the global outline. */
+  input:focus-visible, select:focus-visible, textarea:focus-visible { outline: none; border-bottom-color: var(--umber); box-shadow: 0 1px 0 var(--umber); }
+  input[aria-invalid='true'] { border-bottom-color: #9b2c2c; box-shadow: 0 1px 0 #9b2c2c; }
+  .field__error { font-size: var(--step--1); color: #9b2c2c; }
+  .field__error:empty { display: none; }
   .form__trap { position: absolute; left: -9999px; }
-  .form__status { min-height: 1.5em; font-size: var(--step--1); }
-  .form button { justify-self: start; }
+  .form__status { min-height: 1.5em; margin-top: calc(var(--s-3) * -1); font-size: var(--step--1); }
+  .form button { justify-self: start; padding-inline: 2.2em; }
 </style>
 
 <script>

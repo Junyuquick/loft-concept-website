@@ -30,6 +30,7 @@ const testimonials = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/testimonials' }),
   schema: z.object({
     quote: z.string(),
+    highlight: z.string(),
     author: z.string(),
     projectSlug: z.string().optional(),
     projectLabel: z.string(),
