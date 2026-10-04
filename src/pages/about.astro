@@ -1,0 +1,63 @@
+---
+import { getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import BookingCTA from '../components/BookingCTA.astro';
+
+const feature = await getEntry('projects', 'sennett-road');
+if (!feature) throw new Error('About page needs the sennett-road project');
+---
+<Base
+  title="About"
+  description="Loft Concept was founded in 2010 to design and build under one roof. One team, accountable from the first sketch to the final handover."
+>
+  <section class="container lead">
+    <p class="eyebrow">About</p>
+    <h1>More than interior design. <span class="accent">We design, plan and build.</span></h1>
+    <p class="lead__text">When design and construction are handled by the same team, the result is more cohesive, more considered, and more truly yours.</p>
+  </section>
+
+  <section class="section story">
+    <div class="container story__grid">
+      <h2>Our story</h2>
+      <div class="story__body" data-reveal>
+        <p>Loft Concept was founded in 2010 on a conviction that set us apart from the start: truly great spaces are not just designed, they are built. While most interior firms hand their clients to separate contractors, we built a practice that does both, under one roof, with one team accountable from start to finish.</p>
+        <p>Over fifteen years we have grown from a small, dedicated team into a full-service interior design and construction practice, with a portfolio spanning HDB flats, condominiums, landed properties and commercial spaces across Singapore. Our integrated approach means fewer miscommunications, tighter coordination, and a finished result that holds together.</p>
+        <p>Through every project, our commitment stays the same: listen closely, design thoughtfully, and build with precision.</p>
+        <a class="link" href="/#process">See how we work</a>
+      </div>
+    </div>
+  </section>
+
+  <figure class="feature" data-reveal='image'>
+    <Photo image={feature.data.hero} alt={feature.data.heroAlt ?? 'A Loft Concept interior'} sizes="100vw" position={feature.data.coverPosition} />
+  </figure>
+
+  <section class="section">
+    <div class="container pair">
+      <div data-reveal>
+        <p class="eyebrow">Our mission</p>
+        <p class="pair__text">To design and deliver bespoke, premium living spaces that blend aesthetics, functionality and craftsmanship, enhancing the everyday lives of discerning homeowners.</p>
+      </div>
+      <div data-reveal style="--i:1">
+        <p class="eyebrow">Our vision</p>
+        <p class="pair__text">To be a leading design and architectural studio, renowned for timeless, sophisticated homes and trusted for shaping refined lifestyles through thoughtful, high-quality design.</p>
+      </div>
+    </div>
+  </section>
+
+  <BookingCTA heading="Ready to get started?" />
+</Base>
+
+<style>
+  .lead { padding-block: var(--s-6) var(--s-5); display: grid; gap: var(--s-3); justify-items: start; }
+  .lead h1 { max-width: 16ch; }
+  .lead__text { font-size: var(--step-1); line-height: 1.5; color: var(--ink); }
+  .story__grid { display: grid; gap: var(--s-4); }
+  @media (min-width: 900px) { .story__grid { grid-template-columns: 4fr 8fr; } }
+  .story__body { display: grid; gap: var(--s-3); justify-items: start; }
+  .feature { margin: 0; height: min(70dvh, 48rem); min-height: 20rem; }
+  .pair { display: grid; gap: var(--s-5); }
+  @media (min-width: 900px) { .pair { grid-template-columns: 1fr 1fr; gap: var(--s-6); } }
+  .pair__text { font-size: var(--step-2); line-height: 1.3; color: var(--ink); max-width: 28ch; }
+</style>

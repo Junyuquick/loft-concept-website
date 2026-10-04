@@ -1,0 +1,68 @@
+# Sveltia CMS: https://sveltiacms.app/en/docs
+# Fields mirror the projects schema in src/content.config.ts; src/lib/cms-config.test.ts fails if they drift.
+backend:
+  name: github
+  repo: Junyuquick/loft-concept-website
+  branch: main
+  base_url: https://sveltia-cms-auth.junyuquick246.workers.dev
+
+media_folder: /src/assets/projects/uploads
+
+output:
+  omit_empty_optional_fields: true
+
+media_libraries:
+  default:
+    config:
+      transformations:
+        raster_image:
+          format: webp
+          quality: 85
+          width: 2400
+          height: 2400
+
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  - name: projects
+    label: Projects
+    label_singular: Project
+    folder: src/content/projects
+    extension: md
+    format: frontmatter
+    # Relative to this folder, so Sveltia writes paths Astro's image() can resolve from the entry file.
+    media_folder: ../../assets/projects/uploads
+    public_folder: ../../assets/projects/uploads
+    create: true
+    delete: true
+    identifier_field: title
+    slug: '{{slug}}'
+    summary: '{{title}} · {{sector}}'
+    sortable_fields: [order, title]
+    fields:
+      - { name: title, label: Title, widget: string, hint: 'Also becomes the web address for new projects, e.g. "Tanjong Rhu" → /portfolio/tanjong-rhu.' }
+      - name: sector
+        label: Sector
+        widget: select
+        options: [{ label: Residential, value: residential }, { label: Commercial, value: commercial }]
+      - name: propertyType
+        label: Property type
+        widget: select
+        required: false
+        options: [{ label: HDB, value: hdb }, { label: Condo, value: condo }, { label: Landed, value: landed }, { label: Commercial, value: commercial }]
+      - { name: location, label: Location, widget: string, required: false }
+      - { name: area, label: Area, widget: string, required: false, hint: 'e.g. "1,200 sq ft"' }
+      - { name: year, label: Year completed, widget: number, value_type: int, required: false }
+      - { name: scope, label: Scope of work, widget: string, required: false }
+      - { name: summary, label: Summary, widget: text, minlength: 20, hint: 'Two or three sentences shown on the project page and in search results.' }
+      - { name: cover, label: Cover photo, widget: image, accept: 'image/jpeg,image/png,image/webp', hint: 'Shown on the portfolio grid.' }
+      - { name: coverAlt, label: Cover photo description, widget: string, required: false, hint: 'Describe the photo for visitors using screen readers.' }
+      - { name: coverPosition, label: Cover focus point, widget: string, required: false, default: '50% 50%', hint: 'Which part of the cover stays visible when cropped. "50% 50%" is the centre; leave as is if unsure.' }
+      - { name: hero, label: Main photo, widget: image, accept: 'image/jpeg,image/png,image/webp', hint: 'The large photo at the top of the project page.' }
+      - { name: heroAlt, label: Main photo description, widget: string, required: false }
+      - { name: gallery, label: Gallery, widget: image, multiple: true, required: false, default: [], accept: 'image/jpeg,image/png,image/webp', hint: 'Drag to reorder.' }
+      - { name: video, label: Video, widget: string, required: false, hint: 'Leave empty unless your developer has added a video file.' }
+      - { name: featured, label: Feature on home page, widget: boolean, required: false, default: false }
+      - { name: order, label: Order, widget: number, value_type: int, hint: 'Lower numbers appear first in the portfolio.' }

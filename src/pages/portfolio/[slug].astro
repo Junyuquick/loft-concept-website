@@ -1,0 +1,120 @@
+---
+import { getCollection } from 'astro:content';
+import { getImage } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Photo from '../../components/Photo.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
+
+export async function getStaticPaths() {
+  const all = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+  return all.map((project, i) => ({
+    params: { slug: project.id },
+    props: { project, next: all[(i + 1) % all.length] },
+  }));
+}
+
+const { project, next } = Astro.props;
+const { data } = project;
+const typeLabels = { hdb: 'HDB', condo: 'Condominium', landed: 'Landed property', commercial: 'Commercial' } as const;
+const sector = data.sector === 'commercial' ? 'Commercial' : 'Residential';
+const heroAlt = data.heroAlt ?? `${data.title}, ${data.sector} interior by Loft Concept`;
+
+const facts: [string, string][] = [['Sector', sector]];
+if (data.propertyType) facts.push(['Property', typeLabels[data.propertyType]]);
+if (data.location) facts.push(['Location', data.location]);
+if (data.area) facts.push(['Area', data.area]);
+if (data.scope) facts.push(['Scope', data.scope]);
+if (data.year) facts.push(['Year', String(data.year)]);
+
+const shapes = data.gallery.length <= 3 ? data.gallery.map(() => 'wide') : data.gallery.map((_, i) => ['wide', 'half', 'half', 'inset'][i % 4]);
+const sizesFor = { wide: '100vw', half: '(min-width: 900px) 50vw, 100vw', inset: '(min-width: 900px) 66vw, 100vw' } as Record<string, string>;
+
+const og = await getImage({ src: data.hero, width: 1200, height: 630, fit: 'cover', format: 'jpg' });
+const poster = data.video ? (await getImage({ src: data.hero, width: 1600, format: 'jpg' })).src : undefined;
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: `${data.title} by Loft Concept`,
+  description: data.summary,
+  creator: { '@type': 'Organization', name: 'Loft Concept', url: 'https://loftconcept.com.sg' },
+  image: { '@type': 'ImageObject', url: new URL(og.src, Astro.site).href, width: 1200, height: 630 },
+};
+---
+<Base title={data.title} description={data.summary} image={og.src} schema={schema}>
+  <section class="hero">
+    {data.video
+      ? <video data-ambient autoplay muted loop playsinline controls poster={poster} src={data.video} aria-label={`${data.title} walkthrough`}></video>
+      : <Photo image={data.hero} alt={heroAlt} sizes="100vw" position={data.coverPosition} eager />}
+  </section>
+
+  <section class="section head">
+    <div class="container head__grid">
+      <div>
+        <p class="eyebrow">{sector}</p>
+        <h1>{data.title}</h1>
+      </div>
+      <div class="head__text">
+        <p class="head__summary">{data.summary}</p>
+        <dl class="facts">
+          {facts.map(([label, value]) => <div><dt>{label}</dt><dd>{value}</dd></div>)}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  {data.gallery.length > 0 && (
+    <section class="container gallery">
+      {data.gallery.map((image, i) => (
+        <figure class={`gallery__item gallery__item--${shapes[i]}`} data-reveal='image'>
+          <Photo image={image} alt={`${data.title}, view ${i + 2}`} sizes={sizesFor[shapes[i]]} />
+        </figure>
+      ))}
+    </section>
+  )}
+
+  <section class="section next">
+    <div class="container">
+      <p class="eyebrow">Next project</p>
+      <a class="next__link" href={`/portfolio/${next.id}`}>
+        <h2>{next.data.title}</h2>
+        <div class="next__media"><Photo image={next.data.cover} alt={next.data.coverAlt ?? `${next.data.title}, ${next.data.sector} interior by Loft Concept`} sizes="(min-width: 900px) 40vw, 100vw" position={next.data.coverPosition} /></div>
+      </a>
+      <p class="back"><a class="link" href="/portfolio">Back to portfolio</a></p>
+    </div>
+  </section>
+
+  <BookingCTA />
+</Base>
+
+<style>
+  .hero { height: min(80dvh, 56rem); min-height: 22rem; background: color-mix(in srgb, var(--stone) 35%, var(--bone)); }
+  .hero :global(.photo), .hero video { width: 100%; height: 100%; object-fit: cover; }
+  .head { padding-block: var(--s-6); }
+  .head__grid { display: grid; gap: var(--s-4); }
+  @media (min-width: 900px) { .head__grid { grid-template-columns: 5fr 7fr; gap: var(--s-6); } }
+  .head h1 { font-size: var(--step-4); }
+  .head__summary { font-size: var(--step-1); line-height: 1.5; color: var(--ink); max-width: 38ch; }
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: var(--s-3); margin: var(--s-4) 0 0; }
+  .facts dt { font-size: var(--step--1); letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500; }
+  .facts dd { margin: 0.25rem 0 0; color: var(--ink); }
+
+  .gallery { display: grid; gap: var(--s-3); padding-bottom: var(--s-6); }
+  .gallery__item { margin: 0; overflow: hidden; border-radius: var(--r-img); }
+  .gallery__item :global(.photo) { height: auto; }
+  @media (min-width: 900px) {
+    .gallery { grid-template-columns: repeat(12, 1fr); gap: var(--s-5) var(--s-3); align-items: start; }
+    .gallery__item--wide { grid-column: 1 / -1; }
+    .gallery__item--half { grid-column: span 6; }
+    .gallery__item--half:nth-child(4n + 3) { margin-top: var(--s-5); }
+    .gallery__item--inset { grid-column: 3 / span 8; }
+  }
+
+  .next { border-top: 1px solid color-mix(in srgb, var(--stone) 60%, transparent); }
+  .next__link { display: grid; gap: var(--s-3); text-decoration: none; }
+  @media (min-width: 900px) { .next__link { grid-template-columns: 1fr 1fr; align-items: end; } }
+  .next h2 { font-size: var(--step-4); }
+  .next__media { overflow: hidden; border-radius: var(--r-img); aspect-ratio: 3 / 2; }
+  .next__media :global(.photo) { transition: transform 1.1s var(--ease-out); }
+  .next__link:hover .next__media :global(.photo) { transform: scale(1.02); }
+  .back { margin-top: var(--s-4); }
+</style>

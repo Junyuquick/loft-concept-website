@@ -1,0 +1,38 @@
+---
+import { site } from '../lib/site';
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <p class="accent footer__line">Every space, a story told.</p>
+      <p class="footer__small">Interior design and construction in Singapore, since {site.founded}.</p>
+    </div>
+    <nav class="footer__col" aria-label="Footer">
+      <a class="link" href="/">Home</a>
+      {site.nav.map((item) => <a class="link" href={item.href}>{item.label}</a>)}
+      <a class="link" href={site.cta.href}>{site.cta.label}</a>
+    </nav>
+    <div class="footer__col">
+      <a class="link" href={site.phoneHref}>{site.phone}</a>
+      <a class="link" href={`mailto:${site.email}`}>{site.email}</a>
+      <a class="link" href={site.whatsapp} target="_blank" rel="noopener">WhatsApp</a>
+      <a class="link" href={site.instagram} target="_blank" rel="noopener">Instagram</a>
+      <a class="link" href={site.facebook} target="_blank" rel="noopener">Facebook</a>
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <span>© {year} Loft Concept Interior + Architecture</span>
+    <a class="link" href="/privacy">Privacy</a>
+  </div>
+</footer>
+
+<style>
+  .footer { background: var(--umber); color: var(--white); padding-block: var(--s-6) var(--s-3); }
+  .footer__grid { display: grid; gap: var(--s-5); grid-template-columns: 1fr; }
+  @media (min-width: 900px) { .footer__grid { grid-template-columns: 1.4fr 1fr 1fr; } }
+  .footer__line { font-size: var(--step-3); line-height: 1.1; color: var(--white); }
+  .footer__small { margin-top: var(--s-2); color: rgb(255 255 255 / 0.82); max-width: 36ch; }
+  .footer__col { display: grid; gap: 0.5rem; align-content: start; font-size: var(--step--1); letter-spacing: 0.02em; }
+  .footer__bottom { display: flex; justify-content: space-between; gap: var(--s-2); margin-top: var(--s-6); padding-top: var(--s-3); border-top: 1px solid rgb(255 255 255 / 0.2); font-size: var(--step--1); color: rgb(255 255 255 / 0.82); }
+</style>

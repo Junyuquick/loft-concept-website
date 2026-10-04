@@ -1,0 +1,14 @@
+---
+interface Props { quote: string; author: string; label: string }
+const { quote, author, label } = Astro.props;
+---
+<figure class="pull" data-reveal>
+  <blockquote class="accent">“{quote}”</blockquote>
+  <figcaption><strong>{author}</strong> · {label}</figcaption>
+</figure>
+
+<style>
+  .pull { margin: 0; max-width: 62rem; }
+  blockquote { margin: 0; font-size: var(--step-3); line-height: 1.2; color: var(--ink); text-wrap: balance; }
+  figcaption { margin-top: var(--s-3); font-size: var(--step--1); letter-spacing: 0.04em; }
+</style>

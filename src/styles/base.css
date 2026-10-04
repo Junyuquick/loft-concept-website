@@ -1,0 +1,110 @@
+@font-face {
+  font-family: 'TeX Gyre Pagella';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/texgyrepagella-italic.woff2') format('woff2');
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--bone) var(--paper) repeat;
+  background-size: 512px;
+  color: var(--umber);
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body:has(dialog[open]) { overflow: hidden; }
+
+h1, h2, h3, h4 {
+  margin: 0;
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+h1 { font-size: var(--step-4); }
+h2 { font-size: var(--step-3); }
+h3 { font-size: var(--step-1); letter-spacing: -0.01em; line-height: 1.2; }
+p { margin: 0; max-width: 65ch; text-wrap: pretty; }
+img, video, picture { display: block; max-width: 100%; }
+a { color: inherit; }
+[id] { scroll-margin-top: calc(var(--header-h) + 16px); }
+:focus-visible { outline: 2px solid var(--umber); outline-offset: 3px; border-radius: 2px; }
+
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: -100px;
+  z-index: var(--z-skip);
+  padding: 0.75rem 1.25rem;
+  background: var(--umber);
+  color: var(--white);
+  border-radius: var(--r-ctl);
+}
+.skip-link:focus { top: 12px; }
+
+.container { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+.section { padding-block: var(--s-7); }
+.eyebrow {
+  font-size: var(--step--1);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: var(--s-3);
+}
+.accent { font-family: var(--font-accent); font-style: italic; font-weight: 400; letter-spacing: 0; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.95em 1.6em;
+  background: var(--umber);
+  color: var(--white);
+  border: 1px solid var(--umber);
+  border-radius: var(--r-ctl);
+  font: 500 var(--step--1) / 1 var(--font-sans);
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.25s var(--ease-out), color 0.25s var(--ease-out), border-color 0.25s var(--ease-out), transform 0.2s var(--ease-spring);
+}
+.btn:hover { background: var(--ink); border-color: var(--ink); }
+.btn:active { transform: scale(0.98); }
+.btn:disabled { opacity: 0.6; cursor: progress; }
+.btn--ghost { background: transparent; color: var(--umber); }
+.btn--ghost:hover { background: var(--umber); color: var(--white); border-color: var(--umber); }
+.btn--invert { background: var(--bone); color: var(--umber); border-color: var(--bone); }
+.btn--invert:hover { background: var(--white); color: var(--ink); border-color: var(--white); }
+.btn--sm { padding: 0.75em 1.2em; }
+
+.link {
+  text-decoration: none;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size 0.4s var(--ease-out);
+}
+.link:hover, .link:focus-visible, .link[aria-current='page'] { background-size: 100% 1px; }
+
+.photo { width: 100%; height: 100%; object-fit: cover; }
+/* <Picture> wraps .photo in a <picture>; let it fill the frame so the img's height: 100% resolves. */
+picture:has(> .photo) { width: 100%; height: 100%; }
+
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 90ms);
+  }
+  [data-reveal='image'] { transform: scale(1.04); transition-duration: 1.4s; }
+  [data-reveal].is-in { opacity: 1; transform: none; }
+}

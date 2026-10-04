@@ -1,0 +1,21 @@
+---
+import { site } from '../lib/site';
+interface Props { heading?: string }
+const { heading = 'Let’s talk about your space.' } = Astro.props;
+---
+<section class="section cta">
+  <div class="container cta__inner" data-reveal>
+    <h2>{heading}</h2>
+    <p>Tell us about your home or commercial space. One of our designers will be in touch to arrange a first consultation.</p>
+    <div class="cta__actions">
+      <a class="btn" href={site.cta.href}>{site.cta.label}</a>
+      <a class="link" href={site.whatsapp} target="_blank" rel="noopener">Or message us on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta__inner { display: grid; gap: var(--s-3); justify-items: start; }
+  .cta h2 { font-size: var(--step-4); max-width: 16ch; }
+  .cta__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3); margin-top: var(--s-2); }
+</style>

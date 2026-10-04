@@ -1,0 +1,29 @@
+{
+  "name": "loft-concept-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "vitest run",
+    "verify:build": "node scripts/verify-build.mjs",
+    "verify:browser": "node scripts/verify-browser.mjs",
+    "verify:lighthouse": "node scripts/check-lighthouse.mjs",
+    "verify:server": "node scripts/verify-server.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/figtree": "^5.3.0",
+    "astro": "^7.3.5",
+    "sharp": "^0.35.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "playwright": "^1.63.0",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.3",
+    "yaml": "2.9.1"
+  }
+}

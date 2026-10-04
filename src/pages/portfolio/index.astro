@@ -1,0 +1,82 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const chips = [
+  { value: 'all', label: 'All' },
+  { value: 'residential', label: 'Residential' },
+  { value: 'commercial', label: 'Commercial' },
+];
+---
+<Base
+  title="Portfolio"
+  description="Interior design and construction projects by Loft Concept across Singapore: HDB flats, condominiums, landed homes and commercial spaces."
+>
+  <section class="container intro">
+    <p class="eyebrow">Portfolio</p>
+    <h1>Homes and spaces we have designed <span class="accent">and built.</span></h1>
+  </section>
+
+  <div class="container filters" role="group" aria-label="Filter projects by sector">
+    {chips.map((chip) => <button type="button" class="chip" data-filter={chip.value} aria-pressed={chip.value === 'all'}>{chip.label}</button>)}
+  </div>
+
+  <div class="container">
+    <div class="grid" data-grid>
+      {projects.map((project, i) => <ProjectCard project={project} eager={i < 2} />)}
+    </div>
+    <p class="empty" data-empty hidden>No projects in this category yet.</p>
+  </div>
+
+  <BookingCTA />
+</Base>
+
+<style>
+  .intro { padding-block: var(--s-6) var(--s-4); }
+  .intro h1 { max-width: 16ch; }
+  .filters { display: none; gap: var(--s-1); padding-bottom: var(--s-5); }
+  @media (scripting: enabled) { .filters { display: flex; } }
+  .chip {
+    padding: 0.55em 1.1em; border: 1px solid var(--umber); border-radius: 999px; background: transparent;
+    color: var(--umber); font: 500 var(--step--1) / 1 var(--font-sans); letter-spacing: 0.04em; cursor: pointer;
+    transition: background 0.25s var(--ease-out), color 0.25s var(--ease-out), transform 0.2s var(--ease-spring);
+  }
+  .chip:hover { background: color-mix(in srgb, var(--umber) 10%, transparent); }
+  .chip:active { transform: scale(0.98); }
+  .chip[aria-pressed='true'] { background: var(--umber); color: var(--white); }
+
+  .grid { display: grid; gap: var(--s-5) var(--s-3); padding-bottom: var(--s-6); }
+  @media (min-width: 900px) { .grid { grid-template-columns: 1fr 1fr; gap: var(--s-5) var(--s-3); } }
+  .empty { padding-block: var(--s-6); }
+</style>
+
+<script>
+  import { matchesSector, parseSector, type SectorFilter } from '../../lib/filter';
+
+  function apply(filter: SectorFilter) {
+    const cards = [...document.querySelectorAll<HTMLElement>('[data-grid] .card')];
+    let shown = 0;
+    for (const card of cards) {
+      const visible = matchesSector(card.dataset.sector ?? '', filter);
+      card.hidden = !visible;
+      if (visible) shown++;
+    }
+    document.querySelectorAll<HTMLElement>('[data-filter]').forEach((chip) => chip.setAttribute('aria-pressed', String(chip.dataset.filter === filter)));
+    const empty = document.querySelector<HTMLElement>('[data-empty]');
+    if (empty) empty.hidden = shown > 0;
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    if (document.querySelector('[data-grid]')) apply(parseSector(location.search));
+  });
+  document.addEventListener('click', (event) => {
+    const chip = (event.target as HTMLElement).closest<HTMLElement>('[data-filter]');
+    if (!chip) return;
+    const filter = chip.dataset.filter as SectorFilter;
+    history.replaceState(null, '', filter === 'all' ? location.pathname : `?sector=${filter}`);
+    apply(filter);
+  });
+</script>

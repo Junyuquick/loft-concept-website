@@ -1,0 +1,35 @@
+---
+import { processSteps } from '../lib/process';
+---
+<section class="section process" id="process">
+  <div class="container process__grid">
+    <div class="process__intro">
+      <p class="eyebrow">How we work</p>
+      <h2>One team, <span class="accent">from first sketch to final handover.</span></h2>
+    </div>
+    <ol class="process__list">
+      {processSteps.map((step, i) => (
+        <li class="process__step" data-reveal style={`--i:${i % 3}`}>
+          <span class="process__num accent">{String(i + 1).padStart(2, '0')}</span>
+          <div>
+            <h3>{step.title}</h3>
+            <p>{step.body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .process__grid { display: grid; gap: var(--s-5); }
+  @media (min-width: 900px) {
+    .process__grid { grid-template-columns: 5fr 7fr; gap: var(--s-6); }
+    .process__intro { position: sticky; top: calc(var(--header-h) + var(--s-4)); align-self: start; }
+  }
+  .process__list { list-style: none; margin: 0; padding: 0; }
+  .process__step { display: grid; grid-template-columns: 3.5rem 1fr; gap: var(--s-2); padding-block: var(--s-3); border-top: 1px solid color-mix(in srgb, var(--stone) 60%, transparent); }
+  .process__step:last-child { border-bottom: 1px solid color-mix(in srgb, var(--stone) 60%, transparent); }
+  .process__num { font-size: var(--step-2); line-height: 1; }
+  .process__step p { margin-top: 0.4rem; }
+</style>
