@@ -88,7 +88,7 @@ Each field gets a plain-English hint (for example, "Lower numbers appear first i
   3. upload `dist/` to Vodien with an FTP deploy action over FTPS, syncing only changed files.
 - Secrets (set): `VODIEN_FTP_HOST` (`ftp.loftconcept.com.sg`), `VODIEN_FTP_USER` (`deploy@loftconcept.com.sg`), `VODIEN_FTP_PASSWORD`. Explicit FTPS on port 21. The `deploy` FTP account is rooted at `/home2/loftconceptcom/public_html` (the domain's document root), so the remote directory is `./`.
 - `concurrency` group so two quick publishes don't upload at the same time; the later one wins.
-- First run targets a staging folder on Vodien, then switches to `public_html`.
+- The `redesign` branch deploys to `staging.loftconcept.com.sg` (document root `public_html/staging`, with a `Disallow: /` robots.txt); `main` deploys live. The live site is still the legacy site, so merging `redesign` into `main` is the go-live, done only on the owner's approval after a public_html backup (decided 2026-10-05).
 
 ## 4. Error handling
 - The admin form enforces required fields and the summary length, so most mistakes are blocked before publishing.
