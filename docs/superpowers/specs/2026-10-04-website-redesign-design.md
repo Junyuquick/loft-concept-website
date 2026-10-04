@@ -113,7 +113,7 @@ A very light fixed grain overlay (`pointer-events: none`, under 3% opacity) to a
 8. **Footer:** minimal. Nav, contact, social, privacy.
 
 ### Portfolio index
-Filter chips (All / Residential / Commercial, then property type: HDB, condo, landed). A mixed-ratio grid built from each project's cover. The filter is progressive enhancement: the full list works without JavaScript.
+Filter chips (Residential / Commercial; property-type chips return once the owner has supplied a type for every project). A mixed-ratio grid built from each project's cover. The filter is progressive enhancement: the full list works without JavaScript.
 
 ### Project page
 Hero image, then a facts strip (location, type, size, scope), a short narrative, 2-3 large images alternating with text, a gallery, then **Next project**. A booking call to action sits at the end. The Mimosa page keeps its walkthrough video. A project with few images degrades to a simpler layout rather than looking empty.
@@ -121,7 +121,7 @@ Hero image, then a facts strip (location, type, size, scope), a short narrative,
 ### About, Testimonials, Contact
 - **About:** the design-and-build story, the studio, and the mission and vision in the guide's own words.
 - **Testimonials:** editorial wall with names and project links. Replace the dots-carousel pattern.
-- **Contact:** a short form (name, phone, email, property type, message), a one-day-reply promise, and WhatsApp. Inline validation with plain error text. A visible focus ring.
+- **Contact:** a short required group (name, phone, email), with the legacy qualification fields (property type, status, key collection, budget, preferences, discount code) kept as an optional second group; a reply promise of "shortly" until the owner commits to a time; and WhatsApp. Inline validation with plain error text. A visible focus ring.
 
 ## 5. Technical design
 
