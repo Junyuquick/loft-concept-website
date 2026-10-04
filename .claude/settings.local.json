@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "mcp__Claude_in_Chrome__browser_batch",
+      "mcp__Claude_in_Chrome__navigate",
+      "mcp__Claude_in_Chrome__javascript_tool",
+      "WebFetch(domain:sginterior.com.sg)",
+      "Bash(mkdir -p \"/Users/junyuquick/Documents/Coding Projects/Loft Concept/.claude\")",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npx --version)",
+      "Bash(ls /usr/local/bin/node /opt/homebrew/bin/node ~/.nvm/versions/node/*/bin/node 2>/dev/null | head -3)",
+      "Bash(ls /usr/local/bin/ | grep -i node; ls /opt/homebrew/bin/ | grep -i node; ls /opt/homebrew/opt/ | grep -i node 2>/dev/null)",
+      "Bash(ruby --version)"
+    ]
+  }
+}
