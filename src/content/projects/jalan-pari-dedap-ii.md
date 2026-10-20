@@ -1,6 +1,7 @@
 ---
 title: "Jalan Pari Dedap II"
 sector: residential
+propertyType: landed
 summary: "Grand without being cold. A private home lift sits beside a floating timber staircase, glass balustrades catching light against a textured stone wall — a foyer that sets the tone for everything beyond it."
 metaDescription: "Jalan Pari Dedap II, Singapore: a foyer with a private home lift, floating timber staircase and textured stone wall. By Loft Concept."
 cover: "../../assets/projects/jalan-pari-dedap-ii/01-img-3625.jpg"

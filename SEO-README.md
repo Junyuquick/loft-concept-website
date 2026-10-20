@@ -87,7 +87,9 @@ No broken links, missing titles, duplicate titles or server errors were found.
 
 **2. Heading order on `/portfolio`.** The page went H1 straight to H3 (the project card titles). Cards on that page are now H2, same visual size. `ProjectCard.astro` has a new optional `headingLevel` prop; the homepage still uses H3 because its section heading is H2.
 
-**Data to check:** `ceylon-road.md` summary says "landed home" but is tagged `propertyType: condo`. One of them is wrong, which matters once we build the landed and condo pages.
+**3. Project data corrected.** Ceylon Road is landed (was tagged condo). Jalan Loyang Besar is commercial (was filed under Residential, so it also moves into the Commercial filter on `/portfolio`). The 13 projects with no type are tagged landed. Result: 16 landed, 1 condo (Leedon Green), 2 commercial. These tags drive the upcoming landed, condo and HDB pages.
+
+**4. Back button bug (not SEO, but it hurts visitors and Google measures that).** After using a filter button on `/portfolio`, opening a project and pressing Back changed the URL but left the project on screen. Cause: the filter button called `history.replaceState(null, ...)`, which erased the position data Astro's page router keeps in `history.state`, so the router ignored the Back press. Fix: one word in `src/pages/portfolio/index.astro` (`history.state` instead of `null`). Added a regression check to `scripts/verify-browser.mjs`; it failed before the fix and passes after.
 
 ## Keyword research, first pass (Singapore, Google, monthly searches)
 
@@ -117,6 +119,7 @@ Source: OpenSEO `research_keywords` with 5 seeds. Volumes are estimates. "KD" is
 
 ## Change log
 
+- **2026-10-21**: Corrected project tags (Ceylon landed, Loyang Besar commercial, rest landed) and fixed the portfolio Back button (details above). 74 unit tests and 9 browser checks pass.
 - **2026-10-21**: Trimmed 20 meta descriptions, fixed `/portfolio` heading order (details above). Tests (74) and build pass.
 - **2026-10-21**: Installed and started OpenSEO (Docker), registered its MCP server with Claude Code, created the "Loft Concept" project (Singapore, English). Ran the site audit and a first keyword pass (results above). No website code changed yet.
 - **2026-10-21**: Investigated Google's "Alternate page with proper canonical tag" email (see above): no code change needed. Estimated DataForSEO budget: about $0.04 per keyword search and $0.06 per backlink check self-hosted, so $50 lasts months.

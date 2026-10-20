@@ -1,6 +1,7 @@
 ---
 title: "Seagull Walk"
 sector: residential
+propertyType: landed
 summary: "Quiet luxury in every detail. Dark-framed mirror panels, warm timber laminates, and soft layered lighting come together in a bedroom that feels both serene and considered — a retreat designed for stillness."
 metaDescription: "Seagull Walk, Singapore: a serene bedroom with dark-framed mirror panels, warm timber laminates and layered lighting. By Loft Concept."
 cover: "../../assets/projects/seagull-walk/01-img-9011.jpg"

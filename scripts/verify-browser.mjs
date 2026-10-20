@@ -39,6 +39,20 @@ await check('Menu opens with the keyboard and closes with Escape', async () => {
   await ctx.close();
 });
 
+await check('Back button returns to the portfolio after using a filter', async () => {
+  const ctx = await browser.newContext();
+  const page = await ctx.newPage();
+  await page.goto(`${BASE}/portfolio`, { waitUntil: 'networkidle' });
+  await page.locator('[data-filter=commercial]').click();
+  await page.locator('.card:not([hidden]) .card__link').first().click();
+  await page.waitForURL(/\/portfolio\/[a-z-]+$/);
+  await page.goBack();
+  await page.waitForURL(/\/portfolio\?sector=commercial$/);
+  await page.locator('h1', { hasText: 'Homes and spaces' }).waitFor({ timeout: 3000 });
+  assert.equal(await page.locator('[data-filter=commercial]').getAttribute('aria-pressed'), 'true');
+  await ctx.close();
+});
+
 await check('Contact form: empty submit shows inline errors', async () => {
   const ctx = await browser.newContext();
   const page = await ctx.newPage();

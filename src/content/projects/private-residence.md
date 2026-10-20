@@ -1,6 +1,7 @@
 ---
 title: "Private Residence"
 sector: residential
+propertyType: landed
 summary: "An interior conceived as experience. Amber onyx glows behind the bar, turf-lined seating wraps around geometric brass frames, and an organic metal screen fragments the light — a space designed not just to be seen, but to be felt."
 metaDescription: "Private Residence: amber onyx behind the bar, turf-lined seating and brass frames in an interior designed to be felt. By Loft Concept."
 cover: "../../assets/projects/private-residence/01-img-2362.jpg"

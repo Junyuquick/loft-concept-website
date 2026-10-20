@@ -76,7 +76,7 @@ const chips = [
     const chip = (event.target as HTMLElement).closest<HTMLElement>('[data-filter]');
     if (!chip) return;
     const filter = chip.dataset.filter as SectorFilter;
-    history.replaceState(null, '', filter === 'all' ? location.pathname : `?sector=${filter}`);
+    history.replaceState(history.state, '', filter === 'all' ? location.pathname : `?sector=${filter}`);
     apply(filter);
   });
 </script>
