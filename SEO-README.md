@@ -225,6 +225,10 @@ Live Google lookups, Singapore, mobile, top 40, 25 phrases. The raw numbers are 
 
 1 of 25 phrases in the top 40: "loft concept singapore" at position 5 (the contact page). Every other phrase, including all the landed, condo and HDB phrases, the HDB permit, timing and guideline phrases, and "loft concept" alone, is not in the top 40. The new service pages and guides were published the same day and Google has not crawled them yet, so this is the true starting point.
 
+### 2026-10-21 (first run of the monthly check, same day as the baseline)
+
+1 of 25 phrases in the top 40, the same as the baseline (last month's number: 1, from the baseline above). Only "loft concept singapore" is there, at position 5. Nothing moved, which is expected: this ran on the same day the guides and service pages were published, before Google had crawled them. This run also confirms the monthly check works end to end; the next entry will be the first real comparison.
+
 ## Change log
 
 - **2026-10-21**: Added a monthly rank-check script, instructions and a rank log (`seo/`). The monthly run is set up by the coordinator agent.
