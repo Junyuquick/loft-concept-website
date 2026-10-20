@@ -106,7 +106,7 @@ How it works: the copy for all three lives in `src/lib/services.ts`; one templat
 Why each part matters:
 - **Own URL and own title per property type:** Google matches a search to the page most clearly about it.
 - **FAQ and Service structured data (JSON-LD):** lets Google show your answers directly in results, and tells it exactly what service you offer and where.
-- **Internal links:** the homepage "What we design" section and the footer link to all three, so visitors and Google can find them. They are also in the sitemap automatically.
+- **Internal links:** the footer, which appears on every page, links to all three, so visitors and Google can find them. They are also in the sitemap automatically.
 - **No prices anywhere,** by design, and a unit test fails if one is ever added. The cost question is answered with an invitation to message you.
 
 Facts used came only from you: founded 2010, 100+ projects (not yet shown on the pages), HDB-registered, as short as one month for renovations, 12+ months for major structural landed work, full-process design and build including teardown, pools and lifts. The HDB page shows an interior photo, not a landed exterior, because you do not list HDB photos.

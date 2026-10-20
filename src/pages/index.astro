@@ -7,7 +7,6 @@ import Process from '../components/Process.astro';
 import PullQuote from '../components/PullQuote.astro';
 import BookingCTA from '../components/BookingCTA.astro';
 import { localBusinessSchema } from '../lib/schema';
-import { services, servicePath } from '../lib/services';
 
 const featured = (await getCollection('projects', (p) => p.data.featured)).sort((a, b) => a.data.order - b.data.order).slice(0, 4);
 // The client can delete projects in /admin: fall back to the sector's first project, or drop the panel.
@@ -88,9 +87,6 @@ const excerpt = 'They really listened to how we live day to day and translated t
         </a>
         )}
       </div>
-      <p class="sectors__links">
-        {services.map((service) => <a class="link" href={servicePath(service)}>{service.navLabel}</a>)}
-      </p>
     </div>
   </section>
 
@@ -131,7 +127,6 @@ const excerpt = 'They really listened to how we live day to day and translated t
   @media (min-width: 900px) { .work__grid { grid-template-columns: 1fr 1fr; gap: var(--s-5) var(--s-3); } }
 
   .sectors__title { margin-bottom: var(--s-5); }
-  .sectors__links { display: flex; flex-wrap: wrap; gap: var(--s-1) var(--s-4); margin-top: var(--s-4); }
   .sectors__grid { display: grid; gap: var(--s-3); }
   @media (min-width: 900px) { .sectors__grid { grid-template-columns: 1fr 1fr; } }
   .sector { position: relative; display: block; overflow: hidden; border-radius: var(--r-img); color: var(--white); text-decoration: none; }
