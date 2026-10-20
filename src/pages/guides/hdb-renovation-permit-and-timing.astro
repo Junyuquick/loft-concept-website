@@ -1,0 +1,100 @@
+---
+import GuideLayout from '../../components/GuideLayout.astro';
+import GuideCta from '../../components/GuideCta.astro';
+import { guides } from '../../lib/guides';
+
+const guide = guides.find((g) => g.slug === 'hdb-renovation-permit-and-timing')!;
+const toc = [
+  { id: 'permit', label: 'Do I need a permit?' },
+  { id: 'apply', label: 'Who applies, and how?' },
+  { id: 'time', label: 'How long do I have?' },
+  { id: 'hours', label: 'Working hours and noise' },
+  { id: 'check', label: 'Four things to check' },
+  { id: 'us', label: 'How we handle it' },
+  { id: 'faq', label: 'Common questions' },
+  { id: 'sources', label: 'Sources' },
+];
+const sources = [
+  { label: "HDB: How to renovate your HDB flat (mynicehome.gov.sg)", href: 'https://www.mynicehome.gov.sg/get-settled-in/hdb-renovation-guide/' },
+  { label: 'HDB: Renovation guidelines', href: 'https://www.hdb.gov.sg/managing-my-home/renovation-and-maintenance/renovation' },
+];
+---
+<GuideLayout guide={guide} toc={toc} sources={sources}>
+  <div class="answer">
+    <p><strong>The short answer.</strong> The flat owner is responsible for getting the renovation permits before works begin. Your contractor must be on HDB's Directory of Renovation Contractors, and can submit the application for you. Once approved, work should be finished within 3 months for a new flat and 1 month for an existing flat. Noisy work is allowed Monday to Friday, 9am to 5pm only.</p>
+  </div>
+
+  <h2 id="permit">Do I need an HDB renovation permit?</h2>
+  <p>Some work does and some does not. According to HDB, you need a permit to:</p>
+  <ul>
+    <li>remove your existing floor finishes and replace them, or raise the floor level in the kitchen, balcony, bathroom or toilet;</li>
+    <li>hack down or alter any wall;</li>
+    <li>replace your main entrance door, if it faces a staircase or lift lobby on a fire escape route (the new door and frame must be half-hour fire-rated and fitted with a door closer);</li>
+    <li>change where a door sits inside the flat. The new doorway must not be cut through a reinforced concrete wall.</li>
+  </ul>
+  <p>You do not need a permit for a glass shower screen, as long as the floor slab is not tampered with. You also do not need one to install an air-conditioner if your flat can already carry the extra electrical load. That mainly means flats built after 1 January 1994, or flats upgraded under HDB's Main Upgrading or Home Improvement programmes. Air-conditioners must be installed by a BCA-trained installer.</p>
+  <p>Three limits are worth knowing before you plan the layout:</p>
+  <ul>
+    <li><strong>New BTO flats:</strong> you must wait 3 years before removing wall or floor finishes in the toilets, to protect the waterproofing. You can overlay the existing tiles instead.</li>
+    <li><strong>The household shelter:</strong> its walls must not be hacked or drilled, and its door must be left intact and working. Under building regulations, apartment buildings built from 1996 have one.</li>
+    <li><strong>Windows:</strong> installing or replacing them must be done by a BCA-approved window contractor listed on HDB's contractor directory.</li>
+  </ul>
+  <p>Some walls in a flat are reinforced concrete, which has steel bars embedded in it. HDB says these walls help maintain the flat's structural integrity. For BTO flats, HDB also has an online service that lists the renovation restrictions specific to your project and block.</p>
+
+  <h2 id="apply">Who applies for the permit, and how?</h2>
+  <p>You do. The flat owner is responsible for obtaining every renovation permit the work needs, before the work begins. Your renovation contractor can handle the paperwork. HDB requires the contractor to be listed on its Directory of Renovation Contractors, and you can authorise them to submit the application online on your behalf.</p>
+  <p>If the work involves removing or repositioning fittings, or hacking or building walls, the layout plans, elevations, sections or details of the proposed work must be submitted with the application. Once HDB receives it, you are notified by SMS. After the permit is granted, you can view its details on HDB's "Check Renovation Permit" service.</p>
+
+  <GuideCta heading="Not sure which approvals your flat needs?" text="Tell us about your flat and what you would like to change. We will explain which permits apply and what that means for your plans." />
+
+  <h2 id="time">How long do I have to finish the work?</h2>
+  <p>HDB's guide says that after you get approval, renovation should be completed within 3 months for new flats and 1 month for existing flats. The reason it gives is to minimise inconvenience and noise for your neighbours.</p>
+  <p>That is why planning matters. The materials need to be ordered, the trades scheduled and the drawings ready before the permit arrives. Our renovations can be completed in as little as a month, depending on the scope of work.</p>
+
+  <h2 id="hours">When can work happen? Hours and noise</h2>
+  <table>
+    <thead><tr><th>Type of work</th><th>When it is allowed</th><th>When it is not</th></tr></thead>
+    <tbody>
+      <tr><td>General works, such as plastering and laying floor screed</td><td>Monday to Saturday, 9am to 6pm</td><td>Sundays and public holidays</td></tr>
+      <tr><td>Noisy works, such as demolishing walls and removing wall or floor finishes</td><td>Monday to Friday, 9am to 5pm</td><td>Weekends, public holidays and the eve of major public holidays</td></tr>
+    </tbody>
+  </table>
+  <p>You may see other sources say noisy work is allowed on Saturdays. HDB's own guide says it is not, so plan the loud stages for weekdays.</p>
+  <p>HDB also asks homeowners to be considerate. Contractors should not hog the lifts or block the lift doors to keep them open, and they should dispose of renovation debris properly. For bulky items, contact your Town Council. HDB also suggests reminding your contractor to give neighbours a heads-up, especially those most affected.</p>
+
+  <h2 id="check">Four things to check before you sign a quotation</h2>
+  <ol class="steps">
+    <li><strong>Is the contractor on HDB's directory?</strong> It is a requirement, not a nicety.</li>
+    <li><strong>Does every item that needs a permit have one?</strong> Compare the quotation against the list above: floor finishes, walls, doors and wet areas.</li>
+    <li><strong>For a BTO flat, have you checked the restrictions for your block?</strong> The toilet rule and any project-specific limits can change your layout.</li>
+    <li><strong>Does the schedule fit the rules?</strong> The loud stages must fall on weekdays, and the whole job must fit within the completion window.</li>
+  </ol>
+  <p>If you are comparing firms, our guide to <a href="/guides/choosing-a-renovation-firm">choosing a renovation firm</a> covers the questions to ask.</p>
+
+  <h2 id="us">How Loft Concept handles it</h2>
+  <p>We are a registered HDB renovation contractor. We design your home, manage the permits and approvals, and carry out the work with one team, so you deal with the same people from the first sketch to the handover. We have completed more than 100 projects across Singapore. <a href="/hdb-interior-design">Read more about our HDB service</a>.</p>
+
+  <GuideCta heading="Planning an HDB renovation?" text="Tell us about your flat. One of our designers will be in touch to arrange a first consultation." />
+
+  <h2 id="faq">Common questions</h2>
+  <details>
+    <summary>Can my contractor apply for the permit for me?</summary>
+    <p>Yes. The owner remains responsible, but you can authorise a contractor on HDB's directory to submit the application online on your behalf.</p>
+  </details>
+  <details>
+    <summary>How long do I have to complete the work after approval?</summary>
+    <p>HDB says it should be completed within 3 months for new flats and 1 month for existing flats.</p>
+  </details>
+  <details>
+    <summary>Can noisy work happen on a Saturday?</summary>
+    <p>Not according to HDB's guide. Noisy work such as demolishing walls or removing finishes is allowed Monday to Friday, 9am to 5pm. General works such as plastering are allowed Monday to Saturday, 9am to 6pm.</p>
+  </details>
+  <details>
+    <summary>Do I need a permit to install an air-conditioner?</summary>
+    <p>Not if your flat is already equipped to handle the electrical load, which mainly applies to flats built after 1 January 1994 and upgraded flats. It must still be installed by a BCA-trained installer.</p>
+  </details>
+  <details>
+    <summary>Can I hack the walls of the household shelter?</summary>
+    <p>No. HDB says the shelter walls must not be hacked or drilled, and its door must be kept intact and working.</p>
+  </details>
+</GuideLayout>

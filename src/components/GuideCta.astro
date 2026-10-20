@@ -1,0 +1,20 @@
+---
+import { site } from '../lib/site';
+interface Props { heading: string; text: string }
+const { heading, text } = Astro.props;
+---
+<aside class="gcta" data-reveal>
+  <h2>{heading}</h2>
+  <p>{text}</p>
+  <div class="gcta__actions">
+    <a class="btn" href={site.cta.href}>{site.cta.label}</a>
+    <a class="link" href={site.whatsapp} target="_blank" rel="noopener">Or message us on WhatsApp</a>
+  </div>
+</aside>
+
+<style>
+  .gcta { margin-block: var(--s-5); padding: var(--s-4); border: 1px solid color-mix(in srgb, var(--stone) 70%, transparent); border-radius: var(--r-img); background: color-mix(in srgb, var(--white) 55%, transparent); display: grid; gap: var(--s-2); justify-items: start; }
+  .gcta h2 { font-size: var(--step-2); line-height: 1.15; max-width: 22ch; margin: 0; }
+  .gcta p { color: var(--ink); max-width: 52ch; margin: 0; }
+  .gcta__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3); margin-top: var(--s-1); }
+</style>

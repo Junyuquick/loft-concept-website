@@ -13,6 +13,7 @@ export interface Service {
   projectsHeading: string;
   scope: { term: string; body: string }[];
   timeline: string;
+  guide: { href: string; label: string };
   faq: { q: string; a: string }[];
 }
 
@@ -41,6 +42,7 @@ export const services: Service[] = [
       { term: 'Pools, lifts and outdoor spaces', body: 'The features that make a landed home feel like yours, from pools and private lifts to courtyards and gardens, are part of the design from the start.' },
       { term: 'Interiors and handover', body: 'Joinery, lighting and finishes completed to a standard we are proud to put our name to, and a home handed over ready to live in.' },
     ],
+    guide: { href: '/guides/landed-rebuild-or-renovate', label: 'Rebuild or renovate your landed home? Read our guide' },
     timeline: 'A renovation can be completed in as little as a month. A new build or major structural project is a longer journey, often more than twelve months, and we plan it carefully so that every stage happens in the right order.',
     faq: [
       { q: 'Can you build a landed home on empty land?', a: 'Yes. We take a landed home from empty land to a finished, ready-to-live-in house. We also work with existing houses, whether that means a full rebuild, an extension or a renovation.' },
@@ -68,6 +70,7 @@ export const services: Service[] = [
       { term: 'Joinery and finishes', body: 'Custom cabinetry, materials and lighting chosen and made to suit your design.' },
       { term: 'Handover', body: 'A finished home, checked in detail and handed over ready to live in.' },
     ],
+    guide: { href: '/guides/condo-renovation-approvals', label: 'Condo approvals and rules: read our guide' },
     timeline: 'A condominium renovation can be completed in as little as a month. The timeline depends on the scope of work, and we confirm a realistic schedule with you before any work begins.',
     faq: [
       { q: 'Do you handle management approvals for condo renovations?', a: 'Yes. We manage the approvals and follow the renovation rules of your building, so you do not have to coordinate them yourself.' },
@@ -95,6 +98,7 @@ export const services: Service[] = [
       { term: 'Construction', body: 'Our own team carries out the work to the agreed schedule, and keeps you updated at every step.' },
       { term: 'Finishing and handover', body: 'Carpentry, lighting and finishes completed with care, and a home handed over ready to live in.' },
     ],
+    guide: { href: '/guides/hdb-renovation-permit-and-timing', label: 'HDB permits, timing and rules: read our guide' },
     timeline: 'An HDB renovation can be completed in as little as a month. The timeline depends on the scope of work, and we confirm a realistic schedule with you before any work begins.',
     faq: [
       { q: 'Are you a registered HDB renovation contractor?', a: 'Yes. Loft Concept is a registered HDB renovation contractor.' },

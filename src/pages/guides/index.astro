@@ -1,0 +1,40 @@
+---
+import Base from '../../layouts/Base.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
+import { guides, guidePath } from '../../lib/guides';
+---
+<Base
+  title="Guides to renovating in Singapore"
+  description="Plain-English guides to HDB permits, landed rebuilds, condo approvals and choosing a renovation firm, checked against official sources."
+>
+  <section class="container lead">
+    <h1>Guides to renovating <span class="accent">in Singapore.</span></h1>
+    <p class="lead__text">What the rules say, what to ask, and what to plan for, written by the team that designs and builds the homes. Each guide is checked against official sources and dated.</p>
+  </section>
+
+  <section class="container list">
+    {guides.map((guide, i) => (
+      <a class="item" href={guidePath(guide)} data-reveal style={`--i:${i % 3}`}>
+        <h2>{guide.h1}</h2>
+        <p>{guide.lead}</p>
+        <span class="item__meta">{guide.minutes} minute read</span>
+      </a>
+    ))}
+  </section>
+
+  <BookingCTA heading="Not sure where to start?" />
+</Base>
+
+<style>
+  .lead { padding-block: var(--s-6) var(--s-5); display: grid; gap: var(--s-3); justify-items: start; }
+  .lead h1 { max-width: 16ch; }
+  .lead__text { font-size: var(--step-1); line-height: 1.5; color: var(--ink); max-width: 52ch; }
+  .list { padding-bottom: var(--s-7); }
+  .item { display: grid; gap: var(--s-2); padding-block: var(--s-4); border-top: 1px solid color-mix(in srgb, var(--stone) 60%, transparent); text-decoration: none; color: inherit; }
+  .item:last-child { border-bottom: 1px solid color-mix(in srgb, var(--stone) 60%, transparent); }
+  @media (min-width: 900px) { .item { grid-template-columns: 5fr 6fr 2fr; gap: var(--s-5); align-items: baseline; } }
+  .item h2 { font-size: var(--step-2); max-width: 18ch; transition: color 0.25s var(--ease-out); }
+  .item:hover h2, .item:focus-visible h2 { color: var(--umber); }
+  .item p { max-width: 52ch; }
+  .item__meta { font-size: var(--step--1); letter-spacing: 0.04em; }
+</style>

@@ -1,0 +1,103 @@
+---
+import { getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Photo from './Photo.astro';
+import BookingCTA from './BookingCTA.astro';
+import { guides, guidePath, guideSchema, type Guide } from '../lib/guides';
+
+interface Props {
+  guide: Guide;
+  toc: { id: string; label: string }[];
+  sources: { label: string; href: string }[];
+}
+const { guide, toc, sources } = Astro.props;
+const feature = await getEntry('projects', guide.photo);
+const others = guides.filter((g) => g.slug !== guide.slug);
+const fmt = (iso: string) => new Date(`${iso}T00:00:00+08:00`).toLocaleDateString('en-SG', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<Base title={guide.title} description={guide.description} schema={guideSchema(guide)}>
+  <article>
+    <header class="container head">
+      <nav class="crumbs" aria-label="Breadcrumb"><a class="link" href="/guides">Guides</a></nav>
+      <h1>{guide.h1}</h1>
+      <p class="head__lead">{guide.lead}</p>
+      <p class="head__meta">By Loft Concept · Reviewed {fmt(guide.reviewed)} · {guide.minutes} minute read</p>
+    </header>
+
+    {feature && (
+      <figure class="feature" data-reveal='image'>
+        <Photo image={feature.data.hero} alt={guide.photoAlt} sizes="100vw" position={feature.data.coverPosition} eager />
+      </figure>
+    )}
+
+    <div class="container body">
+      <nav class="toc" aria-label="In this guide">
+        <p class="toc__title">In this guide</p>
+        <ol>
+          {toc.map((item) => <li><a class="link" href={`#${item.id}`}>{item.label}</a></li>)}
+        </ol>
+      </nav>
+      <div class="prose">
+        <slot />
+        <section class="sources" id="sources">
+          <h2>Sources and how we checked</h2>
+          <p>Rules change, so confirm the current position with the agency or your estate's management before you plan. We last reviewed this guide on {fmt(guide.reviewed)}.</p>
+          <ul>
+            {sources.map((s) => <li><a class="link" href={s.href} target="_blank" rel="noopener">{s.label}</a></li>)}
+          </ul>
+        </section>
+        <p class="related">
+          Related: <a class="link" href={guide.serviceHref}>{guide.serviceLabel}</a>
+          {others.map((g) => <>{' · '}<a class="link" href={guidePath(g)}>{g.h1}</a></>)}
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <BookingCTA heading="Talk to us about your home." />
+</Base>
+
+<style>
+  .head { padding-block: var(--s-6) var(--s-5); display: grid; gap: var(--s-3); justify-items: start; }
+  .crumbs { font-size: var(--step--1); letter-spacing: 0.04em; }
+  .head h1 { max-width: 20ch; }
+  .head__lead { font-size: var(--step-1); line-height: 1.5; color: var(--ink); max-width: 52ch; }
+  .head__meta { font-size: var(--step--1); letter-spacing: 0.04em; }
+  .feature { margin: 0; height: min(60dvh, 40rem); min-height: 18rem; }
+
+  .body { display: grid; gap: var(--s-5); padding-block: var(--s-6) var(--s-7); }
+  @media (min-width: 1000px) { .body { grid-template-columns: 3fr 8fr; gap: var(--s-6); } }
+  .toc { align-self: start; font-size: var(--step--1); }
+  @media (min-width: 1000px) { .toc { position: sticky; top: calc(var(--header-h) + var(--s-4)); } }
+  .toc__title { font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: var(--s-2); }
+  .toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+  .toc li { max-width: 28ch; }
+
+  .prose { max-width: 70ch; }
+  .prose :global(h2) { font-size: var(--step-2); line-height: 1.15; margin-top: var(--s-6); margin-bottom: var(--s-2); }
+  .prose :global(h2:first-child) { margin-top: 0; }
+  .prose :global(p) { max-width: none; margin-top: var(--s-2); color: var(--ink); }
+  .prose :global(ul), .prose :global(ol.steps) { margin: var(--s-2) 0 0; padding-left: 1.25em; display: grid; gap: 0.6rem; color: var(--ink); }
+  .prose :global(li::marker) { color: var(--stone); }
+  .prose :global(a:not(.btn)) { text-decoration: underline; text-decoration-color: var(--stone); text-underline-offset: 0.2em; }
+  .prose :global(a:not(.btn):hover) { text-decoration-color: var(--umber); }
+  .prose :global(.answer) { padding: var(--s-3) var(--s-4); border: 1px solid color-mix(in srgb, var(--stone) 70%, transparent); border-radius: var(--r-img); background: color-mix(in srgb, var(--white) 55%, transparent); }
+  .prose :global(.answer p) { margin-top: 0; font-size: var(--step-1); line-height: 1.5; }
+  .prose :global(.answer strong) { font-weight: 500; }
+  .prose :global(table) { width: 100%; border-collapse: collapse; margin-top: var(--s-2); font-size: var(--step--1); }
+  .prose :global(th), .prose :global(td) { text-align: left; vertical-align: top; padding: 0.8rem 0.8rem 0.8rem 0; border-top: 1px solid color-mix(in srgb, var(--stone) 60%, transparent); }
+  .prose :global(th) { font-weight: 500; color: var(--ink); }
+  .prose :global(tr:last-child td) { border-bottom: 1px solid color-mix(in srgb, var(--stone) 60%, transparent); }
+  .prose :global(details) { border-top: 1px solid color-mix(in srgb, var(--stone) 60%, transparent); }
+  .prose :global(details:last-of-type) { border-bottom: 1px solid color-mix(in srgb, var(--stone) 60%, transparent); }
+  .prose :global(summary) { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-3); padding-block: var(--s-3); cursor: pointer; list-style: none; font-size: var(--step-1); line-height: 1.25; color: var(--ink); font-weight: 500; letter-spacing: -0.01em; }
+  .prose :global(summary::-webkit-details-marker) { display: none; }
+  .prose :global(summary::after) { content: '+'; flex: none; font-weight: 400; transition: transform 0.3s var(--ease-out); }
+  .prose :global(details[open] summary::after) { transform: rotate(45deg); }
+  .prose :global(details p) { margin-top: 0; padding-bottom: var(--s-3); }
+  .prose :global(.gcta + h2) { margin-top: var(--s-5); }
+
+  .sources ul { margin: var(--s-2) 0 0; padding-left: 1.25em; display: grid; gap: 0.4rem; font-size: var(--step--1); }
+  .sources p { font-size: var(--step--1); }
+  .related { margin-top: var(--s-5); font-size: var(--step--1); line-height: 1.8; }
+</style>

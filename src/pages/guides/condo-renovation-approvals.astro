@@ -1,0 +1,83 @@
+---
+import GuideLayout from '../../components/GuideLayout.astro';
+import GuideCta from '../../components/GuideCta.astro';
+import { guides } from '../../lib/guides';
+
+const guide = guides.find((g) => g.slug === 'condo-renovation-approvals')!;
+const toc = [
+  { id: 'who', label: 'Who decides what you can do?' },
+  { id: 'limits', label: 'What you cannot change' },
+  { id: 'mcst', label: 'What your MCST decides' },
+  { id: 'new', label: 'New unit or resale?' },
+  { id: 'order', label: 'A sensible order of steps' },
+  { id: 'us', label: 'How we handle it' },
+  { id: 'faq', label: 'Common questions' },
+  { id: 'sources', label: 'Sources' },
+];
+const sources = [
+  { label: 'BCA: What to know as a condo owner', href: 'https://www1.bca.gov.sg/home-and-building-owners/condo-strata/condo-living-be-condo-savvy/what-to-know-as-a-condo-owner/' },
+  { label: 'URA: Renovating private residential property', href: 'https://www.ura.gov.sg/Corporate/Property/Residential/Renovating-private-residential-property' },
+];
+---
+<GuideLayout guide={guide} toc={toc} sources={sources}>
+  <div class="answer">
+    <p><strong>The short answer.</strong> As a condo owner you belong to the Management Corporation (MCST) and must follow its by-laws. Structural slabs, beams, columns and walls cannot be altered without a professional engineer's assessment and approval from the Commissioner of Building Control. Changes to windows and external walls need MCST and agency approval, and work that increases the estate's total floor area needs a 90% MCST resolution.</p>
+  </div>
+
+  <h2 id="who">Who decides what you can do inside your unit?</h2>
+  <p>Several parties, and they overlap. When you buy a unit, BCA explains, you automatically become a subsidiary proprietor and part of the Management Corporation. The MCST passes by-laws at its general meetings, and you must follow them once enacted, even if you were not at the meeting.</p>
+  <p>Before any work, BCA advises checking with the developer or the MCST, and reading your Sale and Purchase agreement, for renovation restrictions. Government agencies such as BCA and URA have their own requirements on top, depending on the type of work.</p>
+
+  <h2 id="limits">What you cannot change</h2>
+  <ul>
+    <li><strong>Structural elements.</strong> Slabs, beams, columns and walls cannot be altered without assessment by a professional engineer. Approval from the Commissioner of Building Control is also required.</li>
+    <li><strong>The outside of the building.</strong> Alterations to features fixed to the external building, such as windows and walls, are not allowed without approval from the MCST and any relevant government agencies. Adding something that changes how the building looks, such as a covering over a private enclosed space, needs MCST permission.</li>
+    <li><strong>Anything that adds floor area to the estate.</strong> Work that increases the total gross floor area of the whole estate needs a 90% resolution from the MCST. BCA's examples are roofing over a private enclosed space and putting a slab over a void in a unit. Other agencies, such as URA and BCA, may also need to approve.</li>
+  </ul>
+  <p>Condo layouts are often more fixed than people expect. It is worth finding out early which walls are structural, because that decides how far a new plan can go.</p>
+
+  <GuideCta heading="Not sure what your unit allows?" text="Tell us about your condo and the layout you have in mind. We will tell you what is likely to need approval before you fall in love with a plan." />
+
+  <h2 id="mcst">What your MCST decides</h2>
+  <p>Most of the practical detail, such as the renovation application process, any deposit and the hours when work is allowed, is set by your own MCST. These vary from estate to estate, and the figures quoted on blogs often disagree, so we will not quote typical numbers here. Ask your managing agent for the estate's renovation guidelines and application form before you plan, and have them in hand when you meet your designer.</p>
+
+  <h2 id="new">New unit or resale?</h2>
+  <p>If you have bought a new unit, there is a Defects Liability Period during which owners must report defects caused by poor workmanship or defective materials, and the developer is responsible for fixing those that were reported in time. After the period ends, upkeep is yours, and you may need to engage your own contractor and bear the cost. It is worth knowing your period's end date before you plan work, so that nothing is missed.</p>
+
+  <h2 id="order">A sensible order of steps</h2>
+  <ol class="steps">
+    <li>Read your Sale and Purchase agreement and the MCST by-laws.</li>
+    <li>Get the estate's renovation guidelines and application form from the managing agent.</li>
+    <li>Decide the scope with your designer, and flag anything that touches a structural element or the outside of the building.</li>
+    <li>If anything is structural, have a professional engineer assess it, and obtain the approvals that requires.</li>
+    <li>Submit the MCST application, and confirm the permitted working hours.</li>
+    <li>Schedule the work around those hours and your neighbours.</li>
+  </ol>
+
+  <h2 id="us">How Loft Concept handles it</h2>
+  <p>We design your condo and carry out the work with one team, and we manage the approvals and building rules for you, so you do not have to coordinate them yourself. A condominium renovation can be completed in as little as a month, depending on the scope, and we confirm a realistic schedule with you before work begins. <a href="/condo-interior-design">Read more about our condo service</a>.</p>
+
+  <GuideCta heading="Planning a condo renovation?" text="Tell us about your unit. One of our designers will be in touch to arrange a first consultation." />
+
+  <h2 id="faq">Common questions</h2>
+  <details>
+    <summary>Do I need MCST approval to renovate?</summary>
+    <p>Your MCST will have its own renovation process, and BCA advises checking with the developer or MCST before any work. Changes to the outside of the building always need MCST approval. Ask your managing agent for the guidelines and the form.</p>
+  </details>
+  <details>
+    <summary>Can I remove a wall?</summary>
+    <p>Only if it is not structural. Structural walls, slabs, beams and columns cannot be altered without a professional engineer's assessment and approval from the Commissioner of Building Control. A designer or engineer can tell you which walls are which.</p>
+  </details>
+  <details>
+    <summary>Can I enclose my balcony or add a roof over a private space?</summary>
+    <p>BCA lists roofing over a private enclosed space as work that increases the estate's gross floor area, which needs a 90% resolution from the MCST, and may need URA and BCA approval too.</p>
+  </details>
+  <details>
+    <summary>What if I have a dispute with my neighbours or the MCST?</summary>
+    <p>BCA describes these as private matters that should be settled amicably. Where that fails, it points to mediation through the Community Mediation Centre or the Singapore Mediation Centre, or an application to the Strata Titles Boards.</p>
+  </details>
+  <details>
+    <summary>How long does a condo renovation take?</summary>
+    <p>It can take as little as a month, depending on the scope. We confirm a schedule with you before work begins.</p>
+  </details>
+</GuideLayout>

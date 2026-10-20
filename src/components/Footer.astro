@@ -13,6 +13,7 @@ const year = new Date().getFullYear();
       <a class="link" href="/">Home</a>
       {site.nav.map((item) => <a class="link" href={item.href}>{item.label}</a>)}
       {services.map((service) => <a class="link" href={servicePath(service)}>{service.navLabel}</a>)}
+      <a class="link" href="/guides">Guides</a>
       <a class="link" href={site.cta.href}>{site.cta.label}</a>
     </nav>
     <div class="footer__col">

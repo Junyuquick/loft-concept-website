@@ -105,7 +105,7 @@ How it works: the copy for all three lives in `src/lib/services.ts`; one templat
 
 Why each part matters:
 - **Own URL and own title per property type:** Google matches a search to the page most clearly about it.
-- **FAQ and Service structured data (JSON-LD):** lets Google show your answers directly in results, and tells it exactly what service you offer and where.
+- **Service structured data (JSON-LD):** tells Google exactly what service you offer and where. **Correction (21 Oct):** I also said the FAQ markup lets Google show your answers directly in results. That is out of date: Google stopped showing FAQ rich results on 7 May 2026. The visible FAQ text is still useful to readers and to Google, but the hidden `FAQPage` markup no longer does anything special. It is harmless; see `GUIDES-RESEARCH.md`, section 3, for the recommendation.
 - **Internal links:** the footer, which appears on every page, links to all three, so visitors and Google can find them. They are also in the sitemap automatically.
 - **No prices anywhere,** by design, and a unit test fails if one is ever added. The cost question is answered with an invitation to message you.
 
@@ -114,6 +114,21 @@ Facts used came only from you: founded 2010, 100+ projects (not yet shown on the
 **7. Descriptive photo descriptions (alt text).** All 154 images on the project pages now have a specific one-sentence description, such as "Walnut kitchen island with wine cubbies, stainless steel appliances and a crystal pendant light". Google reads these (it is how photos appear in Google Images), and screen readers read them to blind visitors. Main/cover photos use the existing `heroAlt` and `coverAlt` fields. Gallery photos use a new `galleryAlts` list in each project file, in the same order as `gallery`; I added the field to `src/content.config.ts`, the admin editor (`public/admin/config.yml`, label "Gallery photo descriptions") and `src/pages/portfolio/[slug].astro` (falls back to "Title, view N" when a description is missing, so a new project added in the admin still works). Written from the photos only: no client names, no house numbers.
 
 **8. HDB page photo changed** to the Mount Sinai Road kitchen (an interior with no people in it). The previous one showed a person in a mirror reflection.
+
+**9. Four guides** (built and tested locally, **not yet deployed**). Written after detailed research, which is explained in plain language in `GUIDES-RESEARCH.md`.
+
+| Guide | Why this one |
+|---|---|
+| `/guides/hdb-renovation-permit-and-timing` | The only guide topic with real search demand (880 + 720 + 320 a month). Competitors are mostly thin contractor blogs; every rule here comes from HDB's own guide. |
+| `/guides/landed-rebuild-or-renovate` | "Rebuild vs renovate" is the winning angle for landed searches. Uses URA's 50% additions-and-alterations test, which generic pages skip. |
+| `/guides/condo-renovation-approvals` | Official BCA facts on structural limits, MCST by-laws and the 90% rule. Few searches, but serious readers. |
+| `/guides/choosing-a-renovation-firm` | Answers the top Singapore fear (renovation drew the most consumer complaints in 2022, per CASE data quoted by SingSaver): delays, workmanship, upfront payments. |
+
+How it works: `src/lib/guides.ts` lists the guides, `src/components/GuideLayout.astro` is the reading layout (direct answer at the top, contents list, sources, review date), `src/components/GuideCta.astro` is the calm call to action used inside each guide, and each guide is one file in `src/pages/guides/`. They are linked from the footer ("Guides"), from each other, and from the matching service page. Each has Article and breadcrumb structured data. There are no prices, and a test fails if one is added.
+
+Why they are built this way: Google's own guidance rewards first-hand experience, clear sourcing and accuracy, and warns against copying what others say or writing to a word count. So every rule is taken from an official page and linked, the review date is shown, and anything the official sources do not settle (condo deposits and hours, neighbour-notice periods, approval times) is left out and the reader is told to check. Each guide asks for the enquiry three times, differently, and always offers WhatsApp.
+
+**Needs your input:** the "what we see in practice" parts are deliberately general because I only know what you have told me. The seven questions in `GUIDES-RESEARCH.md`, section 10, would make them genuinely yours.
 
 ## Keyword research, first pass (Singapore, Google, monthly searches)
 
@@ -204,6 +219,7 @@ Re-run the same check monthly. In OpenSEO there is also a rank tracker with thes
 
 ## Change log
 
+- **2026-10-21**: Researched what makes guides rank and convert (`GUIDES-RESEARCH.md`), corrected the FAQ-markup claim, and built four guides plus a guides index.
 - **2026-10-21**: Ran OpenSEO research (keyword demand, competitor and SERP review, rank tracker baseline, re-audit), wrote descriptive alt text for all project photos, and swapped the HDB page photo.
 - **2026-10-21**: Added the landed, condo and HDB service pages with FAQ schema and internal links (details above). 79 unit tests pass.
 - **2026-10-21**: Corrected project tags (Ceylon landed, Loyang Besar commercial, rest landed) fixed the portfolio Back button and the scroll jump on Back (details above). 74 unit tests and 10 browser checks pass.

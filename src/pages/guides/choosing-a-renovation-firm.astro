@@ -1,0 +1,72 @@
+---
+import GuideLayout from '../../components/GuideLayout.astro';
+import GuideCta from '../../components/GuideCta.astro';
+import { guides } from '../../lib/guides';
+
+const guide = guides.find((g) => g.slug === 'choosing-a-renovation-firm')!;
+const toc = [
+  { id: 'why', label: 'Why this matters' },
+  { id: 'questions', label: 'Questions to ask any firm' },
+  { id: 'quote', label: 'What a good quotation looks like' },
+  { id: 'team', label: 'Why one team matters' },
+  { id: 'us', label: 'How we work' },
+  { id: 'faq', label: 'Common questions' },
+  { id: 'sources', label: 'Sources' },
+];
+const sources = [
+  { label: 'SingSaver: Why hire CaseTrust accredited renovation firms (quoting CASE data)', href: 'https://www.singsaver.com.sg/page/blog/why-should-you-hire-casetrust-accredited-renovation-firms' },
+  { label: 'Home & Decor: CaseTrust deposit performance bond scheme for renovation firms', href: 'https://www.homeanddecor.com.sg/design/news/singaporeans-spending-too-much-on-home-renovation-and-complaints-against-the-industry-increases' },
+  { label: "HDB: How to renovate your HDB flat (on engaging contractors)", href: 'https://www.mynicehome.gov.sg/get-settled-in/hdb-renovation-guide/' },
+];
+---
+<GuideLayout guide={guide} toc={toc} sources={sources}>
+  <div class="answer">
+    <p><strong>The short answer.</strong> Before you sign, ask who will manage your site and how you can reach them, how the quotation is broken down, how payments are staged, whether your deposit is protected, and to see finished projects like yours. If you own an HDB flat, check that the contractor is on HDB's Directory of Renovation Contractors.</p>
+  </div>
+
+  <h2 id="why">Why this matters</h2>
+  <p>According to SingSaver, citing the Consumers Association of Singapore (CASE), renovation contractors received the highest number of consumer complaints of any sector in 2022, 1,454 cases. The two most common complaints were shoddy workmanship and delays in completion. We could not find newer figures, and we do not think they would change the point: most of these problems can be spotted, or avoided, with the right questions before you pay anything.</p>
+
+  <h2 id="questions">Questions to ask any firm, including us</h2>
+  <ol class="steps">
+    <li><strong>Who will manage my site, and how do I reach them?</strong> A named person who answers is worth more than a polished brochure.</li>
+    <li><strong>Do you design and build, or hand the work to other contractors?</strong> Every handover is a chance for something to be lost.</li>
+    <li><strong>Is the quotation itemised?</strong> You should be able to see what each line is, and how it relates to the design.</li>
+    <li><strong>How are payments staged?</strong> CASE's reported advice is to avoid large prepayments and to negotiate a progressive payment schedule tied to key project milestones.</li>
+    <li><strong>Is my deposit protected?</strong> CaseTrust accreditation for renovation firms includes protection of customers' prepayments. Ask whether the firm holds it, and ask to see proof.</li>
+    <li><strong>Can I see completed projects like mine, and visit one?</strong> Photographs show the best day of a project. A finished home shows how it was built.</li>
+    <li><strong>For an HDB flat: are you on HDB's directory?</strong> HDB requires the contractor you engage to be listed on its Directory of Renovation Contractors.</li>
+  </ol>
+
+  <GuideCta heading="Ask us the same questions." text="We are glad to answer every one of them at your first consultation. Tell us about your home to arrange it." />
+
+  <h2 id="quote">What a good quotation looks like</h2>
+  <p>A good quotation is itemised, so that you can see each piece of work and ask about it. It also connects each item to the design, so that you understand why it is there. It sets out the schedule, and how and when payments fall due. If a quotation arrives as a single sum with little detail, ask for it to be broken down before you decide.</p>
+  <p>The detailed quotation is part of how we work. At a second consultation, we walk you through it item by item and explain how each one relates to the design.</p>
+
+  <h2 id="team">Why one team matters</h2>
+  <p>When design and construction are handled by separate firms, the designer and the contractor can end up working from different assumptions, and you are left to referee. When one team does both, with one team accountable from the first sketch to the final handover, there are fewer miscommunications and tighter coordination. It does not guarantee a good result, which is why the questions above still apply to us, but it removes a common source of delay and disagreement.</p>
+
+  <h2 id="us">How we work</h2>
+  <p>We have been designing and building homes since 2010, and have completed more than 100 projects. A designer contacts you and arranges a first consultation. We draw a detailed space plan, prepare a moodboard, and walk you through the quotation. Then we coordinate the schedule and keep you updated at every step. <a href="/#process">See how we work</a>, or <a href="/portfolio">look at the homes we have completed</a>.</p>
+
+  <GuideCta heading="Ready to talk?" text="Tell us about your home. One of our designers will be in touch to arrange a first consultation." />
+
+  <h2 id="faq">Common questions</h2>
+  <details>
+    <summary>Should I pay a large deposit upfront?</summary>
+    <p>CASE's reported advice is not to make large prepayments, and to negotiate a progressive payment schedule tied to key project milestones.</p>
+  </details>
+  <details>
+    <summary>What is CaseTrust?</summary>
+    <p>CaseTrust is an accreditation scheme run by CASE. For renovation firms, it includes a scheme that protects customers' deposits if the business closes, through a deposit performance bond.</p>
+  </details>
+  <details>
+    <summary>Does my HDB contractor have to be registered?</summary>
+    <p>Yes. HDB says the renovation contractor you engage must be listed in its Directory of Renovation Contractors.</p>
+  </details>
+  <details>
+    <summary>Is a firm that designs and builds better than one that only designs?</summary>
+    <p>Not automatically. But with one team accountable from the first sketch to the handover, there are fewer handovers between designer and builder, which is where many misunderstandings begin.</p>
+  </details>
+</GuideLayout>

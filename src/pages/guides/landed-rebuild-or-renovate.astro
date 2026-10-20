@@ -1,0 +1,85 @@
+---
+import GuideLayout from '../../components/GuideLayout.astro';
+import GuideCta from '../../components/GuideCta.astro';
+import { guides } from '../../lib/guides';
+
+const guide = guides.find((g) => g.slug === 'landed-rebuild-or-renovate')!;
+const toc = [
+  { id: 'line', label: 'Where URA draws the line' },
+  { id: 'rebuild', label: 'What a rebuild involves' },
+  { id: 'decide', label: 'How to decide' },
+  { id: 'us', label: 'What we do' },
+  { id: 'faq', label: 'Common questions' },
+  { id: 'sources', label: 'Sources' },
+];
+const sources = [
+  { label: 'URA: Additions and alterations to a landed house', href: 'https://www.ura.gov.sg/Corporate/Guidelines/Development-Control/Planning-Permission/Plan-Lodgment-Application/Additions-and-Alterations-Landed-House' },
+  { label: 'URA: New erection of landed house', href: 'https://www.ura.gov.sg/Corporate/Guidelines/Development-Control/Planning-Permission/Plan-Lodgment-Application/New-Erection-of-Landed-House' },
+  { label: 'URA: Renovating private residential property', href: 'https://www.ura.gov.sg/Corporate/Property/Residential/Renovating-private-residential-property' },
+  { label: 'BCA: Building plan submission', href: 'https://www1.bca.gov.sg/safety-and-standards/applications-and-licenses/building-plan-submission/' },
+];
+---
+<GuideLayout guide={guide} toc={toc} sources={sources}>
+  <div class="answer">
+    <p><strong>The short answer.</strong> URA's guidelines for additions and alterations set three limits: add no more than 50% to the existing floor area, replace no more than 50% of the external walls, and change no more than 50% of the existing structure. Go beyond them and the work is lodged as a rebuild instead. Beyond the rules, the choice comes down to the condition of the structure, how much of the layout you want to change, and how long you can wait.</p>
+  </div>
+
+  <h2 id="line">Where URA draws the line between renovating and rebuilding</h2>
+  <p>For a landed house, Singapore's planning authority, URA, has a separate route for additions and alterations (often called A&amp;A). Its guidelines are specific. To be treated as additions and alterations, the work must keep within all of these:</p>
+  <ul>
+    <li>the floor area you add is no more than 50% of the existing approved gross floor area;</li>
+    <li>no more than 50% of the existing external walls are removed and replaced;</li>
+    <li>structural changes, such as new columns and beams or rebuilt floor slabs, affect no more than 50% of the existing approved floor area;</li>
+    <li>the entire roof may be changed or replaced, as long as it does not add a storey. An attic may be added if the extra floor area stays within the limits.</li>
+  </ul>
+  <p>URA's own guidance is that if a proposal cannot meet these guidelines, it should be lodged as a new erection or reconstruction, in other words a rebuild. That makes the 50% tests a useful first check on which route your plans belong to.</p>
+  <p>Two cautions. These routes do not cover every site: URA's lodgment scheme excludes land in conservation areas, Good Class Bungalow areas and special control areas, so those sites need a different process. And, more generally, URA says that additions or alterations to a private home usually need planning permission if they increase the gross floor area.</p>
+
+  <GuideCta heading="Which side of the line is your house on?" text="Tell us about your house and what you would like to change. We will help you work out which route fits, before you commit to a design." />
+
+  <h2 id="rebuild">What does a rebuild involve?</h2>
+  <p>A rebuild starts with drawings and approvals, long before any demolition. A qualified person, meaning a registered architect or professional engineer with a valid practising certificate, must be appointed. The qualified person lodges plans with URA, obtains its written permission, and then submits building plans to BCA, the building authority, through its online CORENET system.</p>
+  <p>URA also attaches conditions to a straightforward rebuild. The new house must be the same housing type as the one it replaces, comply with envelope control, and meet the development control guidelines on plot size, setbacks and site coverage. If a rebuild keeps parts of an older house that do not meet today's guidelines, at least 25% of the existing floor plate must be retained, and a professional engineer must certify that those structures are sound.</p>
+  <p>This is why a rebuild takes time. A renovation can be completed in as little as a month. A rebuild, or any project with major structural work, can take more than twelve months. Planning it carefully, so each stage happens in the right order, is most of the work.</p>
+
+  <h2 id="decide">How to decide</h2>
+  <p>The rules set the boundaries. Inside them, these questions usually point the way. They are a way of thinking, not a verdict on your house, which a qualified person should assess.</p>
+  <table>
+    <thead><tr><th>If this describes you</th><th>It points towards</th></tr></thead>
+    <tbody>
+      <tr><td>The structure is sound and the layout mostly works. You want new finishes, joinery and better flow.</td><td>Renovation</td></tr>
+      <tr><td>You want to add a lot of floor area, move the stairs, or change most of the structure.</td><td>Likely past the 50% limits, so a rebuild</td></tr>
+      <tr><td>You want to keep part of the house for its position on the plot or its character.</td><td>Additions and alterations, within the limits, or a rebuild that retains part of the old floor plate</td></tr>
+      <tr><td>You want a pool, a private lift or a large outdoor space designed in from the start.</td><td>Either route, but the earlier they are planned, the better</td></tr>
+      <tr><td>You cannot be away from the house for a year or more.</td><td>Renovation. A rebuild is a longer journey.</td></tr>
+      <tr><td>The house is in a conservation area, a Good Class Bungalow area or a special control area.</td><td>A different process, so speak to a qualified person early</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="us">What we do</h2>
+  <p>We take a landed home from empty land to a finished, ready-to-live-in house, and we work just as readily when the land is not empty. That includes teardown and rebuilding, additions and alterations, and the features that make a landed home feel like yours, such as pools and private lifts. We manage the whole process, so you deal with one team, accountable from the first sketch to the handover. <a href="/landed-interior-design">Read more about our landed homes service</a>, or see <a href="/portfolio">the landed homes we have completed</a>.</p>
+
+  <GuideCta heading="Thinking about your landed home?" text="Tell us about your house and your plans. One of our designers will be in touch to arrange a first consultation." />
+
+  <h2 id="faq">Common questions</h2>
+  <details>
+    <summary>Do I need a qualified person?</summary>
+    <p>Yes. URA's lodgment routes require a qualified person to be appointed, and BCA requires building plans to be submitted through one. That means a registered architect or a professional engineer with a valid practising certificate.</p>
+  </details>
+  <details>
+    <summary>Can I add a storey as part of additions and alterations?</summary>
+    <p>URA's guidelines allow an entire roof to be changed or replaced as long as it does not involve an additional storey. Adding a storey therefore needs to be assessed by your qualified person against the guidelines.</p>
+  </details>
+  <details>
+    <summary>Can I rebuild if my house is in a conservation area?</summary>
+    <p>URA's lodgment scheme does not cover land in conservation areas, Good Class Bungalow areas or special control areas. Those sites follow a different process, so speak to a qualified person before planning.</p>
+  </details>
+  <details>
+    <summary>How long does a rebuild take?</summary>
+    <p>It depends on the scope. A renovation can take as little as a month, while a rebuild or a project with major structural work can take more than twelve months. We give you a realistic schedule once we understand what you want to build.</p>
+  </details>
+  <details>
+    <summary>How much will it cost?</summary>
+    <p>Every landed home is different, shaped by its size, condition and the level of finish you want. Message us to arrange a first consultation, where we listen to your plans and give you a clear view of what they involve.</p>
+  </details>
+</GuideLayout>

@@ -54,6 +54,7 @@ const projects = (await getCollection('projects', (p) => p.data.propertyType ===
       <div class="time__body" data-reveal>
         <p>{service.timeline}</p>
         <a class="link" href="/#process">See how we work</a>
+        <a class="link" href={service.guide.href}>{service.guide.label}</a>
       </div>
     </div>
   </section>
