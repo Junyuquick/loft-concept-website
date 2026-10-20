@@ -128,7 +128,7 @@ How it works: `src/lib/guides.ts` lists the guides, `src/components/GuideLayout.
 
 Why they are built this way: Google's own guidance rewards first-hand experience, clear sourcing and accuracy, and warns against copying what others say or writing to a word count. So every rule is taken from an official page and linked, the review date is shown, and anything the official sources do not settle (condo deposits and hours, neighbour-notice periods, approval times) is left out and the reader is told to check. Each guide asks for the enquiry three times, differently, and always offers WhatsApp.
 
-**Needs your input:** the "what we see in practice" parts are deliberately general because I only know what you have told me. The seven questions in `GUIDES-RESEARCH.md`, section 10, would make them genuinely yours.
+**Your answers are in.** The guides now carry your name and title as author, mention CaseTrust accreditation and milestone payments, say the first consultation is free, and the landed guide has a section on what surprises come up on site (hidden structure, soil and foundations, approval delays). The extra research and the statements to double-check are in `GUIDES-RESEARCH.md`, section 11.
 
 ## Keyword research, first pass (Singapore, Google, monthly searches)
 

@@ -28,6 +28,7 @@ describe('guides', () => {
       const graph = guideSchema(g)['@graph'] as any[];
       expect(graph.map((n) => n['@type'])).toEqual(['Article', 'BreadcrumbList']);
       expect(graph[0].mainEntityOfPage).toContain(guidePath(g));
+      expect(graph[0].author).toMatchObject({ '@type': 'Person', name: 'Quick Ming Jun', jobTitle: 'Lead Designer' });
     }
   });
 });

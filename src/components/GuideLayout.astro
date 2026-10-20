@@ -3,7 +3,7 @@ import { getEntry } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Photo from './Photo.astro';
 import BookingCTA from './BookingCTA.astro';
-import { guides, guidePath, guideSchema, type Guide } from '../lib/guides';
+import { author, guides, guidePath, guideSchema, type Guide } from '../lib/guides';
 
 interface Props {
   guide: Guide;
@@ -21,7 +21,7 @@ const fmt = (iso: string) => new Date(`${iso}T00:00:00+08:00`).toLocaleDateStrin
       <nav class="crumbs" aria-label="Breadcrumb"><a class="link" href="/guides">Guides</a></nav>
       <h1>{guide.h1}</h1>
       <p class="head__lead">{guide.lead}</p>
-      <p class="head__meta">By Loft Concept · Reviewed {fmt(guide.reviewed)} · {guide.minutes} minute read</p>
+      <p class="head__meta">By {author.name}, {author.role} at Loft Concept · Reviewed {fmt(guide.reviewed)} · {guide.minutes} minute read</p>
     </header>
 
     {feature && (

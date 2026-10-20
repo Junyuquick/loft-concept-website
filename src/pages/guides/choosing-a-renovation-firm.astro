@@ -7,6 +7,7 @@ const guide = guides.find((g) => g.slug === 'choosing-a-renovation-firm')!;
 const toc = [
   { id: 'why', label: 'Why this matters' },
   { id: 'questions', label: 'Questions to ask any firm' },
+  { id: 'mistakes', label: 'Five mistakes to avoid' },
   { id: 'quote', label: 'What a good quotation looks like' },
   { id: 'team', label: 'Why one team matters' },
   { id: 'us', label: 'How we work' },
@@ -17,6 +18,7 @@ const sources = [
   { label: 'SingSaver: Why hire CaseTrust accredited renovation firms (quoting CASE data)', href: 'https://www.singsaver.com.sg/page/blog/why-should-you-hire-casetrust-accredited-renovation-firms' },
   { label: 'Home & Decor: CaseTrust deposit performance bond scheme for renovation firms', href: 'https://www.homeanddecor.com.sg/design/news/singaporeans-spending-too-much-on-home-renovation-and-complaints-against-the-industry-increases' },
   { label: "HDB: How to renovate your HDB flat (on engaging contractors)", href: 'https://www.mynicehome.gov.sg/get-settled-in/hdb-renovation-guide/' },
+  { label: 'HomeTrust: Avoid these newbie mistakes (on budgeting a contingency)', href: 'https://www.hometrust.sg/articles/avoid-these-newbie-mistakes-that-will-make-or-break-your-renovation/' },
 ];
 ---
 <GuideLayout guide={guide} toc={toc} sources={sources}>
@@ -32,13 +34,23 @@ const sources = [
     <li><strong>Who will manage my site, and how do I reach them?</strong> A named person who answers is worth more than a polished brochure.</li>
     <li><strong>Do you design and build, or hand the work to other contractors?</strong> Every handover is a chance for something to be lost.</li>
     <li><strong>Is the quotation itemised?</strong> You should be able to see what each line is, and how it relates to the design.</li>
-    <li><strong>How are payments staged?</strong> CASE's reported advice is to avoid large prepayments and to negotiate a progressive payment schedule tied to key project milestones.</li>
-    <li><strong>Is my deposit protected?</strong> CaseTrust accreditation for renovation firms includes protection of customers' prepayments. Ask whether the firm holds it, and ask to see proof.</li>
+    <li><strong>How are payments staged?</strong> CASE's reported advice is to avoid large prepayments and to negotiate a progressive payment schedule tied to key project milestones. Our payments are tied to project milestones.</li>
+    <li><strong>Is my deposit protected?</strong> CaseTrust accreditation for renovation firms includes protection of customers' prepayments. Ask whether the firm holds it, and ask to see proof. Loft Concept is CaseTrust accredited.</li>
     <li><strong>Can I see completed projects like mine, and visit one?</strong> Photographs show the best day of a project. A finished home shows how it was built.</li>
     <li><strong>For an HDB flat: are you on HDB's directory?</strong> HDB requires the contractor you engage to be listed on its Directory of Renovation Contractors.</li>
   </ol>
 
-  <GuideCta heading="Ask us the same questions." text="We are glad to answer every one of them at your first consultation. Tell us about your home to arrange it." />
+  <GuideCta heading="Ask us the same questions." text="We are glad to answer every one of them, and the first consultation is free. Tell us about your home to arrange it." />
+
+  <h2 id="mistakes">Five mistakes to avoid before you call anyone</h2>
+  <p>Renovation advice from firms and platforms keeps returning to the same mistakes. These are the ones that come up most, drawn from that advice rather than from our own statistics.</p>
+  <ol class="steps">
+    <li><strong>Fixing the budget with no buffer.</strong> Surprises happen. HomeTrust, for example, suggests setting aside an extra 10 to 20 percent of the total budget as a contingency, though advice varies between sources.</li>
+    <li><strong>Choosing on the lowest total.</strong> Two quotations are only comparable if they include the same work. Compare what each one covers, line by line, not just the final figure.</li>
+    <li><strong>Starting before the approvals are in place.</strong> HDB makes the owner responsible for getting permits before work begins, and condominiums have MCST rules of their own. Our guides to <a href="/guides/hdb-renovation-permit-and-timing">HDB permits</a> and <a href="/guides/condo-renovation-approvals">condo approvals</a> explain both.</li>
+    <li><strong>Not inspecting a resale home first.</strong> Check the condition of existing waterproofing and fittings before you build over them. A water-retention test on bathroom floors is commonly recommended.</li>
+    <li><strong>Leaving the scope vague.</strong> Get the work, the materials and the schedule in writing. A verbal "we will sort it out" is hard to rely on later.</li>
+  </ol>
 
   <h2 id="quote">What a good quotation looks like</h2>
   <p>A good quotation is itemised, so that you can see each piece of work and ask about it. It also connects each item to the design, so that you understand why it is there. It sets out the schedule, and how and when payments fall due. If a quotation arrives as a single sum with little detail, ask for it to be broken down before you decide.</p>
@@ -48,9 +60,9 @@ const sources = [
   <p>When design and construction are handled by separate firms, the designer and the contractor can end up working from different assumptions, and you are left to referee. When one team does both, with one team accountable from the first sketch to the final handover, there are fewer miscommunications and tighter coordination. It does not guarantee a good result, which is why the questions above still apply to us, but it removes a common source of delay and disagreement.</p>
 
   <h2 id="us">How we work</h2>
-  <p>We have been designing and building homes since 2010, and have completed more than 100 projects. A designer contacts you and arranges a first consultation. We draw a detailed space plan, prepare a moodboard, and walk you through the quotation. Then we coordinate the schedule and keep you updated at every step. <a href="/#process">See how we work</a>, or <a href="/portfolio">look at the homes we have completed</a>.</p>
+  <p>We have been designing and building homes since 2010, and have completed more than 100 projects. We are CaseTrust accredited, and our payments are tied to project milestones. A designer contacts you and arranges a first consultation. We draw a detailed space plan, prepare a moodboard, and walk you through the quotation. Then we coordinate the schedule and keep you updated at every step. <a href="/#process">See how we work</a>, or <a href="/portfolio">look at the homes we have completed</a>.</p>
 
-  <GuideCta heading="Ready to talk?" text="Tell us about your home. One of our designers will be in touch to arrange a first consultation." />
+  <GuideCta heading="Ready to talk?" text="Tell us about your home. One of our designers will be in touch to arrange a free first consultation." />
 
   <h2 id="faq">Common questions</h2>
   <details>

@@ -1,5 +1,7 @@
 import { site } from './site';
 
+export const author = { name: 'Quick Ming Jun', role: 'Lead Designer' } as const;
+
 export interface Guide {
   slug: string;
   title: string;
@@ -89,7 +91,7 @@ export function guideSchema(guide: Guide): Record<string, unknown> {
         mainEntityOfPage: url,
         datePublished: guide.published,
         dateModified: guide.reviewed,
-        author: { '@type': 'Organization', name: site.name, url: site.url },
+        author: { '@type': 'Person', name: author.name, jobTitle: author.role, worksFor: { '@type': 'Organization', name: site.name, url: site.url } },
         publisher: { '@type': 'Organization', name: site.name, url: site.url, logo: { '@type': 'ImageObject', url: `${site.url}/apple-touch-icon.png` } },
       },
       {

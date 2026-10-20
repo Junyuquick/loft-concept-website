@@ -164,14 +164,48 @@ The marketing sources agree on a few ideas, but they are agency blogs, so I trea
 Google rewards first-hand experience, and I only know what you have told me. I will build all four guides now using verified facts plus what you have said (design and build under one roof, 100+ projects, teardown to rebuild, pools and lifts, HDB-registered, as short as one month, 12 months or more for major structural landed work). The "what we see in practice" parts will be careful and general. To make them truly yours, answer any of these and I will work them in:
 
 1. What are the **three most common mistakes** you see homeowners make before they call you?
+do detailed research(incl. internet research)
 2. For landed homes, what usually **tips owners toward rebuilding** instead of renovating?
+do detailed research(incl. internet research)
 3. What **surprises** come up most often on site (hidden structural issues, approval delays)?
+hidden structural issue, soil issue which requires better foundation for structal support, approval delays, you make up some(do internet research)
 4. Are you **CaseTrust accredited**, or a member of an industry body? I will only mention it if true.
+yes casetrust accredited
 5. How do you handle **payments**? (For example progress payments tied to milestones.) I will not claim this unless you confirm it.
+yea payment tied to milestone
 6. Do you want a **named author or reviewer** on the guides (for example the founder or lead designer), with a photo? Google asks about "background about the author". Anonymous "Loft Concept" works, but a name is stronger.
+Lead Designer, Quick Ming Jun
 7. Is your first consultation **free**? I will not say it is unless you tell me.
+free
 
 Anything I write that is not from an official source or from you will be marked in the guide's source file so you can check it before it goes live.
+
+## 11. Follow-up: your answers, the extra research, and what went into the guides
+
+**Your answers (21 Oct)** and where they went:
+
+| You said | Where it is used |
+|---|---|
+| Hidden structural issues, soil needing a better foundation, approval delays are the common surprises | Landed guide, new section "What surprises come up on site?" (stated in Loft Concept's voice, because you told me) |
+| CaseTrust accredited | "Choosing a renovation firm" guide, plus a line in each guide's "how we handle it" section |
+| Payments tied to milestones | Same places as above |
+| Author: Lead Designer, Quick Ming Jun | Byline on every guide ("By Quick Ming Jun, Lead Designer at Loft Concept"), and as the author in the Article structured data. No photo yet. |
+| First consultation is free | The call-to-action boxes in the guides, and the cost answer on the three service pages |
+
+**Common mistakes homeowners make (your question 1).** I read renovation advice from firms and platforms. The same five come up again and again: no budget buffer, choosing on the lowest total, starting before approvals, not inspecting a resale home first, and a vague scope. They are in the "choosing a firm" guide as "five mistakes to avoid". I wrote them as advice drawn from those sources, **not** as Loft Concept's own statistics, because I do not have your data and an invented "we see this all the time" claim would not be honest with readers. Only one number is used, the 10 to 20 percent contingency, which I checked on HomeTrust's page and attribute to it.
+
+**What tips owners towards rebuilding (your question 2).** I found one hard answer, which is already in the guide: URA's 50% limits. The search results also repeated softer claims (for example that a sound frame can still hold a poor layout), but I could not confirm the specific wording in the pages I opened. So the guide gives only reasoning that follows from the official rules (a structural engineer's survey first; a layout that fights the structure will probably pass the 50% limits anyway) and marks nothing as a statistic. If you can tell me what usually tips *your* clients, that is the part Google would value most.
+
+**Soil and foundations, and approval delays (your question 3).** Official: **BCA's 1 September 2025 circular** says site investigation (SI) reports are submitted for building works so the qualified person can assess ground conditions reliably for a safe and economical design. Builder advice (Hitomo Construction, Haus Atelier, both contractor blogs I opened): clayey or loose soil may need deep piling; do the soil investigation before the structural design is fixed; a surprising ground condition found after work starts should be dealt with immediately. Approval delays: several builder and architect blogs say delays usually come from small things that compound, such as incomplete structural documents or design changes after submission. I could not find official figures on how long approvals take, so the guide gives none.
+
+**Things I found but deliberately left out** because I could not verify them: cost figures of any kind (including the soil-investigation and piling costs some blogs quote), per-square-foot rebuild costs, rebuild timelines other than yours (12 months or more for major structural work), the claim that a Class 1 builder is required for rebuilds, and exact approval durations.
+
+**Please check these before relying on them** (statements in Loft Concept's voice that rest on your answers, not on a document):
+1. "These are the three [surprises] we meet most often" (landed guide).
+2. "Our payments are tied to project milestones" and "Loft Concept is CaseTrust accredited" (several places).
+3. "The first consultation is free" (call-to-action boxes, cost answers).
+4. "Our renovations can be completed in as little as a month" and "more than twelve months" for major structural landed work (from your earlier answers).
+5. The name and job title in the byline.
 
 ## Sources
 

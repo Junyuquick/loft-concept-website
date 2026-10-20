@@ -19,7 +19,7 @@ export interface Service {
 
 const price = {
   q: 'How much will it cost?',
-  a: 'Every home is different, shaped by its size, its condition and the level of finish you want. Message us to arrange a first consultation, where we listen to your plans and give you a clear view of what they involve.',
+  a: 'Every home is different, shaped by its size, its condition and the level of finish you want. Message us to arrange a free first consultation, where we listen to your plans and give you a clear view of what they involve.',
 };
 
 export const services: Service[] = [

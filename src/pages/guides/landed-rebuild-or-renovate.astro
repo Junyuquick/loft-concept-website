@@ -7,6 +7,7 @@ const guide = guides.find((g) => g.slug === 'landed-rebuild-or-renovate')!;
 const toc = [
   { id: 'line', label: 'Where URA draws the line' },
   { id: 'rebuild', label: 'What a rebuild involves' },
+  { id: 'surprises', label: 'What surprises come up on site?' },
   { id: 'decide', label: 'How to decide' },
   { id: 'us', label: 'What we do' },
   { id: 'faq', label: 'Common questions' },
@@ -17,6 +18,9 @@ const sources = [
   { label: 'URA: New erection of landed house', href: 'https://www.ura.gov.sg/Corporate/Guidelines/Development-Control/Planning-Permission/Plan-Lodgment-Application/New-Erection-of-Landed-House' },
   { label: 'URA: Renovating private residential property', href: 'https://www.ura.gov.sg/Corporate/Property/Residential/Renovating-private-residential-property' },
   { label: 'BCA: Building plan submission', href: 'https://www1.bca.gov.sg/safety-and-standards/applications-and-licenses/building-plan-submission/' },
+  { label: 'BCA circular: Guideline on requirements for site investigation reports (1 September 2025)', href: 'https://info.corenet.gov.sg/docs/default-source/bca-circulars/20250901_guidelines-on-requirements-for-site-investigation-reports.pdf' },
+  { label: 'Hitomo Construction: Top 5 things to know before rebuilding a landed property (builder advice on soil and foundations)', href: 'https://www.hitomoconstruction.com/post/top-5-things-to-know-before-rebuilding-a-landed-property-in-singapore' },
+  { label: 'Haus Atelier: Guide to piling for a home rebuild in Singapore (builder advice on soil investigation)', href: 'https://hausatelier.com.sg/guide-to-piling-for-a-home-rebuild-in-singapore/' },
 ];
 ---
 <GuideLayout guide={guide} toc={toc} sources={sources}>
@@ -35,12 +39,20 @@ const sources = [
   <p>URA's own guidance is that if a proposal cannot meet these guidelines, it should be lodged as a new erection or reconstruction, in other words a rebuild. That makes the 50% tests a useful first check on which route your plans belong to.</p>
   <p>Two cautions. These routes do not cover every site: URA's lodgment scheme excludes land in conservation areas, Good Class Bungalow areas and special control areas, so those sites need a different process. And, more generally, URA says that additions or alterations to a private home usually need planning permission if they increase the gross floor area.</p>
 
-  <GuideCta heading="Which side of the line is your house on?" text="Tell us about your house and what you would like to change. We will help you work out which route fits, before you commit to a design." />
+  <GuideCta heading="Which side of the line is your house on?" text="Tell us about your house and what you would like to change. At a free first consultation, we will help you work out which route fits, before you commit to a design." />
 
   <h2 id="rebuild">What does a rebuild involve?</h2>
   <p>A rebuild starts with drawings and approvals, long before any demolition. A qualified person, meaning a registered architect or professional engineer with a valid practising certificate, must be appointed. The qualified person lodges plans with URA, obtains its written permission, and then submits building plans to BCA, the building authority, through its online CORENET system.</p>
   <p>URA also attaches conditions to a straightforward rebuild. The new house must be the same housing type as the one it replaces, comply with envelope control, and meet the development control guidelines on plot size, setbacks and site coverage. If a rebuild keeps parts of an older house that do not meet today's guidelines, at least 25% of the existing floor plate must be retained, and a professional engineer must certify that those structures are sound.</p>
   <p>This is why a rebuild takes time. A renovation can be completed in as little as a month. A rebuild, or any project with major structural work, can take more than twelve months. Planning it carefully, so each stage happens in the right order, is most of the work.</p>
+
+  <h2 id="surprises">What surprises come up on site?</h2>
+  <p>Older houses hold surprises, and so does the ground beneath them. These are the three we meet most often.</p>
+  <ul>
+    <li><strong>Hidden structural problems.</strong> Once the finishes come off, an older house can show structure that does not match the drawings, or that has deteriorated. That can change what it makes sense to keep.</li>
+    <li><strong>The soil.</strong> Ground conditions can call for a deeper or stronger foundation than expected. This is why site investigation comes first. BCA's September 2025 guideline on site investigation reports explains that the reports submitted for building works let the qualified person assess ground conditions reliably, for a safe and economical design. Builders commonly advise getting the soil investigation done before the structural design is fixed, because clayey or loose soil may need deep piling, and finding a difficult condition after demolition has started is far more disruptive.</li>
+    <li><strong>Approval delays.</strong> A landed project involves several agencies, so one slow approval can hold up the rest. Builders and architects commonly report that delays come from small things that compound, such as incomplete structural documents or design changes after submission. A realistic schedule has to allow for it, which is why we give you one only once we understand the scope.</li>
+  </ul>
 
   <h2 id="decide">How to decide</h2>
   <p>The rules set the boundaries. Inside them, these questions usually point the way. They are a way of thinking, not a verdict on your house, which a qualified person should assess.</p>
@@ -56,10 +68,12 @@ const sources = [
     </tbody>
   </table>
 
-  <h2 id="us">What we do</h2>
-  <p>We take a landed home from empty land to a finished, ready-to-live-in house, and we work just as readily when the land is not empty. That includes teardown and rebuilding, additions and alterations, and the features that make a landed home feel like yours, such as pools and private lifts. We manage the whole process, so you deal with one team, accountable from the first sketch to the handover. <a href="/landed-interior-design">Read more about our landed homes service</a>, or see <a href="/portfolio">the landed homes we have completed</a>.</p>
+  <p>Two practical points sit beside the table. First, a structural engineer's survey tells you what you are really working with, the frame and sometimes the foundation, so it is worth having before you decide. Second, if the layout you want fights the existing structure, with stairs, columns and walls all needing to move, you will probably pass URA's 50% limits anyway, and a rebuild can be cleaner than working around the old frame.</p>
 
-  <GuideCta heading="Thinking about your landed home?" text="Tell us about your house and your plans. One of our designers will be in touch to arrange a first consultation." />
+  <h2 id="us">What we do</h2>
+  <p>We take a landed home from empty land to a finished, ready-to-live-in house, and we work just as readily when the land is not empty. That includes teardown and rebuilding, additions and alterations, and the features that make a landed home feel like yours, such as pools and private lifts. We manage the whole process, so you deal with one team, accountable from the first sketch to the handover. We are CaseTrust accredited, and our payments are tied to project milestones. <a href="/landed-interior-design">Read more about our landed homes service</a>, or see <a href="/portfolio">the landed homes we have completed</a>.</p>
+
+  <GuideCta heading="Thinking about your landed home?" text="Tell us about your house and your plans. One of our designers will be in touch to arrange a free first consultation." />
 
   <h2 id="faq">Common questions</h2>
   <details>
@@ -75,11 +89,19 @@ const sources = [
     <p>URA's lodgment scheme does not cover land in conservation areas, Good Class Bungalow areas or special control areas. Those sites follow a different process, so speak to a qualified person before planning.</p>
   </details>
   <details>
+    <summary>Do I need a soil investigation?</summary>
+    <p>BCA requires site investigation reports to be submitted for building works, and the qualified person uses them to assess the ground conditions for the foundation design. Builders commonly advise doing it early, before the structural design is fixed.</p>
+  </details>
+  <details>
+    <summary>Can I change my house type, for example from semi-detached to detached?</summary>
+    <p>URA's lodgment criteria for both additions and alterations and new erection require the resulting house to be the same housing type as the existing one, so a change of type follows a different process. Speak to a qualified person first.</p>
+  </details>
+  <details>
     <summary>How long does a rebuild take?</summary>
     <p>It depends on the scope. A renovation can take as little as a month, while a rebuild or a project with major structural work can take more than twelve months. We give you a realistic schedule once we understand what you want to build.</p>
   </details>
   <details>
     <summary>How much will it cost?</summary>
-    <p>Every landed home is different, shaped by its size, condition and the level of finish you want. Message us to arrange a first consultation, where we listen to your plans and give you a clear view of what they involve.</p>
+    <p>Every landed home is different, shaped by its size, condition and the level of finish you want. Message us to arrange a free first consultation, where we listen to your plans and give you a clear view of what they involve.</p>
   </details>
 </GuideLayout>
