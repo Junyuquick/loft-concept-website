@@ -66,7 +66,7 @@ const schema = {
     <section class="container gallery">
       {data.gallery.map((image, i) => (
         <figure class={`gallery__item gallery__item--${shapes[i]}`} data-reveal='image'>
-          <Photo image={image} alt={`${data.title}, view ${i + 2}`} sizes={sizesFor[shapes[i]]} />
+          <Photo image={image} alt={data.galleryAlts[i] ?? `${data.title}, view ${i + 2}`} sizes={sizesFor[shapes[i]]} />
         </figure>
       ))}
     </section>

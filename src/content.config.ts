@@ -21,6 +21,7 @@ const projects = defineCollection({
       hero: image(),
       heroAlt: z.string().optional(),
       gallery: z.array(image()).default([]),
+      galleryAlts: z.array(z.string()).default([]),
       video: z.string().optional(),
       featured: z.boolean().default(false),
       order: z.number().int(),

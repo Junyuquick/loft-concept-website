@@ -64,6 +64,7 @@ collections:
       - { name: hero, label: Main photo, widget: image, accept: 'image/jpeg,image/png,image/webp', hint: 'The large photo at the top of the project page.' }
       - { name: heroAlt, label: Main photo description, widget: string, required: false }
       - { name: gallery, label: Gallery, widget: image, multiple: true, required: false, default: [], accept: 'image/jpeg,image/png,image/webp', hint: 'Drag to reorder.' }
+      - { name: galleryAlts, label: Gallery photo descriptions, widget: list, field: { name: description, label: Description, widget: string }, required: false, default: [], hint: 'One short, plain description per gallery photo, in the same order as the gallery. Read aloud by screen readers and used by Google Images. No client names or house numbers.' }
       - { name: video, label: Video, widget: string, required: false, hint: 'Leave empty unless your developer has added a video file.' }
       - { name: featured, label: Feature on home page, widget: boolean, required: false, default: false }
       - { name: order, label: Order, widget: number, value_type: int, hint: 'Lower numbers appear first in the portfolio.' }

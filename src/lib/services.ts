@@ -85,7 +85,7 @@ export const services: Service[] = [
     h1: 'HDB homes,',
     h1Accent: 'designed and built to feel like yours.',
     lead: 'As a registered HDB renovation contractor, we take care of everything: the design, the permits, the construction and the handover.',
-    photo: 'seagull-walk',
+    photo: 'mount-sinai-road',
     propertyType: 'hdb',
     projectsHeading: '',
     scope: [

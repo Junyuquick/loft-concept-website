@@ -4,6 +4,8 @@ sector: residential
 propertyType: landed
 summary: "Light, layered, and alive. Mimosa is a space that moves — where materiality and atmosphere are choreographed rather than placed. Every element earns its role, and the result is an interior that feels less like a renovation and more like a revelation."
 metaDescription: "Mimosa: a light, layered interior where materials and atmosphere are choreographed rather than placed. Designed by Loft Concept."
+heroAlt: "Four-storey terrace house with glass balconies and warm lighting glowing at dusk"
+coverAlt: "Four-storey terrace house with glass balconies and warm lighting glowing at dusk"
 cover: "../../assets/projects/mimosa/poster.jpg"
 hero: "../../assets/projects/mimosa/poster.jpg"
 gallery:

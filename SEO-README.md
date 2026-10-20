@@ -111,6 +111,10 @@ Why each part matters:
 
 Facts used came only from you: founded 2010, 100+ projects (not yet shown on the pages), HDB-registered, as short as one month for renovations, 12+ months for major structural landed work, full-process design and build including teardown, pools and lifts. The HDB page shows an interior photo, not a landed exterior, because you do not list HDB photos.
 
+**7. Descriptive photo descriptions (alt text).** All 154 images on the project pages now have a specific one-sentence description, such as "Walnut kitchen island with wine cubbies, stainless steel appliances and a crystal pendant light". Google reads these (it is how photos appear in Google Images), and screen readers read them to blind visitors. Main/cover photos use the existing `heroAlt` and `coverAlt` fields. Gallery photos use a new `galleryAlts` list in each project file, in the same order as `gallery`; I added the field to `src/content.config.ts`, the admin editor (`public/admin/config.yml`, label "Gallery photo descriptions") and `src/pages/portfolio/[slug].astro` (falls back to "Title, view N" when a description is missing, so a new project added in the admin still works). Written from the photos only: no client names, no house numbers.
+
+**8. HDB page photo changed** to the Mount Sinai Road kitchen (an interior with no people in it). The previous one showed a person in a mirror reflection.
+
 ## Keyword research, first pass (Singapore, Google, monthly searches)
 
 Source: OpenSEO `research_keywords` with 5 seeds. Volumes are estimates. "KD" is keyword difficulty (0-100); the low KD numbers here look optimistic, so treat them as relative, not absolute. Check real results before committing (step 4/8).
@@ -153,17 +157,54 @@ You do not need to do anything with Google Analytics for this.
 
 ## Later tasks
 
-- [ ] **More descriptive photo descriptions (alt text).** Alt text is the written description of a picture. Google reads it (it is how images rank in Google Images), and screen readers read it to blind visitors. Right now every project photo has a generic description such as "Bedok Road, residential interior by Loft Concept" or "Bedok Road, view 3".
+- [x] **More descriptive photo descriptions (alt text). Done 2026-10-21, see fix 7.** Alt text is the written description of a picture. Google reads it (it is how images rank in Google Images), and screen readers read it to blind visitors. Right now every project photo has a generic description such as "Bedok Road, residential interior by Loft Concept" or "Bedok Road, view 3".
   - Replace them with a specific, plain description of what is in the photo, e.g. "Double-height kitchen with dark walnut millwork and a crystal chandelier". Keep it factual, one sentence, about 8-16 words.
   - Do **not** include client names, house numbers or anything sensitive. Street names already on the site are fine.
   - Where they live: `coverAlt` and `heroAlt` are fields in each project file in `src/content/projects/`. Gallery photos have no field yet: they are auto-labelled "view N" in `src/pages/portfolio/[slug].astro`, so this needs a new `galleryAlts` list added to `src/content.config.ts`, `public/admin/config.yml` and the page template, plus a test.
   - 19 projects, about 6-8 photos each. I can draft all of them by looking at each photo; you review the wording.
 - [ ] **Add "100+ projects" to the service pages** if you want it shown.
-- [ ] **Competitor gap and rank tracking:** use OpenSEO to see what competitors rank for, then set up rank tracking for the target keywords.
-- [ ] **Re-check the site audit** with OpenSEO once the new pages are live and indexed.
+- [x] **Competitor gap and rank tracking: done 2026-10-21, see "OpenSEO research results".** use OpenSEO to see what competitors rank for, then set up rank tracking for the target keywords.
+- [x] **Re-check the site audit (done 2026-10-21: 48 issues down to 25, only thin content and filter URLs remain).** with OpenSEO once the new pages are live and indexed.
+
+## OpenSEO research results (2026-10-21)
+
+Market: Singapore, Google, English. Data from DataForSEO through OpenSEO. Volumes are monthly searches. "KD" is difficulty, and the low numbers look optimistic, so treat them as relative.
+
+**Phrases worth targeting, and where they live on the site**
+
+| Phrase | Searches | Page |
+|---|---|---|
+| interior design service singapore | 4,400 | homepage |
+| renovation contractor singapore | 1,600 | HDB page (we are HDB-registered) |
+| hdb renovation permit | 880 | HDB page FAQ (informational, a good way in) |
+| interior design company in singapore / interior design firms in singapore / interior designer singapore | 880 each | homepage |
+| hdb renovation | 720 | HDB page |
+| singapore condo interior design | 590 | condo page |
+| hdb renovation contractor | 480 | HDB page |
+| hdb registered renovation contractor | 390 | HDB page |
+| best interior design singapore / condominium interior design singapore / hdb interior design | 260 each | homepage / condo / HDB |
+| award winning interior design singapore | 140 | homepage (only if you have awards) |
+| design and build singapore | 110 | homepage / about |
+| landed property interior design singapore / luxury interior design singapore | 110 each | landed page / homepage |
+| landed house interior design singapore / landed interior design singapore | 90 each | landed page |
+
+Teardown and rebuild phrases ("rebuild house singapore", "landed house rebuild") have almost no search volume. Customers do not search for them, so describe that specialty on the landed page but do not expect search traffic from it.
+
+**Who ranks today.** Qanvast, Homevera, Flo Design, The Interior Lab and MyDesign appear most across your phrases. A large share of results are not firms at all: directories and publications (Qanvast, Houzz, Tatler, The Honeycombers, HomeTrust), listicles ("10 best HDB renovation contractors") and Reddit. For "interior design company in singapore" and "singapore condo interior design", Google shows a **map pack of three local businesses** above the normal results (SG Interior Design, Casa, The Alchemists; Flo Design, HOFT, Key Concept). Landed searches show a mix of firm service pages and long guides ("landed house interior design ideas, costs and tips").
+
+**Where you start.** The audit shows 5 keywords ranking, all minor (street names from the old site). The backlink data shows none. **Baseline rank check (2026-10-21, live Google, top 40, Singapore, mobile).** I checked all 22 phrases below directly. Your site is in the top 40 for exactly one of them: "loft concept singapore" at position 5 (the contact page). Every other phrase, including "loft concept" alone, "interior design service singapore", all landed, condo and HDB phrases, shows **not in top 40**. This is the "before" picture to compare against. Google's listing for your contact page still shows text from the old site, so Google has not re-crawled yet.
+
+Re-run the same check monthly. In OpenSEO there is also a rank tracker with these 22 phrases (project "Loft Concept"), but its first run got stuck on "running" and never stored positions, and a restart did not clear it. Until that is sorted out, ask Claude to run the live lookup instead (a few cents; I did not record the exact charge).
+
+**What this means we should do next (in order of likely payoff)**
+1. **Google Business Profile.** The map pack decides "company" and "condo" searches. Complete every field, pick the right categories, add photos, and ask finished clients for reviews.
+2. **Get listed where Google already looks.** Qanvast, Houzz, HomeTrust and the HDB renovation contractor directory all rank for your phrases, and a listing is also a backlink. Being named in "best HDB renovation contractors" articles (Epos, Women's Weekly style) is the same idea.
+3. **Guides.** Landed and condo searches reward long guides as well as service pages. One well-written guide per property type (renovation process, approvals, timeline, no prices) would compete for those results.
+4. **Re-run the rank tracker monthly** (manual runs cost about $0.29). Compare against this baseline.
 
 ## Change log
 
+- **2026-10-21**: Ran OpenSEO research (keyword demand, competitor and SERP review, rank tracker baseline, re-audit), wrote descriptive alt text for all project photos, and swapped the HDB page photo.
 - **2026-10-21**: Added the landed, condo and HDB service pages with FAQ schema and internal links (details above). 79 unit tests pass.
 - **2026-10-21**: Corrected project tags (Ceylon landed, Loyang Besar commercial, rest landed) fixed the portfolio Back button and the scroll jump on Back (details above). 74 unit tests and 10 browser checks pass.
 - **2026-10-21**: Trimmed 20 meta descriptions, fixed `/portfolio` heading order (details above). Tests (74) and build pass.
