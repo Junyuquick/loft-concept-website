@@ -53,6 +53,26 @@ await check('Back button returns to the portfolio after using a filter', async (
   await ctx.close();
 });
 
+await check('Back to the portfolio restores the scroll position instantly, without scrolling down from the top', async () => {
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  const page = await ctx.newPage();
+  await page.goto(`${BASE}/portfolio`, { waitUntil: 'networkidle' });
+  const card = page.locator('.card__link').nth(14);
+  await card.scrollIntoViewIfNeeded();
+  await page.waitForTimeout(1500);
+  const before = await page.evaluate(() => Math.round(scrollY));
+  assert.ok(before > 1000, `expected to be scrolled down, got ${before}`);
+  await card.click();
+  await page.waitForURL(/\/portfolio\/[a-z-]+$/);
+  await page.waitForTimeout(500);
+  await page.goBack();
+  await page.waitForURL(/\/portfolio$/);
+  await page.waitForTimeout(250);
+  const after = await page.evaluate(() => Math.round(scrollY));
+  assert.ok(Math.abs(after - before) <= 5, `scroll was ${after}px 250ms after Back, expected ${before}px`);
+  await ctx.close();
+});
+
 await check('Contact form: empty submit shows inline errors', async () => {
   const ctx = await browser.newContext();
   const page = await ctx.newPage();

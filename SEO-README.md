@@ -91,6 +91,8 @@ No broken links, missing titles, duplicate titles or server errors were found.
 
 **4. Back button bug (not SEO, but it hurts visitors and Google measures that).** After using a filter button on `/portfolio`, opening a project and pressing Back changed the URL but left the project on screen. Cause: the filter button called `history.replaceState(null, ...)`, which erased the position data Astro's page router keeps in `history.state`, so the router ignored the Back press. Fix: one word in `src/pages/portfolio/index.astro` (`history.state` instead of `null`). Added a regression check to `scripts/verify-browser.mjs`; it failed before the fix and passes after.
 
+**5. Scroll jump on Back.** Pressing Back from a project returned to `/portfolio` but visibly scrolled down from the top to where you left off, which looked laggy. Cause: the site sets `scroll-behavior: smooth` on the whole page, and Astro restores your position with a plain `scrollTo()`, which that setting turns into an animated scroll. Fix: in `src/scripts/motion.ts`, smooth scrolling is switched off only while the router swaps pages, so Back lands instantly. Smooth scrolling elsewhere is unchanged. Regression check added to `scripts/verify-browser.mjs` (it failed with 914px against 3879px expected before the fix).
+
 ## Keyword research, first pass (Singapore, Google, monthly searches)
 
 Source: OpenSEO `research_keywords` with 5 seeds. Volumes are estimates. "KD" is keyword difficulty (0-100); the low KD numbers here look optimistic, so treat them as relative, not absolute. Check real results before committing (step 4/8).
@@ -119,7 +121,7 @@ Source: OpenSEO `research_keywords` with 5 seeds. Volumes are estimates. "KD" is
 
 ## Change log
 
-- **2026-10-21**: Corrected project tags (Ceylon landed, Loyang Besar commercial, rest landed) and fixed the portfolio Back button (details above). 74 unit tests and 9 browser checks pass.
+- **2026-10-21**: Corrected project tags (Ceylon landed, Loyang Besar commercial, rest landed) fixed the portfolio Back button and the scroll jump on Back (details above). 74 unit tests and 10 browser checks pass.
 - **2026-10-21**: Trimmed 20 meta descriptions, fixed `/portfolio` heading order (details above). Tests (74) and build pass.
 - **2026-10-21**: Installed and started OpenSEO (Docker), registered its MCP server with Claude Code, created the "Loft Concept" project (Singapore, English). Ran the site audit and a first keyword pass (results above). No website code changed yet.
 - **2026-10-21**: Investigated Google's "Alternate page with proper canonical tag" email (see above): no code change needed. Estimated DataForSEO budget: about $0.04 per keyword search and $0.06 per backlink check self-hosted, so $50 lasts months.

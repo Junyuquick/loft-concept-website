@@ -28,7 +28,14 @@ function initVideos() {
   });
 }
 
+// The router restores your scroll position with a plain scrollTo(), which html's
+// scroll-behavior: smooth turns into a visible scroll from the top. Jump instead.
+document.addEventListener('astro:before-swap', (event) => {
+  event.newDocument.documentElement.style.scrollBehavior = 'auto';
+});
+
 document.addEventListener('astro:page-load', () => {
+  document.documentElement.style.removeProperty('scroll-behavior');
   initReveal();
   initVideos();
 });
