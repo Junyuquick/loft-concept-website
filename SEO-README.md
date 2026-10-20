@@ -137,6 +137,31 @@ Source: OpenSEO `research_keywords` with 5 seeds. Volumes are estimates. "KD" is
 
 **Skip:** jobs, courses, schools, competitor brand names and property-listing terms. They have volume but the people searching will not hire you.
 
+## Google Search Console: step by step (you do this, about 15 minutes)
+
+Search Console is Google's free dashboard for your site. It is where Google tells you what it indexed, what it did not, and which searches brought people to you. Do it now, not at the end: Google takes days to weeks to crawl, so starting early saves time.
+
+1. **Open it:** go to https://search.google.com/search-console and sign in with the Google account that owns the business.
+2. **Check your site is added.** If `loftconcept.com.sg` is already listed (it must be, since Google emailed you), click it. If not: Add property, choose **Domain**, enter `loftconcept.com.sg`, and follow the DNS verification steps.
+3. **Confirm the sitemap.** Left menu, **Sitemaps**. You should see `sitemap-index.xml` with status "Success". If it is missing, type `sitemap-index.xml` in "Add a new sitemap" and Submit.
+4. **After the new pages deploy, ask Google to look at them.** Click the search bar at the top, paste `https://loftconcept.com.sg/landed-interior-design` and press Enter. When it says "URL is not on Google", click **Request indexing**. Repeat for `/condo-interior-design` and `/hdb-interior-design`. This is the fastest way to get them seen.
+5. **Look at the email's warning.** Left menu, **Pages**. Scroll to "Why pages aren't indexed" and click **Alternate page with proper canonical tag**. Click a few of the example URLs. Expected: addresses with `?sector=`, `.html`, a trailing `/`, `http://` or `www.`. That is normal. **If a URL that is in your sitemap appears there, tell me.**
+6. **Look at the other reasons too.** In the same list, anything saying "Crawled - currently not indexed" or "Discovered - currently not indexed" on project pages is the thin-content issue, not a bug.
+7. **Check back weekly.** Left menu, **Performance**. It shows which searches show your site and how many clicks you get. Once there is data (usually after 1-2 weeks), send me a screenshot or the top queries and I will turn them into actions.
+
+You do not need to do anything with Google Analytics for this.
+
+## Later tasks
+
+- [ ] **More descriptive photo descriptions (alt text).** Alt text is the written description of a picture. Google reads it (it is how images rank in Google Images), and screen readers read it to blind visitors. Right now every project photo has a generic description such as "Bedok Road, residential interior by Loft Concept" or "Bedok Road, view 3".
+  - Replace them with a specific, plain description of what is in the photo, e.g. "Double-height kitchen with dark walnut millwork and a crystal chandelier". Keep it factual, one sentence, about 8-16 words.
+  - Do **not** include client names, house numbers or anything sensitive. Street names already on the site are fine.
+  - Where they live: `coverAlt` and `heroAlt` are fields in each project file in `src/content/projects/`. Gallery photos have no field yet: they are auto-labelled "view N" in `src/pages/portfolio/[slug].astro`, so this needs a new `galleryAlts` list added to `src/content.config.ts`, `public/admin/config.yml` and the page template, plus a test.
+  - 19 projects, about 6-8 photos each. I can draft all of them by looking at each photo; you review the wording.
+- [ ] **Add "100+ projects" to the service pages** if you want it shown.
+- [ ] **Competitor gap and rank tracking:** use OpenSEO to see what competitors rank for, then set up rank tracking for the target keywords.
+- [ ] **Re-check the site audit** with OpenSEO once the new pages are live and indexed.
+
 ## Change log
 
 - **2026-10-21**: Added the landed, condo and HDB service pages with FAQ schema and internal links (details above). 79 unit tests pass.
