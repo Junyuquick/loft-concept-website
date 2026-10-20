@@ -217,8 +217,17 @@ Re-run the same check monthly. In OpenSEO there is also a rank tracker with thes
 3. **Guides.** Landed and condo searches reward long guides as well as service pages. One well-written guide per property type (renovation process, approvals, timeline, no prices) would compete for those results.
 4. **Re-run the rank tracker monthly** (manual runs cost about $0.29). Compare against this baseline.
 
+## Rank log
+
+Live Google lookups, Singapore, mobile, top 40, 25 phrases. The raw numbers are in `seo/rank-history.json`. A monthly scheduled run adds an entry here (see `seo/MONTHLY-RANK-CHECK.md`). Positions can move for reasons unrelated to the website, and one month is noise, so look at the trend over three or more months.
+
+### 2026-10-21 (baseline)
+
+1 of 25 phrases in the top 40: "loft concept singapore" at position 5 (the contact page). Every other phrase, including all the landed, condo and HDB phrases, the HDB permit, timing and guideline phrases, and "loft concept" alone, is not in the top 40. The new service pages and guides were published the same day and Google has not crawled them yet, so this is the true starting point.
+
 ## Change log
 
+- **2026-10-21**: Added a monthly rank-check script, instructions and a rank log (`seo/`). The monthly run is set up by the coordinator agent.
 - **2026-10-21**: Researched what makes guides rank and convert (`GUIDES-RESEARCH.md`), corrected the FAQ-markup claim, and built four guides plus a guides index.
 - **2026-10-21**: Ran OpenSEO research (keyword demand, competitor and SERP review, rank tracker baseline, re-audit), wrote descriptive alt text for all project photos, and swapped the HDB page photo.
 - **2026-10-21**: Added the landed, condo and HDB service pages with FAQ schema and internal links (details above). 79 unit tests pass.
