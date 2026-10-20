@@ -93,6 +93,24 @@ No broken links, missing titles, duplicate titles or server errors were found.
 
 **5. Scroll jump on Back.** Pressing Back from a project returned to `/portfolio` but visibly scrolled down from the top to where you left off, which looked laggy. Cause: the site sets `scroll-behavior: smooth` on the whole page, and Astro restores your position with a plain `scrollTo()`, which that setting turns into an animated scroll. Fix: in `src/scripts/motion.ts`, smooth scrolling is switched off only while the router swaps pages, so Back lands instantly. Smooth scrolling elsewhere is unchanged. Regression check added to `scripts/verify-browser.mjs` (it failed with 914px against 3879px expected before the fix).
 
+**6. Three new service pages** (built and tested locally, **not yet deployed**). These give Google a page for each of the phrases people search, instead of everything competing on the homepage.
+
+| Page | Targets | Source of truth |
+|---|---|---|
+| `/landed-interior-design` | landed property / landed house interior design Singapore | `src/lib/services.ts` |
+| `/condo-interior-design` | condo / condominium interior design Singapore (about 590 searches a month) | same |
+| `/hdb-interior-design` | HDB interior design / renovation (about 260 plus 880 for permits) | same |
+
+How it works: the copy for all three lives in `src/lib/services.ts`; one template, `src/pages/[service].astro`, renders them, so they look identical to each other and to the rest of the site (same tokens, `Photo`, `ProjectCard`, `BookingCTA`). Each has its own title and 160-character description, a "what we take care of" section, a timeline, projects (from the project `propertyType` tags), and an FAQ.
+
+Why each part matters:
+- **Own URL and own title per property type:** Google matches a search to the page most clearly about it.
+- **FAQ and Service structured data (JSON-LD):** lets Google show your answers directly in results, and tells it exactly what service you offer and where.
+- **Internal links:** the homepage "What we design" section and the footer link to all three, so visitors and Google can find them. They are also in the sitemap automatically.
+- **No prices anywhere,** by design, and a unit test fails if one is ever added. The cost question is answered with an invitation to message you.
+
+Facts used came only from you: founded 2010, 100+ projects (not yet shown on the pages), HDB-registered, as short as one month for renovations, 12+ months for major structural landed work, full-process design and build including teardown, pools and lifts. The HDB page shows an interior photo, not a landed exterior, because you do not list HDB photos.
+
 ## Keyword research, first pass (Singapore, Google, monthly searches)
 
 Source: OpenSEO `research_keywords` with 5 seeds. Volumes are estimates. "KD" is keyword difficulty (0-100); the low KD numbers here look optimistic, so treat them as relative, not absolute. Check real results before committing (step 4/8).
@@ -121,6 +139,7 @@ Source: OpenSEO `research_keywords` with 5 seeds. Volumes are estimates. "KD" is
 
 ## Change log
 
+- **2026-10-21**: Added the landed, condo and HDB service pages with FAQ schema and internal links (details above). 79 unit tests pass.
 - **2026-10-21**: Corrected project tags (Ceylon landed, Loyang Besar commercial, rest landed) fixed the portfolio Back button and the scroll jump on Back (details above). 74 unit tests and 10 browser checks pass.
 - **2026-10-21**: Trimmed 20 meta descriptions, fixed `/portfolio` heading order (details above). Tests (74) and build pass.
 - **2026-10-21**: Installed and started OpenSEO (Docker), registered its MCP server with Claude Code, created the "Loft Concept" project (Singapore, English). Ran the site audit and a first keyword pass (results above). No website code changed yet.

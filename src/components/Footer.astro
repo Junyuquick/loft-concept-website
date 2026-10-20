@@ -1,5 +1,6 @@
 ---
 import { site } from '../lib/site';
+import { services, servicePath } from '../lib/services';
 const year = new Date().getFullYear();
 ---
 <footer class="footer">
@@ -11,6 +12,7 @@ const year = new Date().getFullYear();
     <nav class="footer__col" aria-label="Footer">
       <a class="link" href="/">Home</a>
       {site.nav.map((item) => <a class="link" href={item.href}>{item.label}</a>)}
+      {services.map((service) => <a class="link" href={servicePath(service)}>{service.navLabel}</a>)}
       <a class="link" href={site.cta.href}>{site.cta.label}</a>
     </nav>
     <div class="footer__col">

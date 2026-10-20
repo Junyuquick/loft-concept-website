@@ -1,0 +1,128 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import BookingCTA from '../components/BookingCTA.astro';
+import { services, serviceSchema, type Service } from '../lib/services';
+import { site } from '../lib/site';
+
+export function getStaticPaths() {
+  return services.map((service) => ({ params: { service: service.slug }, props: { service } }));
+}
+
+const { service } = Astro.props as { service: Service };
+// The client can delete projects in /admin, so the photo and the project list both tolerate gaps.
+const feature = await getEntry('projects', service.photo);
+const projects = (await getCollection('projects', (p) => p.data.propertyType === service.propertyType))
+  .sort((a, b) => Number(b.data.featured) - Number(a.data.featured) || a.data.order - b.data.order)
+  .slice(0, 4);
+---
+<Base title={service.title} description={service.description} schema={serviceSchema(service)}>
+  <section class="container lead">
+    <h1>{service.h1} <span class="accent">{service.h1Accent}</span></h1>
+    <p class="lead__text">{service.lead}</p>
+    <div class="lead__actions">
+      <a class="btn" href={site.cta.href}>{site.cta.label}</a>
+      <a class="link" href={site.whatsapp} target="_blank" rel="noopener">Or message us on WhatsApp</a>
+    </div>
+  </section>
+
+  {feature && (
+    <figure class="feature" data-reveal='image'>
+      <Photo image={feature.data.hero} alt="A Loft Concept interior" sizes="100vw" position={feature.data.coverPosition} eager />
+    </figure>
+  )}
+
+  <section class="section scope">
+    <div class="container scope__grid">
+      <h2>What we take care of</h2>
+      <dl class="scope__list">
+        {service.scope.map((item, i) => (
+          <div class="scope__row" data-reveal style={`--i:${i % 3}`}>
+            <dt>{item.term}</dt>
+            <dd>{item.body}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="section time">
+    <div class="container time__grid">
+      <h2>How long it takes</h2>
+      <div class="time__body" data-reveal>
+        <p>{service.timeline}</p>
+        <a class="link" href="/#process">See how we work</a>
+      </div>
+    </div>
+  </section>
+
+  {projects.length > 0 && service.projectsHeading && (
+    <section class="section work">
+      <div class="container">
+        <h2>{service.projectsHeading}</h2>
+        <div class="work__grid">
+          {projects.map((project) => <ProjectCard project={project} />)}
+        </div>
+        <p class="work__more"><a class="link" href="/portfolio">See all projects</a></p>
+      </div>
+    </section>
+  )}
+
+  <section class="section faq">
+    <div class="container faq__grid">
+      <h2>Questions we are often asked</h2>
+      <div class="faq__list">
+        {service.faq.map((item) => (
+          <details class="faq__item">
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <BookingCTA heading="Ready to get started?" />
+</Base>
+
+<style>
+  .lead { padding-block: var(--s-6) var(--s-5); display: grid; gap: var(--s-3); justify-items: start; }
+  .lead h1 { max-width: 18ch; }
+  .lead__text { font-size: var(--step-1); line-height: 1.5; color: var(--ink); max-width: 46ch; }
+  .lead__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3); margin-top: var(--s-2); }
+  .feature { margin: 0; height: min(70dvh, 48rem); min-height: 20rem; }
+
+  .scope__grid, .time__grid, .faq__grid { display: grid; gap: var(--s-4); }
+  @media (min-width: 900px) {
+    .scope__grid, .time__grid, .faq__grid { grid-template-columns: 5fr 7fr; gap: var(--s-6); }
+    .scope__grid h2, .faq__grid h2 { position: sticky; top: calc(var(--header-h) + var(--s-4)); align-self: start; }
+  }
+  .scope__list { margin: 0; }
+  .scope__row { display: grid; gap: 0.4rem; padding-block: var(--s-3); border-top: 1px solid color-mix(in srgb, var(--stone) 60%, transparent); }
+  .scope__row:last-child { border-bottom: 1px solid color-mix(in srgb, var(--stone) 60%, transparent); }
+  @media (min-width: 640px) { .scope__row { grid-template-columns: 1fr 2fr; gap: var(--s-3); } }
+  .scope__row dt { font-size: var(--step-1); line-height: 1.2; color: var(--ink); font-weight: 500; letter-spacing: -0.01em; }
+  .scope__row dd { margin: 0; }
+
+  .time__body { display: grid; gap: var(--s-3); justify-items: start; font-size: var(--step-1); line-height: 1.5; color: var(--ink); }
+  .time__body p { max-width: 40ch; }
+
+  .work h2 { margin-bottom: var(--s-5); }
+  .work__grid { display: grid; gap: var(--s-5) var(--s-3); }
+  @media (min-width: 900px) { .work__grid { grid-template-columns: 1fr 1fr; } }
+  .work__more { margin-top: var(--s-5); }
+
+  .faq__item { border-top: 1px solid color-mix(in srgb, var(--stone) 60%, transparent); }
+  .faq__item:last-child { border-bottom: 1px solid color-mix(in srgb, var(--stone) 60%, transparent); }
+  .faq__item summary {
+    display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-3);
+    padding-block: var(--s-3); cursor: pointer; list-style: none;
+    font-size: var(--step-1); line-height: 1.25; color: var(--ink); font-weight: 500; letter-spacing: -0.01em;
+  }
+  .faq__item summary::-webkit-details-marker { display: none; }
+  .faq__item summary::after { content: '+'; flex: none; font-weight: 400; transition: transform 0.3s var(--ease-out); }
+  .faq__item[open] summary::after { transform: rotate(45deg); }
+  .faq__item p { padding-bottom: var(--s-3); max-width: 60ch; }
+</style>
