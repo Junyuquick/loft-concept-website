@@ -13,7 +13,7 @@ interface Props {
 const { guide, toc, sources } = Astro.props;
 const feature = await getEntry('projects', guide.photo);
 const others = guides.filter((g) => g.slug !== guide.slug);
-const fmt = (iso: string) => new Date(`${iso}T00:00:00+08:00`).toLocaleDateString('en-SG', { day: 'numeric', month: 'long', year: 'numeric' });
+const fmt = (iso: string) => new Date(`${iso}T00:00:00+08:00`).toLocaleDateString('en-SG', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Singapore' });
 ---
 <Base title={guide.title} description={guide.description} schema={guideSchema(guide)}>
   <article>
