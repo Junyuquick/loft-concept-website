@@ -2,6 +2,7 @@
 title: "Ernani Street"
 sector: residential
 summary: "Richness without excess. A dramatic timber feature wall anchors the living space while glass partitions in dark frames define — without dividing — the home's generous proportions. Warm, layered, grounded."
+metaDescription: "Ernani Street, Singapore: a dramatic timber feature wall and dark-framed glass partitions give a home warmth and generous proportions."
 cover: "../../assets/projects/ernani-street/01-img-9107.jpg"
 hero: "../../assets/projects/ernani-street/01-img-9107.jpg"
 gallery:

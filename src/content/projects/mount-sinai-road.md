@@ -3,6 +3,7 @@ title: "Mount Sinai Road"
 sector: residential
 propertyType: landed
 summary: "Drama in every detail. A sculpted chandelier of frosted petals crowns an open-plan space where backlit onyx, dark timber cabinetry, and high-gloss surfaces converge — a home that holds nothing back."
+metaDescription: "Mount Sinai Road, Singapore: a landed home with a frosted-petal chandelier, backlit onyx and dark timber cabinetry. By Loft Concept."
 cover: "../../assets/projects/mount-sinai-road/01-img-9829.jpg"
 hero: "../../assets/projects/mount-sinai-road/01-img-9829.jpg"
 gallery:

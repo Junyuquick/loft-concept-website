@@ -26,7 +26,7 @@ const chips = [
 
   <div class="container">
     <div class="grid" data-grid>
-      {projects.map((project, i) => <ProjectCard project={project} eager={i < 2} />)}
+      {projects.map((project, i) => <ProjectCard project={project} eager={i < 2} headingLevel="h2" />)}
     </div>
     <p class="empty" data-empty hidden>No projects in this category yet.</p>
   </div>

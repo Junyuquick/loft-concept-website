@@ -3,6 +3,7 @@ title: "Horse City"
 sector: commercial
 propertyType: commercial
 summary: "A bold commercial intervention where structure becomes spectacle. Exposed red steel scaffolding zigzags across white space, creating dynamic geometry that doubles as display and division — a working interior that wears its bones proudly."
+metaDescription: "Horse City: a commercial interior where exposed red steel scaffolding doubles as display and division. Designed and built by Loft Concept."
 cover: "../../assets/projects/horse-city/01-img-4063.jpg"
 hero: "../../assets/projects/horse-city/01-img-4063.jpg"
 gallery:

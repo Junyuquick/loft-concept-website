@@ -56,7 +56,8 @@ collections:
       - { name: area, label: Area, widget: string, required: false, hint: 'e.g. "1,200 sq ft"' }
       - { name: year, label: Year completed, widget: number, value_type: int, required: false }
       - { name: scope, label: Scope of work, widget: string, required: false }
-      - { name: summary, label: Summary, widget: text, minlength: 20, hint: 'Two or three sentences shown on the project page and in search results.' }
+      - { name: summary, label: Summary, widget: text, minlength: 20, hint: 'Two or three sentences shown on the project page.' }
+      - { name: metaDescription, label: Google search description, widget: text, required: false, maxlength: 160, hint: 'The grey text under the page title in Google results. Up to 160 characters; longer text is cut off. If left empty, the Summary is used.' }
       - { name: cover, label: Cover photo, widget: image, accept: 'image/jpeg,image/png,image/webp', hint: 'Shown on the portfolio grid.' }
       - { name: coverAlt, label: Cover photo description, widget: string, required: false, hint: 'Describe the photo for visitors using screen readers.' }
       - { name: coverPosition, label: Cover focus point, widget: string, required: false, default: '50% 50%', hint: 'Which part of the cover stays visible when cropped. "50% 50%" is the centre; leave as is if unsure.' }

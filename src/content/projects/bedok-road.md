@@ -2,6 +2,7 @@
 title: "Bedok Road"
 sector: residential
 summary: "Luxury distilled into every surface. A double-height kitchen anchored by dark walnut millwork, a floating crystal chandelier, and polished marble underfoot — where the art of cooking meets the art of living, without compromise."
+metaDescription: "Bedok Road, Singapore: a double-height kitchen with dark walnut millwork, a floating crystal chandelier and polished marble. By Loft Concept."
 cover: "../../assets/projects/bedok-road/01-20151026-147bedokroad-110.jpg"
 hero: "../../assets/projects/bedok-road/01-20151026-147bedokroad-110.jpg"
 gallery:

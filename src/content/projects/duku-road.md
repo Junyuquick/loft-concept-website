@@ -2,6 +2,7 @@
 title: "Duku Road"
 sector: residential
 summary: "A modern tropical address. Louvred timber screens, glass balustrades, and a palm-shaded courtyard define a multi-storey shophouse reimagined for contemporary life — indoor and outdoor in quiet conversation."
+metaDescription: "Duku Road, Singapore: a multi-storey shophouse reimagined with louvred timber screens, glass balustrades and a palm-shaded courtyard."
 cover: "../../assets/projects/duku-road/01-img-3300.jpg"
 hero: "../../assets/projects/duku-road/01-img-3300.jpg"
 gallery:

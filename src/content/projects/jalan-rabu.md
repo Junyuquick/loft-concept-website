@@ -2,6 +2,7 @@
 title: "Jalan Rabu"
 sector: residential
 summary: "A three-storey semi-detached that speaks in clean lines. Dark grey cladding meets timber accents across a composed contemporary facade — modern architecture that sits comfortably in its neighbourhood."
+metaDescription: "Jalan Rabu, Singapore: a three-storey semi-detached home with dark grey cladding and timber accents. Designed by Loft Concept."
 cover: "../../assets/projects/jalan-rabu/01-cimg6048.jpg"
 hero: "../../assets/projects/jalan-rabu/01-cimg6048.jpg"
 gallery:

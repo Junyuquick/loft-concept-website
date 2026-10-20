@@ -40,7 +40,7 @@ const schema = {
   image: { '@type': 'ImageObject', url: new URL(og.src, Astro.site).href, width: 1200, height: 630 },
 };
 ---
-<Base title={data.title} description={data.summary} image={og.src} schema={schema}>
+<Base title={data.title} description={data.metaDescription ?? data.summary} image={og.src} schema={schema}>
   <section class="hero">
     {data.video
       ? <video data-ambient autoplay muted loop playsinline controls poster={poster} src={data.video} aria-label={`${data.title} walkthrough`}></video>

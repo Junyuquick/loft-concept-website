@@ -3,6 +3,7 @@ title: "Jalan Lana"
 sector: residential
 propertyType: landed
 summary: "A semi-detached home that marries old-world warmth with contemporary ease. Tufted leather sofas, a solid-slab timber table, and light spilling through timber blinds create a living room that feels both curated and lived-in — the kind of space that welcomes without trying."
+metaDescription: "Jalan Lana, Singapore: a semi-detached home with tufted leather sofas, a solid-slab timber table and soft light. Designed by Loft Concept."
 cover: "../../assets/projects/jalan-lana/01-dream-semi-d-paramount-kembangan-area-east-coast-marine-parade-singapore1.jpg"
 hero: "../../assets/projects/jalan-lana/01-dream-semi-d-paramount-kembangan-area-east-coast-marine-parade-singapore1.jpg"
 gallery:

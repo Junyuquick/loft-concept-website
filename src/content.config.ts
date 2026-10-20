@@ -14,6 +14,7 @@ const projects = defineCollection({
       year: z.number().int().optional(),
       scope: z.string().optional(),
       summary: z.string().min(20),
+      metaDescription: z.string().max(160).optional(),
       cover: image(),
       coverAlt: z.string().optional(),
       coverPosition: z.string().default('50% 50%'),

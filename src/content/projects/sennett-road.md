@@ -2,6 +2,7 @@
 title: "Sennett Road"
 sector: residential
 summary: "Architecture as statement. This three-storey landed home commands its corner with confidence — a layered facade of dark cladding, glass, and precise geometry that glows from within as day turns to night."
+metaDescription: "Sennett Road, Singapore: a three-storey landed home with a layered facade of dark cladding, glass and precise geometry. By Loft Concept."
 cover: "../../assets/projects/sennett-road/01-20160106-15sennettroad-01-2.jpg"
 hero: "../../assets/projects/sennett-road/01-20160106-15sennettroad-01-2.jpg"
 gallery:

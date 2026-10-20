@@ -2,6 +2,7 @@
 title: "Lornie Road"
 sector: residential
 summary: "A landed home best seen after dark. Warm light filters through full-height louvred windows, casting soft patterns across timber floors and inviting the outside in. Refined, intimate, and unmistakably alive."
+metaDescription: "Lornie Road, Singapore: a landed home where full-height louvred windows filter warm light across timber floors. By Loft Concept."
 cover: "../../assets/projects/lornie-road/01-img-5072.jpg"
 hero: "../../assets/projects/lornie-road/01-img-5072.jpg"
 gallery:

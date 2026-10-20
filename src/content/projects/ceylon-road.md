@@ -1,8 +1,9 @@
 ---
 title: "Ceylon Road"
 sector: residential
-propertyType: condo
+propertyType: landed
 summary: "Conceived on paper, resolved in stone and glass. This corner-site landed home — rendered in dark charcoal, white render, and timber — is a study in material restraint and architectural confidence."
+metaDescription: "Ceylon Road, Singapore: a corner-site home in charcoal, white render and timber, a study in material restraint. Designed by Loft Concept."
 cover: "../../assets/projects/ceylon-road/01-img-0676.jpg"
 hero: "../../assets/projects/ceylon-road/01-img-0676.jpg"
 gallery:
