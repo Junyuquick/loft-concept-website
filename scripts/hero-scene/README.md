@@ -35,3 +35,14 @@ Blender -b -P build_hero2.py -- portrait  <out_dir> 33-192   # resume a frame ra
 ```
 
 Encode with the commands above. `build_hero.py` is the earlier box-built version, kept for reference.
+
+## v3 (current, shipped): Seedance time-lapse
+
+The hero is now a generated time-lapse, not the Blender render. Workflow:
+
+1. `fal_image.py` (Nano Banana Pro edit on fal) made four stage stills of the client's street render (old house, pit, frame, finished), then relit them to a low warm camera-left sun using the client's style frame as a light-only reference. Portrait (9:16) stills were recomposed from the landscape ones.
+2. `fal_i2v.py` ran Seedance 2.0 image-to-video (standard tier, 720p) three times with a first and last frame each: old house to excavation (calm excavator dismantling, thin low dust only), excavation to frame, frame to finished home. Locked-off camera, constant light, silent.
+3. ffmpeg joined the shots, sped them to 10 s, light grade (contrast 0.97, saturation 0.94), subtle grain, then encoded MP4 (crf 25, maxrate 3M) and WebM (VP9 crf 33).
+
+Keys are read from `~/.config/fal/key` and never printed. `fal_seedance.py` is the earlier reference-to-video attempt (orbit camera), kept for reference; it looked more obviously AI. `build_hero.py` and `build_hero2.py` are the Blender versions (previs and fallback).
+Total generation cost for both orientations was roughly USD 21 including the discarded drafts.
