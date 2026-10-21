@@ -17,3 +17,21 @@ ffmpeg -framerate 24 -i <out_dir>/f_%04d.png -an -c:v libvpx-vp9 -crf 26 -b:v 0 
 
 Landscape files are `hero.mp4` / `hero.webm`; posters are the first frame (`hero-poster.jpg`, `hero-poster-portrait.jpg`).
 Built with Blender 5.2.
+
+## v2 (current): realistic build
+
+`build_hero2.py` is the version that shipped. Same 8 second storyboard, but built from generated 3D models plus free CC0 assets instead of boxes:
+
+- Meshy (image to 3D, from the client's before and after photos) made the old house and the finished house. Meshy text to 3D made the excavator, worker, palm, tree and sedan. `meshy_gen.py` and `meshy_text.py` do this; they read the API key from `~/.config/meshy/key` and never print it.
+- Poly Haven (CC0) supplies the sky (`kloofendal_48d_partly_cloudy_puresky`), the ground and plaster textures, and the shrubs.
+- The finished house is revealed upward with a height-clip in its materials (`add_clip`), so one model builds itself floor by floor.
+
+The models (about 300 MB) and textures are not committed. Put them in `assets/models/*.glb`, `assets/models/ph/<shrub>/`, `assets/tex/<name>/{Diffuse,nor_gl,Rough}.jpg` and `assets/hdri/sky.hdr` next to the script, then run:
+
+```
+Blender -b -P build_hero2.py -- portrait  <out_dir>
+Blender -b -P build_hero2.py -- landscape <out_dir>
+Blender -b -P build_hero2.py -- portrait  <out_dir> 33-192   # resume a frame range
+```
+
+Encode with the commands above. `build_hero.py` is the earlier box-built version, kept for reference.
