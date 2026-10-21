@@ -25,6 +25,12 @@ function initVideos() {
   document.querySelectorAll<HTMLVideoElement>('video[data-ambient]').forEach((video) => {
     video.pause();
     video.removeAttribute('autoplay');
+    // A hero that tells a story should rest on its last frame, not its first.
+    if (video.hasAttribute('data-end-still')) {
+      const seekToEnd = () => { video.currentTime = video.duration; };
+      if (video.readyState >= 1) seekToEnd();
+      else video.addEventListener('loadedmetadata', seekToEnd, { once: true });
+    }
   });
 }
 

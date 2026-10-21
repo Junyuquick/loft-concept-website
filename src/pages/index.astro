@@ -26,10 +26,21 @@ const excerpt = 'They really listened to how we live day to day and translated t
 >
   <section class="hero">
     <div class="hero__media">
-      <video data-ambient autoplay muted loop playsinline preload="metadata" poster="/videos/hero-poster.jpg" aria-hidden="true">
+      <video id="hero-video" data-ambient data-end-still autoplay muted playsinline preload="auto" poster="/videos/hero-poster.jpg" aria-hidden="true">
         <source src="/videos/hero.webm" type="video/webm" />
         <source src="/videos/hero.mp4" type="video/mp4" />
       </video>
+      <script is:inline>
+        (function () {
+          var v = document.getElementById('hero-video');
+          if (!v || !matchMedia('(max-aspect-ratio: 1/1)').matches) return;
+          var s = v.querySelectorAll('source');
+          s[0].src = '/videos/hero-portrait.webm';
+          s[1].src = '/videos/hero-portrait.mp4';
+          v.poster = '/videos/hero-poster-portrait.jpg';
+          v.load();
+        })();
+      </script>
     </div>
     <div class="hero__veil"></div>
     <div class="container hero__copy">
