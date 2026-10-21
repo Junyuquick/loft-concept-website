@@ -46,3 +46,14 @@ The hero is now a generated time-lapse, not the Blender render. Workflow:
 
 Keys are read from `~/.config/fal/key` and never printed. `fal_seedance.py` is the earlier reference-to-video attempt (orbit camera), kept for reference; it looked more obviously AI. `build_hero.py` and `build_hero2.py` are the Blender versions (previs and fallback).
 Total generation cost for both orientations was roughly USD 21 including the discarded drafts.
+
+## Colour grade (shipped)
+
+The v3 time-lapse is graded with ffmpeg (no Resolve). `grade_looks.sh` defines three looks; the site uses Look C ("neutral film"): lower light (average luma about 83-93, from 115-130), milky blacks at about Y17, restrained colour (saturation 0.80, faint warm highlights), soft halation on the brightest spots only, vignette and grain 8. The chain stays in 16-bit RGB until the end: tone curve, colour balance, saturation matrix, halation (threshold, blur, warm tint, screen blend), then 8-bit yuv420p, vignette and grain. Do not use `eq=saturation` in this chain: it converts the pixel format and breaks the halation blend.
+
+```
+source grade_looks.sh; F=$(look_filter C)
+ffmpeg -i src.mkv -filter_complex "$F" -map "[v]" -an -c:v libx264 -preset slow -crf 24 -maxrate 3M -bufsize 6M -pix_fmt yuv420p -movflags +faststart hero.mp4
+ffmpeg -i src.mkv -filter_complex "$F" -map "[v]" -an -c:v libvpx-vp9 -crf 34 -b:v 0 -pix_fmt yuv420p hero.webm
+```
+`src.mkv` is the untouched joined shots, sped to 10 s and stored lossless (FFV1), so the grade is applied once, never on top of earlier compression.
