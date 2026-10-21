@@ -26,20 +26,22 @@ const excerpt = 'They really listened to how we live day to day and translated t
 >
   <section class="hero">
     <div class="hero__media">
-      <video id="hero-video" data-ambient data-end-still autoplay muted playsinline preload="auto" poster="/videos/hero-poster.jpg" aria-hidden="true">
-        <source src="/videos/hero.webm" type="video/webm" />
-        <source src="/videos/hero.mp4" type="video/mp4" />
-      </video>
-      <!-- data-astro-rerun: the router swaps in fresh markup on Back/Forward, so this must run on every visit, not only the first load. -->
+      <video id="hero-video" data-ambient data-end-still autoplay muted playsinline preload="auto" aria-hidden="true"></video>
+      <!-- The sources are added here, once, for the right orientation, so a phone never starts downloading the landscape file (about 2.4 MB)
+           before switching. data-astro-rerun: the router swaps in fresh markup on Back/Forward, so this must run on every visit. -->
       <script is:inline data-astro-rerun>
         (function () {
           var v = document.getElementById('hero-video');
-          if (!v || !matchMedia('(max-aspect-ratio: 1/1)').matches) return;
-          var s = v.querySelectorAll('source');
-          s[0].src = '/videos/hero-portrait.webm';
-          s[1].src = '/videos/hero-portrait.mp4';
-          v.poster = '/videos/hero-poster-portrait.jpg';
-          v.load();
+          if (!v || v.querySelector('source')) return;
+          var p = matchMedia('(max-aspect-ratio: 1/1)').matches;
+          var base = p ? '/videos/hero-portrait' : '/videos/hero';
+          v.poster = p ? '/videos/hero-poster-portrait.jpg' : '/videos/hero-poster.jpg';
+          [['.webm', 'video/webm'], ['.mp4', 'video/mp4']].forEach(function (f) {
+            var s = document.createElement('source');
+            s.src = base + f[0];
+            s.type = f[1];
+            v.appendChild(s);
+          });
         })();
       </script>
     </div>
@@ -117,6 +119,7 @@ const excerpt = 'They really listened to how we live day to day and translated t
 <style>
   .hero { position: relative; min-height: calc(100dvh - var(--header-h)); display: grid; align-items: end; color: var(--white); overflow: hidden; }
   .hero__media, .hero__veil { position: absolute; inset: 0; }
+  .hero__media { background: rgb(43 36 29); }
   /* The video is a locked-off shot: the finished house sits in its middle, the road fills the bottom. Anchor low so a tall or wide
      viewport trims sky, never road, and keep the copy small and short enough to sit on the road, clear of the facade. */
   .hero__media video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 92%; }
