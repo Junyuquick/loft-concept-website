@@ -5,13 +5,13 @@ propertyType: landed
 summary: "Quiet luxury in every detail. Dark-framed mirror panels, warm timber laminates, and soft layered lighting come together in a bedroom that feels both serene and considered — a retreat designed for stillness."
 metaDescription: "Seagull Walk, Singapore: a serene bedroom with dark-framed mirror panels, warm timber laminates and layered lighting. By Loft Concept."
 heroAlt: "Bedroom with a grey upholstered headboard, light timber wall panels and a mirrored walk-in wardrobe"
-coverAlt: "Bedroom with a grey upholstered headboard, light timber wall panels and a mirrored walk-in wardrobe"
+coverAlt: "Kitchen with a black marble island, walnut tall cabinets and filament pendant lights"
 galleryAlts:
   - "Balcony terrace with timber-look tiles and a black vertical-bar railing overlooking palms"
   - "Front entrance with a timber-framed glass door, a pitched gable porch and a tiled step"
   - "Living room TV feature wall in stepped grey wood panels against a warm copper backdrop"
   - "Kitchen with a black marble island, walnut tall cabinets and filament pendant lights"
-cover: "../../assets/projects/seagull-walk/01-img-9011.jpg"
+cover: "../../assets/projects/seagull-walk/05-img-9042.jpg"
 hero: "../../assets/projects/seagull-walk/01-img-9011.jpg"
 gallery:
   - "../../assets/projects/seagull-walk/02-img-9012.jpg"

@@ -11,6 +11,6 @@ hero: "../../assets/projects/mimosa/poster.jpg"
 gallery:
   []
 video: "/videos/mimosa-tour.mp4"
-featured: false
+featured: true
 order: 0
 ---

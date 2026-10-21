@@ -5,7 +5,7 @@ propertyType: landed
 summary: "Luxury distilled into every surface. A double-height kitchen anchored by dark walnut millwork, a floating crystal chandelier, and polished marble underfoot — where the art of cooking meets the art of living, without compromise."
 metaDescription: "Bedok Road, Singapore: a double-height kitchen with dark walnut millwork, a floating crystal chandelier and polished marble. By Loft Concept."
 heroAlt: "Open-plan kitchen with walnut millwork, a long crystal pendant light and polished marble floors"
-coverAlt: "Open-plan kitchen with walnut millwork, a long crystal pendant light and polished marble floors"
+coverAlt: "Black spiral staircase beside marble-clad walls overlooking the open kitchen and dining area"
 galleryAlts:
   - "Walnut kitchen island with wine cubbies, stainless steel appliances and a crystal pendant light"
   - "Bathroom with a stone-textured walk-in shower, glass screen and a floating vanity"
@@ -14,7 +14,7 @@ galleryAlts:
   - "Double-height living space with polished marble floors, a glass balustrade and sliding glass doors"
   - "Black spiral staircase beside marble-clad walls overlooking the open kitchen and dining area"
   - "Three-storey corner house with a curved roofline, glass balcony and dark stone gate wall"
-cover: "../../assets/projects/bedok-road/01-20151026-147bedokroad-110.jpg"
+cover: "../../assets/projects/bedok-road/07-20151026-147bedokroad-94.jpg"
 hero: "../../assets/projects/bedok-road/01-20151026-147bedokroad-110.jpg"
 gallery:
   - "../../assets/projects/bedok-road/02-20151026-147bedokroad-116.jpg"
@@ -24,6 +24,6 @@ gallery:
   - "../../assets/projects/bedok-road/06-20151026-147bedokroad-62.jpg"
   - "../../assets/projects/bedok-road/07-20151026-147bedokroad-94.jpg"
   - "../../assets/projects/bedok-road/08-pix7.jpg"
-featured: false
+featured: true
 order: 2
 ---
