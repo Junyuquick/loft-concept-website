@@ -47,6 +47,22 @@ describe('admin config matches the projects schema', () => {
   });
 });
 
+describe('admin config matches the testimonials schema', () => {
+  const tSchema = JSON.parse(readFileSync('.astro/collections/testimonials.schema.json', 'utf8'));
+  const tProps = Object.keys(tSchema.properties).filter((k) => k !== '$schema');
+  const testimonials = config.collections.find((c: any) => c.name === 'testimonials');
+  const tFields = new Map<string, any>(testimonials.fields.map((f: any) => [f.name, f]));
+  it('edits src/content/testimonials as Markdown front matter', () => {
+    expect(testimonials).toMatchObject({ folder: 'src/content/testimonials', extension: 'md', format: 'frontmatter', create: true, delete: true });
+  });
+  it('has exactly the schema fields', () => {
+    expect([...tFields.keys()].sort()).toEqual([...tProps].sort());
+  });
+  it('requires exactly the fields the schema requires', () => {
+    for (const [name, f] of tFields) expect({ name, required: f.required !== false }).toEqual({ name, required: tSchema.required.includes(name) });
+  });
+});
+
 describe('admin media settings', () => {
   // Astro's image() needs paths relative to the entry file; Sveltia only writes those for a
   // relative collection-level folder (a global public_folder must start with "/").

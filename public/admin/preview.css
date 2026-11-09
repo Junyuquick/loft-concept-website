@@ -1,0 +1,109 @@
+/* Styles for the admin previews (preview.js). Values mirror src/styles/{tokens,base}.css and the page styles;
+   vw became cqw and media queries became container queries, because each page is drawn inside a fixed-width frame. */
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&display=swap');
+@font-face { font-family: 'TeX Gyre Pagella'; font-style: italic; font-weight: 400; font-display: swap; src: url('/fonts/texgyrepagella-italic.woff2') format('woff2'); }
+
+html, body { margin: 0; background: #ebe5d9; }
+*, *::before, *::after { box-sizing: border-box; }
+
+.pv-root { font-family: system-ui, sans-serif; padding: 12px; }
+.pv-bar { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; font-size: 13px; color: #564739; }
+.pv-bar span { flex: 1 1 auto; font-weight: 600; }
+.pv-bar label { cursor: pointer; }
+.pv-section { margin-bottom: 28px; }
+.pv-label { margin: 0 0 6px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #564739; }
+.pv-viewport { position: relative; overflow: hidden; border: 1px solid #cfc6b6; background: #d9d1c2; }
+.pv-frame { width: 1280px; margin-inline: auto; transform-origin: top left; container-type: inline-size; }
+.pv-root:has(input[value='phone']:checked) .pv-frame { width: 390px; transform-origin: top center; }
+.pv-hint { margin-top: 24px; font-size: 14px; color: #8a7a68; }
+
+.pv-inner {
+  --white: #ffffff; --bone: #f5f0e6; --stone: #b6a591; --umber: #564739; --ink: #2b241d;
+  --font-sans: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-accent: 'TeX Gyre Pagella', 'Palatino Linotype', Palatino, 'Book Antiqua', serif;
+  --step--1: clamp(0.8rem, 0.78rem + 0.1cqw, 0.875rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2cqw, 1.125rem);
+  --step-1: clamp(1.25rem, 1.15rem + 0.5cqw, 1.5rem);
+  --step-2: clamp(1.6rem, 1.4rem + 1cqw, 2.25rem);
+  --step-3: clamp(2.1rem, 1.7rem + 2cqw, 3.5rem);
+  --step-4: clamp(2.8rem, 2rem + 4cqw, 5.5rem);
+  --s-1: 0.5rem; --s-2: 1rem; --s-3: 1.5rem; --s-4: 2.5rem; --s-5: 4rem; --s-6: 6rem;
+  --s-7: clamp(5rem, 4rem + 6cqw, 10rem);
+  --gutter: clamp(20px, 5cqw, 80px);
+  --r-img: 2px;
+  background: var(--bone) url('/textures/paper.jpg') repeat;
+  background-size: 512px;
+  color: var(--umber);
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  padding-block: var(--s-5);
+}
+.pv-inner h1, .pv-inner h2, .pv-inner h3 { margin: 0; color: var(--ink); font-weight: 500; letter-spacing: -0.02em; line-height: 1.05; text-wrap: balance; }
+.pv-inner h1 { font-size: var(--step-4); }
+.pv-inner h2 { font-size: var(--step-3); }
+.pv-inner h3 { font-size: var(--step-1); letter-spacing: -0.01em; line-height: 1.2; }
+.pv-inner p { margin: 0; max-width: 65ch; text-wrap: pretty; }
+.pv-inner img { display: block; max-width: 100%; }
+.pv-inner .accent { font-family: var(--font-accent); font-style: italic; font-weight: 400; letter-spacing: 0; }
+.pv-inner .eyebrow { font-size: var(--step--1); letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500; margin-bottom: var(--s-3); }
+.pv-inner .link { border-bottom: 1px solid currentColor; }
+.pv-inner .photo { width: 100%; height: 100%; object-fit: cover; }
+.pv-inner section:not(.hero) { padding-inline: var(--gutter); }
+
+.pv-empty { display: grid; place-content: center; height: 100%; min-height: 8rem; background: color-mix(in srgb, var(--stone) 35%, var(--bone)); font-size: var(--step--1); letter-spacing: 0.04em; }
+.pv-ghost { display: grid; place-content: center; aspect-ratio: 3 / 2; background: color-mix(in srgb, var(--stone) 22%, transparent); font-size: var(--step--1); border-radius: var(--r-img); opacity: 0.7; }
+.pv-note { display: grid; place-content: center; padding: var(--s-3); aspect-ratio: 3 / 2; border: 1px dashed var(--stone); font-size: var(--step--1); text-align: center; }
+.pv-badge { position: absolute; right: 16px; bottom: 16px; padding: 6px 12px; background: rgb(43 36 29 / 0.8); color: var(--white); font-size: 13px; border-radius: 4px; }
+
+/* Project card, as in ProjectCard.astro */
+.card__link { display: block; }
+.card__media { overflow: hidden; border-radius: var(--r-img); aspect-ratio: 3 / 2; background: color-mix(in srgb, var(--stone) 35%, var(--bone)); }
+.card__meta { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-2); padding-top: var(--s-2); }
+.card__title { font-size: var(--step-1); letter-spacing: -0.01em; line-height: 1.2; font-weight: 500; }
+
+/* Home page: Selected work */
+.work { padding-block: var(--s-5); }
+.work__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--s-5); }
+.work__grid, .portfolio__grid { display: grid; gap: var(--s-5) var(--s-3); }
+/* A stretched tile would carry its aspect ratio into the column width, so keep tiles at their natural height. */
+.work__grid > *, .portfolio__grid > * { min-width: 0; align-self: start; }
+.portfolio { padding-block: var(--s-5); }
+.portfolio h1 { max-width: 16ch; margin-bottom: var(--s-5); }
+@container (min-width: 900px) { .work__grid, .portfolio__grid { grid-template-columns: 1fr 1fr; } }
+
+/* Project page */
+.hero { height: 22rem; background: color-mix(in srgb, var(--stone) 35%, var(--bone)); position: relative; }
+@container (min-width: 900px) { .hero { height: 40rem; } }
+.head { padding-block: var(--s-6); }
+.head__grid { display: grid; gap: var(--s-4); }
+@container (min-width: 900px) { .head__grid { grid-template-columns: 5fr 7fr; gap: var(--s-6); } }
+.head__summary { font-size: var(--step-1); line-height: 1.5; color: var(--ink); max-width: 38ch; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: var(--s-3); margin: var(--s-4) 0 0; }
+.facts dt { font-size: var(--step--1); letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500; }
+.facts dd { margin: 0.25rem 0 0; color: var(--ink); }
+.gallery { display: grid; gap: var(--s-3); padding-bottom: var(--s-6); }
+.gallery__item { margin: 0; overflow: hidden; border-radius: var(--r-img); }
+.gallery__item img { width: 100%; height: auto; }
+@container (min-width: 900px) {
+  .gallery { grid-template-columns: repeat(12, 1fr); gap: var(--s-5) var(--s-3); align-items: start; }
+  .gallery__item--wide { grid-column: 1 / -1; }
+  .gallery__item--half { grid-column: span 6; }
+  .gallery__item--half:nth-child(4n + 3) { margin-top: var(--s-5); }
+  .gallery__item--inset { grid-column: 3 / span 8; }
+}
+
+/* Testimonials: story on /testimonials, pull quote on the home page */
+.stories { padding-block: var(--s-4); }
+.story { margin: 0; display: grid; gap: var(--s-3); padding-block: var(--s-5); border-block: 1px solid color-mix(in srgb, var(--stone) 60%, transparent); }
+@container (min-width: 900px) { .story { grid-template-columns: 4fr 8fr; gap: var(--s-6); } }
+.story__who { display: grid; gap: 0.2rem; align-content: start; font-size: var(--step--1); letter-spacing: 0.03em; }
+.story__who strong { font-size: var(--step-0); font-weight: 500; color: var(--ink); letter-spacing: 0; }
+.story__words { display: grid; gap: var(--s-3); }
+.story__highlight { font-size: var(--step-2); line-height: 1.25; color: var(--ink); max-width: 30ch; }
+.story__quote { margin: 0; max-width: 62ch; display: grid; gap: var(--s-2); }
+.quote { padding-block: var(--s-5); }
+.pull { margin: 0; max-width: 62rem; }
+.pull blockquote { margin: 0; font-size: var(--step-3); line-height: 1.2; color: var(--ink); text-wrap: balance; }
+.pull figcaption { margin-top: var(--s-3); font-size: var(--step--1); letter-spacing: 0.04em; }

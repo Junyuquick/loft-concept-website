@@ -1,32 +1,33 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import LiteYouTube from '../components/LiteYouTube.astro';
 import BookingCTA from '../components/BookingCTA.astro';
 
 const items = (await getCollection('testimonials')).sort((a, b) => a.data.order - b.data.order);
 // Projects can be deleted in /admin; only link to ones that still exist.
 const projectIds = new Set((await getCollection('projects')).map((p) => p.id));
+// Reviews are typed in /admin with blank lines between paragraphs.
+const paragraphs = (quote: string) => quote.split(/\n+/).filter(Boolean);
 ---
 <Base
   title="Homeowner stories"
-  description="Hear from homeowners who worked with Loft Concept, and step inside a Jalan Lana residence we designed and built."
+  description="Hear from clients who worked with Loft Concept, in their own words, and walk through Mimosa, a home we designed and built."
 >
   <section class="container lead">
     <p class="eyebrow">Homeowner stories</p>
     <div class="lead__grid">
       <h1>The best way to understand our work <span class="accent">is to see it.</span></h1>
-      <p class="lead__text">Four homeowners on what it was like to work with us, and a walk through one of the homes we designed and built.</p>
+      <p class="lead__text">Clients on what it was like to work with us, in their own words, and a walk through one of the homes we designed and built.</p>
     </div>
   </section>
 
   <section class="container video" data-reveal>
-    <LiteYouTube id="rjq1_hLP6n4" title="A tour inside Jalan Lana" />
+    <video class="video__player" controls playsinline preload="none" poster="/videos/mimosa-poster.jpg" src="/videos/mimosa.mp4" aria-label="A walkthrough of Mimosa"></video>
     <div class="video__caption">
-      <h2>A tour inside Jalan Lana</h2>
+      <h2>A walkthrough of Mimosa</h2>
       <div class="video__text">
-        <p>Step inside this Jalan Lana residence and see how Loft Concept transformed the space, from the entry foyer through to every thoughtfully designed room.</p>
-        {projectIds.has('jalan-lana') && <a class="link" href="/portfolio/jalan-lana">View the project</a>}
+        <p>Step inside Mimosa, a home Loft Concept designed and built, and see the finished spaces room by room.</p>
+        {projectIds.has('mimosa') && <a class="link" href="/portfolio/mimosa">View the project</a>}
       </div>
     </div>
   </section>
@@ -41,8 +42,10 @@ const projectIds = new Set((await getCollection('projects')).map((p) => p.id));
             : <span>{item.data.projectLabel}</span>}
         </figcaption>
         <div class="story__words">
-          <p class="story__highlight accent" aria-hidden="true">“{item.data.highlight}”</p>
-          <blockquote class="story__quote">“{item.data.quote}”</blockquote>
+          {item.data.highlight && <p class="story__highlight accent" aria-hidden="true">“{item.data.highlight}”</p>}
+          <blockquote class="story__quote">
+            {paragraphs(item.data.quote).map((text, i, all) => <p>{i === 0 && '“'}{text}{i === all.length - 1 && '”'}</p>)}
+          </blockquote>
         </div>
       </figure>
     ))}
@@ -58,6 +61,7 @@ const projectIds = new Set((await getCollection('projects')).map((p) => p.id));
   .lead h1 { max-width: 16ch; }
   .lead__text { font-size: var(--step-1); line-height: 1.5; color: var(--ink); max-width: 32ch; }
 
+  .video__player { width: 100%; aspect-ratio: 16 / 9; border-radius: var(--r-img); background: var(--ink); }
   .video__caption { display: grid; gap: var(--s-2); padding-top: var(--s-3); }
   @media (min-width: 900px) { .video__caption { grid-template-columns: 7fr 5fr; gap: var(--s-6); } }
   .video h2 { font-size: var(--step-2); }
@@ -71,5 +75,5 @@ const projectIds = new Set((await getCollection('projects')).map((p) => p.id));
   .story__who strong { font-size: var(--step-0); font-weight: 500; color: var(--ink); letter-spacing: 0; }
   .story__words { display: grid; gap: var(--s-3); }
   .story__highlight { font-size: var(--step-2); line-height: 1.25; color: var(--ink); max-width: 30ch; }
-  .story__quote { margin: 0; max-width: 62ch; }
+  .story__quote { margin: 0; max-width: 62ch; display: grid; gap: var(--s-2); }
 </style>

@@ -14,10 +14,8 @@ const sectorPanel = async (sector: 'residential' | 'commercial', preferred: stri
   (await getEntry('projects', preferred)) ?? (await getCollection('projects', (p) => p.data.sector === sector)).sort((a, b) => a.data.order - b.data.order)[0];
 const residential = await sectorPanel('residential', 'lornie-road');
 const commercial = await sectorPanel('commercial', 'horse-city');
-const quote = await getEntry('testimonials', 'wei-liang-priya');
-if (!quote) throw new Error('Home page is missing a required content entry');
-
-const excerpt = 'They really listened to how we live day to day and translated that into a space that just feels right.';
+// The client edits testimonials in /admin: the home page quotes whichever comes first.
+const quote = (await getCollection('testimonials')).sort((a, b) => a.data.order - b.data.order)[0];
 ---
 <Base
   title="Interior design and construction in Singapore"
@@ -108,7 +106,7 @@ const excerpt = 'They really listened to how we live day to day and translated t
 
   <section class="section">
     <div class="container">
-      <PullQuote quote={excerpt} author={quote.data.author} label={quote.data.projectLabel} />
+      {quote && <PullQuote quote={quote.data.highlight ?? quote.data.quote} author={quote.data.author} label={quote.data.projectLabel} />}
       <p class="more"><a class="link" href="/testimonials">More from our clients</a></p>
     </div>
   </section>
