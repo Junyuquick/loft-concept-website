@@ -83,7 +83,7 @@ collections:
     sortable_fields: [order, author]
     fields:
       - { name: quote, label: Review, widget: text, hint: 'The full review, exactly as the client wrote it. Leave a blank line between paragraphs.' }
-      - { name: highlight, label: Highlighted sentence, widget: text, required: false, hint: 'Optional. One sentence shown in large type above the review, and on the home page if this is the first testimonial. It must be copied exactly from the review above, or the site will not publish.' }
+      - { name: highlight, label: Highlighted sentence, widget: text, required: false, hint: 'Optional. One sentence shown in large type. If it is the review''s opening line it replaces that line, so nothing appears twice. Also quoted on the home page if this is the first testimonial. It must be copied exactly from the review above, or the site will not publish.' }
       - { name: author, label: Name, widget: string }
       - { name: projectLabel, label: Label under the name, widget: string, hint: 'For example "Google review" or "Mount Sinai Road · Landed property".' }
       - name: projectSlug

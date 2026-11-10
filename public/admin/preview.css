@@ -97,12 +97,19 @@ html, body { margin: 0; background: #ebe5d9; }
 /* Testimonials: story on /testimonials, pull quote on the home page */
 .stories { padding-block: var(--s-4); }
 .story { margin: 0; display: grid; gap: var(--s-3); padding-block: var(--s-5); border-block: 1px solid color-mix(in srgb, var(--stone) 60%, transparent); }
-@container (min-width: 900px) { .story { grid-template-columns: 4fr 8fr; gap: var(--s-6); } }
+@container (min-width: 900px) { .story { grid-template-columns: 4fr 8fr; gap: var(--s-6); align-items: first baseline; } }
 .story__who { display: grid; gap: 0.2rem; align-content: start; font-size: var(--step--1); letter-spacing: 0.03em; }
 .story__who strong { font-size: var(--step-0); font-weight: 500; color: var(--ink); letter-spacing: 0; }
 .story__words { display: grid; gap: var(--s-3); }
-.story__highlight { font-size: var(--step-2); line-height: 1.25; color: var(--ink); max-width: 30ch; }
 .story__quote { margin: 0; max-width: 62ch; display: grid; gap: var(--s-2); }
+.story__lead { font-size: var(--step-2); line-height: 1.25; color: var(--ink); max-width: 30ch; margin-bottom: var(--s-1); }
+.story__more p + p { margin-top: var(--s-2); }
+.story__more summary { list-style: none; cursor: pointer; width: fit-content; }
+.story__more summary::-webkit-details-marker { display: none; }
+.story__more summary .link { border-bottom: 1px solid currentColor; }
+.story__more[open] summary { margin-bottom: var(--s-2); }
+.story__more .when-open, .story__more[open] .when-closed { display: none; }
+.story__more[open] .when-open { display: inline; }
 .quote { padding-block: var(--s-5); }
 .pull { margin: 0; max-width: 62rem; }
 .pull blockquote { margin: 0; font-size: var(--step-3); line-height: 1.2; color: var(--ink); text-wrap: balance; }

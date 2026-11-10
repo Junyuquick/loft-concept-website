@@ -2,12 +2,11 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import BookingCTA from '../components/BookingCTA.astro';
+import { reviewParts } from '../lib/testimonials';
 
 const items = (await getCollection('testimonials')).sort((a, b) => a.data.order - b.data.order);
 // Projects can be deleted in /admin; only link to ones that still exist.
 const projectIds = new Set((await getCollection('projects')).map((p) => p.id));
-// Reviews are typed in /admin with blank lines between paragraphs.
-const paragraphs = (quote: string) => quote.split(/\n+/).filter(Boolean);
 ---
 <Base
   title="Homeowner stories"
@@ -32,8 +31,11 @@ const paragraphs = (quote: string) => quote.split(/\n+/).filter(Boolean);
     </div>
   </section>
 
-  <section class="container stories">
-    {items.map((item) => (
+  <section class="container stories" aria-labelledby="stories-title">
+    <h2 id="stories-title">What our clients say</h2>
+    {items.map((item) => {
+      const { pull, lead, visible, hidden } = reviewParts(item.data.quote, item.data.highlight);
+      return (
       <figure class="story" data-reveal>
         <figcaption class="story__who">
           <strong>{item.data.author}</strong>
@@ -42,13 +44,21 @@ const paragraphs = (quote: string) => quote.split(/\n+/).filter(Boolean);
             : <span>{item.data.projectLabel}</span>}
         </figcaption>
         <div class="story__words">
-          {item.data.highlight && <p class="story__highlight accent" aria-hidden="true">“{item.data.highlight}”</p>}
+          {pull && <p class="story__lead accent" aria-hidden="true">“{pull}”</p>}
           <blockquote class="story__quote">
-            {paragraphs(item.data.quote).map((text, i, all) => <p>{i === 0 && '“'}{text}{i === all.length - 1 && '”'}</p>)}
+            {lead && <p class="story__lead accent">{lead}</p>}
+            {visible.map((text) => <p>{text}</p>)}
+            {hidden.length > 0 && (
+              <details class="story__more">
+                <summary><span class="link when-closed">Read the full review</span><span class="link when-open">Show less</span></summary>
+                {hidden.map((text) => <p>{text}</p>)}
+              </details>
+            )}
           </blockquote>
         </div>
       </figure>
-    ))}
+      );
+    })}
   </section>
 
   <BookingCTA heading="Ready to get started?" />
@@ -61,19 +71,28 @@ const paragraphs = (quote: string) => quote.split(/\n+/).filter(Boolean);
   .lead h1 { max-width: 16ch; }
   .lead__text { font-size: var(--step-1); line-height: 1.5; color: var(--ink); max-width: 32ch; }
 
-  .video__player { width: 100%; aspect-ratio: 16 / 9; border-radius: var(--r-img); background: var(--ink); }
+  .video__player { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--r-img); background: var(--ink); }
   .video__caption { display: grid; gap: var(--s-2); padding-top: var(--s-3); }
   @media (min-width: 900px) { .video__caption { grid-template-columns: 7fr 5fr; gap: var(--s-6); } }
   .video h2 { font-size: var(--step-2); }
   .video__text { display: grid; gap: var(--s-2); justify-items: start; }
 
-  .stories { padding-block: var(--s-6) var(--s-4); }
+  .stories { padding-block: var(--s-7) var(--s-6); }
+  .stories h2 { margin-bottom: var(--s-5); }
   .story { margin: 0; display: grid; gap: var(--s-3); padding-block: var(--s-5); border-top: 1px solid color-mix(in srgb, var(--stone) 60%, transparent); }
-  .story:last-child { border-bottom: 1px solid color-mix(in srgb, var(--stone) 60%, transparent); }
-  @media (min-width: 900px) { .story { grid-template-columns: 4fr 8fr; gap: var(--s-6); } }
+  .story:last-of-type { border-bottom: 1px solid color-mix(in srgb, var(--stone) 60%, transparent); }
+  @media (min-width: 900px) { .story { grid-template-columns: 4fr 8fr; gap: var(--s-6); align-items: first baseline; } }
   .story__who { display: grid; gap: 0.2rem; align-content: start; font-size: var(--step--1); letter-spacing: 0.03em; }
   .story__who strong { font-size: var(--step-0); font-weight: 500; color: var(--ink); letter-spacing: 0; }
   .story__words { display: grid; gap: var(--s-3); }
-  .story__highlight { font-size: var(--step-2); line-height: 1.25; color: var(--ink); max-width: 30ch; }
   .story__quote { margin: 0; max-width: 62ch; display: grid; gap: var(--s-2); }
+  .story__lead { font-size: var(--step-2); line-height: 1.25; color: var(--ink); max-width: 30ch; margin-bottom: var(--s-1); }
+  .story__more p + p { margin-top: var(--s-2); }
+  .story__more summary { list-style: none; cursor: pointer; width: fit-content; }
+  .story__more summary::-webkit-details-marker { display: none; }
+  /* The disclosure needs to read as clickable before it is hovered. */
+  .story__more summary .link { background-size: 100% 1px; }
+  .story__more[open] summary { margin-bottom: var(--s-2); }
+  .story__more .when-open, .story__more[open] .when-closed { display: none; }
+  .story__more[open] .when-open { display: inline; }
 </style>

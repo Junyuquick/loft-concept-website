@@ -112,21 +112,38 @@ const ProjectPreview = (props) => {
       gallery.length ? h('section', { className: 'gallery' }, gallery.map((url, i) => h('figure', { key: i, className: `gallery__item gallery__item--${shapes[i]}` }, url ? h('img', { src: url, alt: '' }) : h('div', { className: 'pv-empty' }, 'Photo missing')))) : null)));
 };
 
+// Same split as reviewParts() in src/lib/testimonials.ts.
+const reviewParts = (quote, highlight) => {
+  const opens = !!highlight && quote.startsWith(highlight);
+  const rest = opens ? quote.slice(highlight.length) : quote;
+  const paragraphs = rest.split(/\n+/).map((p) => p.trim()).filter(Boolean);
+  const texts = opens ? [highlight, ...paragraphs] : paragraphs;
+  const marked = texts.map((t, i) => (i === 0 ? '“' : '') + t + (i === texts.length - 1 ? '”' : ''));
+  const lead = opens ? marked.shift() : undefined;
+  const collapse = marked.length > 1 && paragraphs.join('').length > 600;
+  return { pull: highlight && !opens ? highlight : undefined, lead, visible: collapse ? marked.slice(0, 1) : marked, hidden: collapse ? marked.slice(1) : [] };
+};
+
 const TestimonialPreview = (props) => {
   const { entry } = props;
   const quote = val(entry, 'quote') || '';
   const highlight = val(entry, 'highlight');
   const author = val(entry, 'author');
   const label = val(entry, 'projectLabel');
-  const paragraphs = quote.split(/\n+/).filter(Boolean);
+  const { pull, lead, visible, hidden } = reviewParts(quote, highlight);
 
   return root(props,
     frame('1 · Testimonials page', h('section', { className: 'stories' },
       h('figure', { className: 'story' },
         h('figcaption', { className: 'story__who' }, h('strong', null, author), val(entry, 'projectSlug') ? h('span', { className: 'link' }, label) : h('span', null, label)),
         h('div', { className: 'story__words' },
-          highlight ? h('p', { className: 'story__highlight accent' }, `“${highlight}”`) : null,
-          h('blockquote', { className: 'story__quote' }, paragraphs.map((text, i) => h('p', { key: i }, (i === 0 ? '“' : '') + text + (i === paragraphs.length - 1 ? '”' : '')))))))),
+          pull ? h('p', { className: 'story__lead accent' }, `“${pull}”`) : null,
+          h('blockquote', { className: 'story__quote' },
+            lead ? h('p', { className: 'story__lead accent' }, lead) : null,
+            visible.map((text, i) => h('p', { key: i }, text)),
+            hidden.length ? h('details', { className: 'story__more' },
+              h('summary', null, h('span', { className: 'link when-closed' }, 'Read the full review'), h('span', { className: 'link when-open' }, 'Show less')),
+              hidden.map((text, i) => h('p', { key: i }, text))) : null))))),
 
     frame('2 · Home page quote', h('section', { className: 'quote' },
       h('figure', { className: 'pull' },
